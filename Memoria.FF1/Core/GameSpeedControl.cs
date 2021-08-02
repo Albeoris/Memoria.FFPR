@@ -5,7 +5,7 @@ using Last.Map.Animation;
 using Memoria.FFPR.IL2CPP;
 using UnityEngine;
 
-namespace Memoria.FFPR.Core
+namespace Memoria.FF1.Core
 {
     public sealed class GameSpeedControl
     {
