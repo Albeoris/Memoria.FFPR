@@ -85,7 +85,7 @@ namespace Memoria.FF1.IL2CPP
 
                 if (!isJustExported && importDirectory != String.Empty)
                 {
-                    String fullPath = Path.Combine(exportDirectory, addressName) + ".txt";
+                    String fullPath = Path.Combine(importDirectory, addressName) + ".txt";
                     try
                     {
                         if (!File.Exists(fullPath))
