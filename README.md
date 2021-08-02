@@ -15,7 +15,7 @@ If you are already using BepInEx to load other mods, use the most recent version
 
 ## Configuration:
 
-- Edit file `$GameFolder$\BepInEx\config\Memoria.ff1.cfg`
+- Edit file `$GameFolder$\BepInEx\config\Memoria.ffpr.cfg`
 
 ## Export:
 
