@@ -1,10 +1,10 @@
-# Memoria FF1/2/3
+# Memoria FF PR
 This is a small modification that makes gameplay of [Final Fantasy I (PR)](https://store.steampowered.com/app/1173770/FINAL_FANTASY/), [Final Fantasy II (PR)](https://store.steampowered.com/app/1173780/FINAL_FANTASY_II/) and [Final Fantasy III (PR)](https://store.steampowered.com/app/1173790/FINAL_FANTASY_III/) more enjoyable. 
 
 ## Installation:
 Unpack both archives into the game folder:
-- [BepInEx Loader x64 6.0.0-be.401](https://github.com/Albeoris/Memoria.FF1/releases/download/v2021.08.02/Loader_v2021.08.01.zip)
-- [Mod v2021.08.02](https://github.com/Albeoris/Memoria.FF1/releases/download/v2021.08.02/Mod_v2021.08.02.zip)
+- [BepInEx Loader x64 6.0.0-be.401](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2021.08.02/Loader_v2021.08.01.zip)
+- [Mod v2021.08.02](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2021.08.02/Mod_v2021.08.02.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
