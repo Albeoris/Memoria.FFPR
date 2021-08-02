@@ -2,10 +2,10 @@
 using Il2CppSystem.Input;
 using Last.Data.User;
 using Last.Map.Animation;
-using Memoria.FF1.IL2CPP;
+using Memoria.FFPR.IL2CPP;
 using UnityEngine;
 
-namespace Memoria.FF1.Core
+namespace Memoria.FFPR.Core
 {
     public sealed class GameSpeedControl
     {

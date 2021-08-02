@@ -1,5 +1,5 @@
 ﻿using System;
-using Memoria.FF1.IL2CPP;
+using Memoria.FFPR.IL2CPP;
 using HarmonyLib;
 using Il2CppSystem.Asset;
 using Il2CppSystem.Collections.Generic;
@@ -7,7 +7,7 @@ using Il2CppSystem.IO;
 using Il2CppSystem.Reflection;
 using Last.Management;
 using Last.Map.Animation;
-using Memoria.FF1.Configuration;
+using Memoria.FFPR.Configuration;
 using UnhollowerBaseLib;
 using UnityEngine;
 using File = System.IO.File;
@@ -15,7 +15,7 @@ using MethodInfo = System.Reflection.MethodInfo;
 using Object = Il2CppSystem.Object;
 using Path = System.IO.Path;
 
-namespace Memoria.FF1.IL2CPP
+namespace Memoria.FFPR.IL2CPP
 {
     [HarmonyPatch(typeof(ResourceManager), "IsLoadAssetCompleted")]
     public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object

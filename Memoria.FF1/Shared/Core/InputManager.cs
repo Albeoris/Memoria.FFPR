@@ -4,7 +4,7 @@ using Il2CppSystem.Input;
 using Il2CppSystem.Input.KeyConfig;
 using UnityEngine;
 
-namespace Memoria.FF1.Core
+namespace Memoria.FFPR.Core
 {
     public static class InputManager
     {

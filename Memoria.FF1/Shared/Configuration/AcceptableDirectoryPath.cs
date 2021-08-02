@@ -5,7 +5,7 @@ using UnityEngine;
 using Logger = BepInEx.Logging.Logger;
 using Object = System.Object;
 
-namespace Memoria.FF1.Configuration
+namespace Memoria.FFPR.Configuration
 {
     public sealed class AcceptableDirectoryPath : AcceptableValueBase
     {

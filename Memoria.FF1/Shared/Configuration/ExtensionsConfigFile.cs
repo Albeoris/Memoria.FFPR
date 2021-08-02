@@ -1,7 +1,7 @@
 ﻿using System;
 using BepInEx.Configuration;
 
-namespace Memoria.FF1.Configuration
+namespace Memoria.FFPR.Configuration
 {
     public static class ExtensionsConfigFile
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 using BepInEx.Logging;
-using Memoria.FF1.Configuration;
-using Memoria.FF1.Core;
+using Memoria.FFPR.Configuration;
+using Memoria.FFPR.Core;
 using UnityEngine;
 using Exception = System.Exception;
 using IntPtr = System.IntPtr;
 using Logger = BepInEx.Logging.Logger;
 
-namespace Memoria.FF1.IL2CPP
+namespace Memoria.FFPR.IL2CPP
 {
     public sealed class ModComponent : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using BepInEx.Configuration;
 using KeyCode = UnityEngine.KeyCode;
 
-namespace Memoria.FF1.Configuration
+namespace Memoria.FFPR.Configuration
 {
     public sealed class SpeedConfiguration
     {

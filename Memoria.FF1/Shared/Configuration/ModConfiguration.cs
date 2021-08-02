@@ -2,9 +2,9 @@
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
-using Memoria.FF1.Core;
+using Memoria.FFPR.Core;
 
-namespace Memoria.FF1.Configuration
+namespace Memoria.FFPR.Configuration
 {
     public sealed class ModConfiguration
     {

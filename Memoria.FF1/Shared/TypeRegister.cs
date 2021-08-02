@@ -4,7 +4,7 @@ using BepInEx.Logging;
 using Il2CppSystem.Collections.Generic;
 using UnhollowerRuntimeLib;
 
-namespace Memoria.FF1
+namespace Memoria.FFPR
 {
     public sealed class TypeRegister
     {
@@ -76,7 +76,7 @@ namespace Memoria.FF1
 
         private static Boolean IsImportableType(Type type)
         {
-            return type.FullName?.StartsWith("Memoria.FF1.IL2CPP") ?? false;
+            return type.Namespace?.EndsWith(".IL2CPP") ?? false;
         }
     }
 }

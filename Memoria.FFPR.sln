@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memoria.FF1", "Memoria.FF1\Memoria.FF1.csproj", "{7CF67936-43E7-44A6-AF1F-819B5475C216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memoria.FF2", "Memoria.FF2\Memoria.FF2.csproj", "{26FE68D2-A964-448E-A3B5-CBA492B76BDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Memoria.FF3", "Memoria.FF3\Memoria.FF3.csproj", "{BDEBA1E6-99F7-4D25-8641-DD6C5CEF7DF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		FF1|Any CPU = FF1|Any CPU
+		All|Any CPU = All|Any CPU
+		FF2|Any CPU = FF2|Any CPU
+		FF3|Any CPU = FF3|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CF67936-43E7-44A6-AF1F-819B5475C216}.FF1|Any CPU.ActiveCfg = FF1|Any CPU
+		{7CF67936-43E7-44A6-AF1F-819B5475C216}.FF1|Any CPU.Build.0 = FF1|Any CPU
+		{7CF67936-43E7-44A6-AF1F-819B5475C216}.All|Any CPU.ActiveCfg = All|Any CPU
+		{7CF67936-43E7-44A6-AF1F-819B5475C216}.All|Any CPU.Build.0 = All|Any CPU
+		{7CF67936-43E7-44A6-AF1F-819B5475C216}.FF2|Any CPU.ActiveCfg = FF2|Any CPU
+		{7CF67936-43E7-44A6-AF1F-819B5475C216}.FF3|Any CPU.ActiveCfg = FF3|Any CPU
+		{26FE68D2-A964-448E-A3B5-CBA492B76BDD}.FF1|Any CPU.ActiveCfg = FF1|Any CPU
+		{26FE68D2-A964-448E-A3B5-CBA492B76BDD}.All|Any CPU.ActiveCfg = All|Any CPU
+		{26FE68D2-A964-448E-A3B5-CBA492B76BDD}.All|Any CPU.Build.0 = All|Any CPU
+		{26FE68D2-A964-448E-A3B5-CBA492B76BDD}.FF2|Any CPU.ActiveCfg = FF2|Any CPU
+		{26FE68D2-A964-448E-A3B5-CBA492B76BDD}.FF2|Any CPU.Build.0 = FF2|Any CPU
+		{26FE68D2-A964-448E-A3B5-CBA492B76BDD}.FF3|Any CPU.ActiveCfg = FF3|Any CPU
+		{BDEBA1E6-99F7-4D25-8641-DD6C5CEF7DF9}.FF1|Any CPU.ActiveCfg = FF1|Any CPU
+		{BDEBA1E6-99F7-4D25-8641-DD6C5CEF7DF9}.All|Any CPU.ActiveCfg = All|Any CPU
+		{BDEBA1E6-99F7-4D25-8641-DD6C5CEF7DF9}.All|Any CPU.Build.0 = All|Any CPU
+		{BDEBA1E6-99F7-4D25-8641-DD6C5CEF7DF9}.FF2|Any CPU.ActiveCfg = FF2|Any CPU
+		{BDEBA1E6-99F7-4D25-8641-DD6C5CEF7DF9}.FF3|Any CPU.ActiveCfg = FF3|Any CPU
+		{BDEBA1E6-99F7-4D25-8641-DD6C5CEF7DF9}.FF3|Any CPU.Build.0 = FF3|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A4E9FB0-B447-4A73-921A-0593BC2398C1}
+	EndGlobalSection
+EndGlobal

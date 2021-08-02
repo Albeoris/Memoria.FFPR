@@ -1,9 +1,9 @@
 ﻿using System;
 using BepInEx.Logging;
-using Memoria.FF1.IL2CPP;
+using Memoria.FFPR.IL2CPP;
 using UnityEngine;
 
-namespace Memoria.FF1
+namespace Memoria.FFPR
 {
     public sealed class SingletonInitializer
     {

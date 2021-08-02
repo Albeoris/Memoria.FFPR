@@ -2,7 +2,7 @@
 using BepInEx.Configuration;
 using UnityEngine;
 
-namespace Memoria.FF1.Configuration
+namespace Memoria.FFPR.Configuration
 {
     public sealed class AssetsConfiguration
     {

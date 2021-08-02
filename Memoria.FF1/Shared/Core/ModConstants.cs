@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 
-namespace Memoria.FF1.Core
+namespace Memoria.FFPR.Core
 {
     public static class ModConstants
     {
-        public const String Id = "Memoria.ff1";
+        public const String Id = "Memoria.ffpr";
     }
 }

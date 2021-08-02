@@ -3,11 +3,11 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.IL2CPP;
 using HarmonyLib;
-using Memoria.FF1.Core;
+using Memoria.FFPR.Core;
 
-namespace Memoria.FF1
+namespace Memoria.FFPR
 {
-    [BepInPlugin(ModConstants.Id, "Memoria FF1", "1.0.0.0")]
+    [BepInPlugin(ModConstants.Id, "Memoria FF PR", "1.0.0.0")]
     public class EntryPoint : BasePlugin
     {
         public override void Load()
