@@ -1,4 +1,4 @@
-# Memoria FF1/2/3
+# Memoria FF PR
 This is a small modification that makes gameplay of [Final Fantasy I (PR)](https://store.steampowered.com/app/1173770/FINAL_FANTASY/), [Final Fantasy II (PR)](https://store.steampowered.com/app/1173780/FINAL_FANTASY_II/) and [Final Fantasy III (PR)](https://store.steampowered.com/app/1173790/FINAL_FANTASY_III/) more enjoyable. 
 
 ## Installation:
