@@ -9,6 +9,7 @@ namespace Memoria.FF1.Configuration
     public sealed class ModConfiguration
     {
         public SpeedConfiguration Speed { get; }
+        public AssetsConfiguration Assets { get; }
 
         public ModConfiguration()
         {
@@ -20,6 +21,7 @@ namespace Memoria.FF1.Configuration
 
                     ConfigFile file = new ConfigFile(GetConfigurationPath(), true, ownerMetadata: null);
                     Speed = new SpeedConfiguration(file);
+                    Assets = new AssetsConfiguration(file);
 
                     log.LogInfo($"{nameof(ModConfiguration)} initialized successfully.");
                 }
@@ -30,7 +32,7 @@ namespace Memoria.FF1.Configuration
                 }
             }
         }
-
+        
         private static String GetConfigurationPath()
         {
             return Utility.CombinePaths(Paths.ConfigPath, ModConstants.Id + ".cfg");

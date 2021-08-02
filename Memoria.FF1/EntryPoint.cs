@@ -17,6 +17,7 @@ namespace Memoria.FF1
                 Log.LogMessage("Initializing...");
 
                 TypeRegister typeRegister = new(Log);
+                typeRegister.RegisterRequiredTypes();
                 typeRegister.RegisterAssemblyTypes();
 
                 SingletonInitializer singletonInitializer = new(Log);

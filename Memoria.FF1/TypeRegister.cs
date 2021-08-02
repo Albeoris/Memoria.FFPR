@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using BepInEx.Logging;
+using Il2CppSystem.Collections.Generic;
 using UnhollowerRuntimeLib;
 
 namespace Memoria.FF1
@@ -13,7 +14,27 @@ namespace Memoria.FF1
         {
             _log = logSource ?? throw new ArgumentNullException(nameof(logSource));
         }
-        
+
+        public void RegisterRequiredTypes()
+        {
+
+
+            try
+            {
+                // Not supported :(
+                
+                // _log.LogInfo("Registering required types...");
+                //
+                // ClassInjector.RegisterTypeInIl2Cpp<Dictionary<String, IntPtr>>();
+                //
+                // _log.LogInfo($"1 additional types required successfully.");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to register required types.", ex);
+            }
+        }
+
         public void RegisterAssemblyTypes()
         {
             try
