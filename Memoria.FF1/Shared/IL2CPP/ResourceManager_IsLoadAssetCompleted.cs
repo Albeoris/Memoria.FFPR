@@ -2,6 +2,7 @@
 using HarmonyLib;
 using Il2CppSystem.Collections.Generic;
 using Last.Management;
+using Last.Map;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.Core;
 using UnhollowerBaseLib;
@@ -17,7 +18,7 @@ using String = System.String;
 namespace Memoria.FFPR.IL2CPP
 {
     // TODO: Import before loading native resources. 
-    [HarmonyPatch(typeof(ResourceManager), "IsLoadAssetCompleted")]
+    [HarmonyPatch(typeof(ResourceManager), nameof(ResourceManager.IsLoadAssetCompleted))]
     public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object
     {
         public ResourceManager_IsLoadAssetCompleted(IntPtr ptr) : base(ptr)

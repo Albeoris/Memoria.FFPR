@@ -94,14 +94,17 @@
     <Compile Include="Shared\Configuration\AcceptableDirectoryPath.cs" />
     <Compile Include="Shared\Configuration\ApplicationPathConverter.cs" />
     <Compile Include="Shared\Configuration\AssetsConfiguration.cs" />
+    <Compile Include="Shared\Configuration\EncountersConfiguration.cs" />
     <Compile Include="Shared\Configuration\ExtensionsConfigFile.cs" />
     <Compile Include="Shared\Configuration\ModConfiguration.cs" />
     <Compile Include="Shared\Configuration\SpeedConfiguration.cs" />
     <Compile Include="Shared\Core\AssetExtensionResolver.cs" />
+    <Compile Include="Shared\Core\GameEncountersControl.cs" />
     <Compile Include="Shared\Core\GameSpeedControl.cs" />
     <Compile Include="Shared\Core\InputManager.cs" />
     <Compile Include="Shared\Core\ModConstants.cs" />
     <Compile Include="Shared\EntryPoint.cs" />
+    <Compile Include="Shared\IL2CPP\EncounterLot_CheckEncount.cs" />
     <Compile Include="Shared\IL2CPP\ResourceExporter.cs" />
     <Compile Include="Shared\IL2CPP\ResourceManager_IsLoadAssetCompleted.cs" />
     <Compile Include="Shared\IL2CPP\ModComponent.cs" />

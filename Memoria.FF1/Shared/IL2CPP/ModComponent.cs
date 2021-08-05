@@ -16,6 +16,7 @@ namespace Memoria.FFPR.IL2CPP
 
         [field: NonSerialized] public ModConfiguration Config { get; private set; }
         [field: NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
+        [field: NonSerialized] public GameEncountersControl EncountersControl { get; private set; }
 
         public ModComponent(IntPtr ptr) : base(ptr)
         {
@@ -33,6 +34,7 @@ namespace Memoria.FFPR.IL2CPP
 
                 Config = new ModConfiguration();
                 SpeedControl = new GameSpeedControl();
+                EncountersControl = new GameEncountersControl();
 
                 gameObject.AddComponent<ResourceExporter>();
 
@@ -71,6 +73,8 @@ namespace Memoria.FFPR.IL2CPP
             {
                 if (_isDisabled)
                     return;
+                
+                EncountersControl.Update();
             }
             catch (Exception ex)
             {

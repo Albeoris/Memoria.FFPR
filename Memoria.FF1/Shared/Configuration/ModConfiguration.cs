@@ -9,6 +9,7 @@ namespace Memoria.FFPR.Configuration
     public sealed class ModConfiguration
     {
         public SpeedConfiguration Speed { get; }
+        public EncountersConfiguration Encounters { get; }
         public AssetsConfiguration Assets { get; }
 
         public ModConfiguration()
@@ -21,6 +22,7 @@ namespace Memoria.FFPR.Configuration
 
                     ConfigFile file = new ConfigFile(GetConfigurationPath(), true, ownerMetadata: null);
                     Speed = new SpeedConfiguration(file);
+                    Encounters = new EncountersConfiguration(file);
                     Assets = new AssetsConfiguration(file);
 
                     log.LogInfo($"{nameof(ModConfiguration)} initialized successfully.");
