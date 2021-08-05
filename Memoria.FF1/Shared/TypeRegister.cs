@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using BepInEx.Logging;
-using Il2CppSystem.Collections.Generic;
 using UnhollowerRuntimeLib;
 
 namespace Memoria.FFPR

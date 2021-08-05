@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using BepInEx.Configuration;
-using UnityEngine;
 using Logger = BepInEx.Logging.Logger;
 using Object = System.Object;
 
@@ -79,11 +78,7 @@ namespace Memoria.FFPR.Configuration
             if (path.IndexOf('%') < 0)
                 return Path.GetFullPath(path);
 
-            String result = path.Replace("%StreamingAssets%", Application.streamingAssetsPath)
-                .Replace("%DataPath%", Application.dataPath)
-                .Replace("%PersistentDataPath%", Application.persistentDataPath)
-                .Replace("%TemporaryCachePath%", Application.temporaryCachePath);
-
+            String result = ApplicationPathConverter.ReplacePlaceholders(path);
             return Path.GetFullPath(result);
         }
     }

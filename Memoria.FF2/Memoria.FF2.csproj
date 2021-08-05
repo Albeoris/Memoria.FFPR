@@ -73,6 +73,10 @@
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+      <HintPath>W:\Steam\steamapps\common\FINAL FANTASY PR\BepInEx\unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.InputLegacyModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
@@ -81,7 +85,11 @@
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-  </ItemGroup>
+    <Reference Include="UnityEngine.TextRenderingModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+      <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>  
   <ItemGroup>
 	<Compile Include="..\Memoria.FF1\Shared\**\*.cs" LinkBase="Shared">
 		<Link>Shared\%(Filename)%(Extension)</Link>

@@ -73,6 +73,10 @@
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+      <HintPath>W:\Steam\steamapps\common\FINAL FANTASY PR\BepInEx\unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.InputLegacyModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
@@ -81,17 +85,24 @@
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+      <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Shared\Configuration\AcceptableDirectoryPath.cs" />
+    <Compile Include="Shared\Configuration\ApplicationPathConverter.cs" />
     <Compile Include="Shared\Configuration\AssetsConfiguration.cs" />
     <Compile Include="Shared\Configuration\ExtensionsConfigFile.cs" />
     <Compile Include="Shared\Configuration\ModConfiguration.cs" />
     <Compile Include="Shared\Configuration\SpeedConfiguration.cs" />
+    <Compile Include="Shared\Core\AssetExtensionResolver.cs" />
     <Compile Include="Shared\Core\GameSpeedControl.cs" />
     <Compile Include="Shared\Core\InputManager.cs" />
     <Compile Include="Shared\Core\ModConstants.cs" />
     <Compile Include="Shared\EntryPoint.cs" />
+    <Compile Include="Shared\IL2CPP\ResourceExporter.cs" />
     <Compile Include="Shared\IL2CPP\ResourceManager_IsLoadAssetCompleted.cs" />
     <Compile Include="Shared\IL2CPP\ModComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

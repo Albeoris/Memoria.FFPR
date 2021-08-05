@@ -1,7 +1,4 @@
 ﻿using System;
-using Il2CppSystem.Input;
-using Last.Data.User;
-using Last.Map.Animation;
 using Memoria.FFPR.IL2CPP;
 using UnityEngine;
 

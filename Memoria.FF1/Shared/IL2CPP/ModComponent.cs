@@ -14,8 +14,8 @@ namespace Memoria.FFPR.IL2CPP
         public static ModComponent Instance { get; private set; }
         public static ManualLogSource Log { get; private set; }
 
-        [field:NonSerialized] public ModConfiguration Config { get; private set; }
-        [field:NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
+        [field: NonSerialized] public ModConfiguration Config { get; private set; }
+        [field: NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
 
         public ModComponent(IntPtr ptr) : base(ptr)
         {
@@ -33,6 +33,8 @@ namespace Memoria.FFPR.IL2CPP
 
                 Config = new ModConfiguration();
                 SpeedControl = new GameSpeedControl();
+
+                gameObject.AddComponent<ResourceExporter>();
 
                 Log.LogMessage($"[{nameof(ModComponent)}].{nameof(Awake)}(): Processed successfully.");
             }
@@ -76,7 +78,7 @@ namespace Memoria.FFPR.IL2CPP
                 Log.LogError($"[{nameof(ModComponent)}].{nameof(Update)}(): {ex}");
             }
         }
-        
+
         private void LateUpdate()
         {
             try
