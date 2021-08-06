@@ -88,7 +88,12 @@ namespace Memoria.FFPR.IL2CPP
                     case "UnityEngine.RuntimeAnimatorController":
                     case "UnityEngine.Shader":
                     case "UnityEngine.Sprite":
-                        throw new NotSupportedException(type);
+                    {
+                        if (!config.ImportTextures)
+                            return;
+                        newAsset = ImportSprite(assetObject.Cast<Sprite>(), fullPath);
+                        break;
+                    }
                     case "UnityEngine.TextAsset":
                     {
                         if (!config.ImportText)
@@ -104,7 +109,10 @@ namespace Memoria.FFPR.IL2CPP
                         break;
                     }
                     case "UnityEngine.Texture2D":
-                        throw new NotSupportedException(type);
+                        if (!config.ImportTextures)
+                            return;
+                        newAsset = ImportTextures(fullPath);
+                        break;
                     case "UnityEngine.U2D.SpriteAtlas":
                         throw new NotSupportedException(type);
                 }
@@ -125,6 +133,29 @@ namespace Memoria.FFPR.IL2CPP
         private static Object ImportTextAsset(String fullPath)
         {
             return new TextAsset(File.ReadAllText(fullPath));
+        }
+        
+        private static Object ImportTextures(String fullPath)
+        {
+            return TextureHelper.ReadTextureFromFile(fullPath);
+        }
+        
+        private static Object ImportSprite(Sprite asset, String fullPath)
+        {
+            Rect originalRect = asset.rect;
+            Vector2 originalPivot = asset.pivot;
+            Single originalWidth = asset.texture.width;
+            Single originalHeight = asset.texture.height;
+
+            Texture2D texture = TextureHelper.ReadTextureFromFile(fullPath);
+            Single newWidth = texture.width;
+            Single newHeight = texture.height;
+            Single ox = newWidth / originalWidth;
+            Single oy = newHeight / originalHeight;
+            Rect newRect = new Rect(originalRect.x * ox, originalRect.y * oy, originalRect.width * ox, originalRect.height * oy);
+            Vector2 newPivot = new Vector2(originalPivot.x * ox, originalPivot.y * oy);
+
+            return Sprite.Create(texture, newRect, newPivot, asset.pixelsPerUnit);
         }
         
         private static Object ImportBinaryAsset(String assetName, String fullPath)

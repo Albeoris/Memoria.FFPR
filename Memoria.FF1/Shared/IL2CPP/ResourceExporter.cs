@@ -41,8 +41,10 @@ namespace Memoria.FFPR.IL2CPP
                     Destroy(this);
                     return;
                 }
+                
+                Time.timeScale = 0.0f;
 
-                ModComponent.Log.LogInfo($"[Export] Export started. Directory: {_exportDirectory}");
+                ModComponent.Log.LogInfo($"[Export] Game stopped. Export started. Directory: {_exportDirectory}");
                 ModComponent.Log.LogInfo($"[Export] Waiting for ResourceManager initialization.");
                 _extensionResolver = new AssetExtensionResolver();
                 
@@ -89,6 +91,10 @@ namespace Memoria.FFPR.IL2CPP
 
                     ModComponent.Log.LogInfo($"[Export] Exporting assets {_totalCount} listed in AssetsPath...");
                 }
+                
+                // Must have to export not readable textures
+                if (Camera.main is null)
+                    return;
 
                 if (_currentGroup != null)
                 {
@@ -154,7 +160,8 @@ namespace Memoria.FFPR.IL2CPP
                 else
                 {
                     ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] Assets exported successfully.");
-                    ModComponent.Instance.Config.Assets.DisableExport();
+                    if (ModComponent.Instance.Config.Assets.ExportAutoDisable)
+                        ModComponent.Instance.Config.Assets.DisableExport();
                     Destroy(this);
                 }
             }
@@ -190,7 +197,6 @@ namespace Memoria.FFPR.IL2CPP
         private void ExportAsset(Il2CppSystem.Object asset, String type, String assetName, String assetPath)
         {
             String fullPath = Path.Combine(_exportDirectory, assetPath);
-            Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
             
             Boolean overwrite = ModComponent.Instance.Config.Assets.ExportOverwrite;
             if (!overwrite && File.Exists(fullPath))
@@ -233,7 +239,7 @@ namespace Memoria.FFPR.IL2CPP
                     ExportBinary(asset.Cast<TextAsset>(), fullPath);
                     break;
                 case "UnityEngine.Texture2D":
-                    ExportDummy(type, assetName);
+                    ExportTexture2D(assetName, asset.Cast<Texture2D>(), fullPath);
                     break;
                 case "UnityEngine.U2D.SpriteAtlas":
                     ExportDummy(type, assetName);
@@ -251,7 +257,33 @@ namespace Memoria.FFPR.IL2CPP
             }
 
             ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tExport [{asset.name}] TextAsset {shortPath}");
+            PrepareDirectory(fullPath);
             File.WriteAllText(fullPath, asset.text);
+        }
+
+        private void ExportTexture2D(String assetName, Texture2D asset, String fullPath)
+        {
+            String shortPath = ApplicationPathConverter.ReturnPlaceholders(fullPath);
+            if (!ModComponent.Instance.Config.Assets.ExportTextures)
+            {
+                ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tSkip exporting [{asset.name}] Texture2D: disabled in config file.");
+                return;
+            }
+
+            ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tExport [{asset.name}] Texture2D {shortPath}");
+
+            PrepareDirectory(fullPath);
+
+            if (asset.isReadable)
+            {
+                TextureHelper.WriteTextureToFile(asset, fullPath);
+            }
+            else
+            {
+                Texture2D readable = TextureHelper.CopyAsReadable(asset);
+                TextureHelper.WriteTextureToFile(readable, fullPath);
+                Destroy(readable);
+            }
         }
 
         private void ExportBinary(TextAsset asset, String fullPath)
@@ -264,12 +296,18 @@ namespace Memoria.FFPR.IL2CPP
             }
 
             ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tExport [{asset.name}] BinaryAsset {shortPath}");
+            PrepareDirectory(fullPath);
             File.WriteAllBytes(fullPath, asset.bytes);
         }
 
         void ExportDummy(String type, String assetName)
         {
             ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tSkip {assetName}. Not supported type: {type}");
+        }
+        
+        private static void PrepareDirectory(String fullPath)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
         }
 
         private void OnExportError(Exception exception)
