@@ -14,7 +14,7 @@
     <GameRegistryPath>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173800</GameRegistryPath>
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry32))</GamePath>
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry64))</GamePath>
-    <GamePath Condition="'$(GamePath)' == ''">bin\FF3</GamePath>
+    <GamePath Condition="'$(GamePath)' == ''">bin\FF4</GamePath>
     <OutputPath>$(GamePath)\BepInEx\plugins\</OutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
