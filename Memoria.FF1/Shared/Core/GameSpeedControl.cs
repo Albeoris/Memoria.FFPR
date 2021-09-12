@@ -86,7 +86,7 @@ namespace Memoria.FFPR.Core
             {
                 if (toggleOff)
                     Time.timeScale = speedFactor;//set it to 1 so our multiplicative approach returns to normal
-                else if (_isHeld > 0)
+                else if (_isHeld > 1)
                 {
                     Time.timeScale = speedFactor;
                     _isHeld = 0;//holding logic should be ignored until key is held again
