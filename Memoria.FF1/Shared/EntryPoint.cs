@@ -16,11 +16,11 @@ namespace Memoria.FFPR
             {
                 Log.LogMessage("Initializing...");
 
-                TypeRegister typeRegister = new(Log);
+                TypeRegister typeRegister = new TypeRegister(Log);
                 typeRegister.RegisterRequiredTypes();
                 typeRegister.RegisterAssemblyTypes();
 
-                SingletonInitializer singletonInitializer = new(Log);
+                SingletonInitializer singletonInitializer = new SingletonInitializer(Log);
                 singletonInitializer.InitializeInGameSingleton();
 
                 PatchMethods();

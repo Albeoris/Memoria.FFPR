@@ -35,7 +35,7 @@ namespace Memoria.FFPR.Core
             Single currentFactor = Time.timeScale;
             if (currentFactor == 0.0f) // Do not unpause the game 
                 return;
-
+            ModComponent.Log.LogInfo("Current Game Speed: " + currentFactor.ToString());
             var config = ModComponent.Instance.Config;
 
             var toggleFactor = config.Speed.ToggleFactor.Value;
@@ -49,12 +49,13 @@ namespace Memoria.FFPR.Core
             Boolean isToggled = InputManager.GetKeyUp(toggleKey) || InputManager.GetKeyUp(toggleAction);
             Boolean isHold = InputManager.GetKey(holdKey) || InputManager.GetKey(holdAction);
             Single speedFactor = 0.0f;
-
+            Boolean toggleOff = false;
             if (isToggled)
             {
                 if (!_isToggled)
                     speedFactor = Math.Max(speedFactor, toggleFactor);
-
+                if (_isToggled)
+                    toggleOff = true;
                 _isToggled = !_isToggled;
             }
 
@@ -69,7 +70,10 @@ namespace Memoria.FFPR.Core
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (currentFactor != speedFactor)
             {
-                Time.timeScale = speedFactor;
+                if (toggleOff)
+                    Time.timeScale = speedFactor;//set it to 1 so our multiplicative approach returns to normal
+                else
+                    Time.timeScale = currentFactor * speedFactor;
                 _speedFactor = speedFactor;
             }
         }

@@ -26,8 +26,8 @@ namespace Memoria.FFPR.IL2CPP
         }
 
         // Don't use other Dictionaries. It must be present in IL2CPP
-        private static readonly Dictionary<Object, Object> KnownAssets = new();
-        private static readonly AssetExtensionResolver ExtensionResolver = new();
+        private static readonly Dictionary<Object, Object> KnownAssets = new Dictionary<Object, Object>();
+        private static readonly AssetExtensionResolver ExtensionResolver = new AssetExtensionResolver();
 
         public static void Postfix(String addressName, ResourceManager __instance, Boolean __result)
         {
