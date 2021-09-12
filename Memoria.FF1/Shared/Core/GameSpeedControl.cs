@@ -36,7 +36,7 @@ namespace Memoria.FFPR.Core
             Single currentFactor = Time.timeScale;
             if (currentFactor == 0.0f) // Do not unpause the game 
                 return;
-            ModComponent.Log.LogInfo("Current Game Speed: " + currentFactor.ToString());
+            //ModComponent.Log.LogInfo("Current Game Speed: " + currentFactor.ToString());
             var config = ModComponent.Instance.Config;
 
             var toggleFactor = config.Speed.ToggleFactor.Value;
