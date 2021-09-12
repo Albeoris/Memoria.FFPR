@@ -12,6 +12,7 @@ namespace Memoria.FFPR.Core
 
         private Boolean _isDisabled;
         private Boolean _isToggled;
+        private int _isHeld;
         private Single _speedFactor = Time.timeScale;
 
         public void Update()
@@ -60,7 +61,20 @@ namespace Memoria.FFPR.Core
             }
 
             if (isHold)
+            {
                 speedFactor = Math.Max(speedFactor, holdFactor);
+                if (_isHeld != 1)
+                {
+                    _isHeld = 1;//key is being held
+                }
+            }
+            else
+            {
+                if(_isHeld > 0)
+                {
+                    _isHeld = 2;//key is no longer being held
+                }
+            }
 
             if (speedFactor == 0.0f)
             {
@@ -72,6 +86,11 @@ namespace Memoria.FFPR.Core
             {
                 if (toggleOff)
                     Time.timeScale = speedFactor;//set it to 1 so our multiplicative approach returns to normal
+                else if (_isHeld > 0)
+                {
+                    Time.timeScale = speedFactor;
+                    _isHeld = 0;//holding logic should be ignored until key is held again
+                }
                 else
                     Time.timeScale = currentFactor * speedFactor;
                 _speedFactor = speedFactor;
