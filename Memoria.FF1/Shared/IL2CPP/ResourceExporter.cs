@@ -137,7 +137,7 @@ namespace Memoria.FFPR.IL2CPP
                         ExportAsset(asset, type, assetName, exportPath);
                     }
 
-                    _resourceManager.DestroyGroupAsset(assetGroup);
+                    //_resourceManager.DestroyGroupAsset(assetGroup);
                     _currentGroup = null;
                 }
 
