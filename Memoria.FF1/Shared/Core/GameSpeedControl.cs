@@ -12,6 +12,7 @@ namespace Memoria.FFPR.Core
 
         private Boolean _isDisabled;
         private Boolean _isToggled;
+        private HeldState _heldState;
         private Single _speedFactor = Time.timeScale;
 
         public void Update()
@@ -50,28 +51,58 @@ namespace Memoria.FFPR.Core
             Boolean isHold = InputManager.GetKey(holdKey) || InputManager.GetKey(holdAction);
             Single speedFactor = 0.0f;
 
+            Boolean toggleOff = false;
             if (isToggled)
             {
-                if (!_isToggled)
+                if (_isToggled)
+                    toggleOff = true;
+                else
                     speedFactor = Math.Max(speedFactor, toggleFactor);
 
                 _isToggled = !_isToggled;
             }
 
             if (isHold)
+            {
                 speedFactor = Math.Max(speedFactor, holdFactor);
+                _heldState = HeldState.KeyIsHeld;
+            }
+            else if (_heldState != HeldState.KeyNotHeld)
+            {
+                _heldState = HeldState.KeyReleased;
+            }
 
             if (speedFactor == 0.0f)
             {
                 speedFactor = _isToggled ? _speedFactor : 1.0f;
             }
-            
+
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (currentFactor != speedFactor)
             {
-                Time.timeScale = speedFactor;
+                if (toggleOff)
+                {
+                    Time.timeScale = speedFactor; //set it to 1 so our multiplicative approach returns to normal
+                }
+                else if (_heldState == HeldState.KeyReleased)
+                {
+                    Time.timeScale = speedFactor;
+                    _heldState = HeldState.KeyNotHeld; //holding logic should be ignored until key is held again
+                }
+                else
+                {
+                    Time.timeScale = currentFactor * speedFactor;
+                }
+
                 _speedFactor = speedFactor;
             }
+        }
+
+        private enum HeldState
+        {
+            KeyNotHeld = 0,
+            KeyIsHeld = 1,
+            KeyReleased = 2
         }
     }
 }
