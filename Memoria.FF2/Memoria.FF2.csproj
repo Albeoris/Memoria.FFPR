@@ -24,72 +24,79 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=2.4.2.0, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="0Harmony">
       <HintPath>$(GamePath)\BepInEx\core\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Assembly-CSharp">
       <HintPath>$(GamePath)\BepInEx\unhollowed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="BepInEx.Core, Version=6.0.0.401, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="BepInEx.Core">
       <HintPath>$(GamePath)\BepInEx\core\BepInEx.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="BepInEx.IL2CPP, Version=6.0.0.401, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="BepInEx.IL2CPP">
       <HintPath>$(GamePath)\BepInEx\core\BepInEx.IL2CPP.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="BepInEx.Preloader.Core, Version=6.0.0.401, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="BepInEx.Preloader.Core">
       <HintPath>$(GamePath)\BepInEx\core\BepInEx.Preloader.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Il2Cppmscorlib, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Il2Cppmscorlib">
       <HintPath>$(GamePath)\BepInEx\unhollowed\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Il2CppSystem.Core, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Il2CppSystem.Core">
       <HintPath>$(GamePath)\BepInEx\unhollowed\Il2CppSystem.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="UnhollowerBaseLib, Version=0.4.15.3, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnhollowerBaseLib">
       <HintPath>$(GamePath)\BepInEx\core\UnhollowerBaseLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InputSystem, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="Unity.InputSystem">
       <HintPath>$(GamePath)\BepInEx\unhollowed\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+	<Reference Include="Unity.Addressables">
+      <HintPath>$(GamePath)\BepInEx\unhollowed\Unity.Addressables.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+	<Reference Include="Unity.ResourceManager">
+      <HintPath>$(GamePath)\BepInEx\unhollowed\Unity.ResourceManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnityEngine.ImageConversionModule">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.IMGUIModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.InputModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnityEngine.InputModule">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>

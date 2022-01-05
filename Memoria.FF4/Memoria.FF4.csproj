@@ -3,18 +3,18 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7CF67936-43E7-44A6-AF1F-819B5475C216}</ProjectGuid>
+    <ProjectGuid>{F93A2F62-669A-44EB-842E-2C0D9DFD1A8D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Memoria.FF1</RootNamespace>
-    <AssemblyName>Memoria.FF1</AssemblyName>
+    <RootNamespace>Memoria.FF4</RootNamespace>
+    <AssemblyName>Memoria.FF4</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>latest</LangVersion>
-    <GameRegistryPath>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173770</GameRegistryPath>
+    <GameRegistryPath>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173800</GameRegistryPath>
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry32))</GamePath>
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry64))</GamePath>
-    <GamePath Condition="'$(GamePath)' == ''">bin\FF3</GamePath>
+    <GamePath Condition="'$(GamePath)' == ''">bin\FF4</GamePath>
 	<OutputPath>$(GamePath)\BepInEx\plugins\</OutputPath>
 	<DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -102,27 +102,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Shared\Configuration\AcceptableDirectoryPath.cs" />
-    <Compile Include="Shared\Configuration\ApplicationPathConverter.cs" />
-    <Compile Include="Shared\Configuration\AssetsConfiguration.cs" />
-    <Compile Include="Shared\Configuration\EncountersConfiguration.cs" />
-    <Compile Include="Shared\Configuration\ExtensionsConfigFile.cs" />
-    <Compile Include="Shared\Configuration\ModConfiguration.cs" />
-    <Compile Include="Shared\Configuration\SpeedConfiguration.cs" />
-    <Compile Include="Shared\Core\AssetExtensionResolver.cs" />
-    <Compile Include="Shared\Core\GameEncountersControl.cs" />
-    <Compile Include="Shared\Core\GameSpeedControl.cs" />
-    <Compile Include="Shared\Core\InputManager.cs" />
-    <Compile Include="Shared\Core\ModConstants.cs" />
-    <Compile Include="Shared\Core\TextureHelper.cs" />
-    <Compile Include="Shared\EntryPoint.cs" />
-    <Compile Include="Shared\IL2CPP\EncounterLot_CheckEncount.cs" />
-    <Compile Include="Shared\IL2CPP\ResourceExporter.cs" />
-    <Compile Include="Shared\IL2CPP\ResourceManager_IsLoadAssetCompleted.cs" />
-    <Compile Include="Shared\IL2CPP\ModComponent.cs" />
+	<Compile Include="..\Memoria.FF1\Shared\**\*.cs" LinkBase="Shared">
+		<Link>Shared\%(Filename)%(Extension)</Link>
+	</Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared\SingletonInitializer.cs" />
-    <Compile Include="Shared\TypeRegister.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

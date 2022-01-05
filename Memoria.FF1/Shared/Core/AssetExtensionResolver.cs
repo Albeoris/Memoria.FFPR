@@ -1,36 +1,21 @@
 ﻿using System;
 using System.IO;
+using Memoria.FFPR.IL2CPP;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 
 namespace Memoria.FFPR.Core
 {
     public sealed class AssetExtensionResolver
     {
-        private readonly String _catalogJson;
-
         public AssetExtensionResolver()
         {
-            _catalogJson = File.ReadAllText(Application.streamingAssetsPath + @"/aa/catalog.json");
         }
 
         public String GetFileExtension(String assetAddress)
         {
-            Int32 index = _catalogJson.IndexOf(assetAddress);
-            if (index < 0)
-                return String.Empty;
-
-            Int32 lastIndex = index + assetAddress.Length;
-            if (_catalogJson.Length <= lastIndex)
-                return String.Empty;
-
-            if (_catalogJson[lastIndex] != '.')
-                return String.Empty;
-
-            Int32 quoteIndex = _catalogJson.IndexOf('"', lastIndex + 1);
-            if (quoteIndex < 0)
-                return String.Empty;
-
-            return _catalogJson.Substring(lastIndex, quoteIndex - lastIndex);
+            String extension = ContentCatalogData_CreateLocator.GetFileExtension(assetAddress);
+            return extension;
         }
 
         public String GetAssetType(Il2CppSystem.Object asset)

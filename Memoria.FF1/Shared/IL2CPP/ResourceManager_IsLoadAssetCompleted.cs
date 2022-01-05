@@ -76,7 +76,7 @@ namespace Memoria.FFPR.IL2CPP
                 String fullPath = Path.Combine(importDirectory, addressName) + extension;
                 if (!File.Exists(fullPath))
                     return;
-                
+
                 Object newAsset = null;
                 switch (type)
                 {
