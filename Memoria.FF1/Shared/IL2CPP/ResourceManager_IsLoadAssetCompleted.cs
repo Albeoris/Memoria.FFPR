@@ -139,7 +139,7 @@ namespace Memoria.FFPR.IL2CPP
         {
             return TextureHelper.ReadTextureFromFile(fullPath);
         }
-        
+
         private static Object ImportSprite(Sprite asset, String fullPath)
         {
             Rect originalRect = asset.rect;
@@ -148,16 +148,26 @@ namespace Memoria.FFPR.IL2CPP
             Single originalHeight = asset.texture.height;
 
             Texture2D texture = TextureHelper.ReadTextureFromFile(fullPath);
+
+            texture.wrapMode = asset.texture.wrapMode;
+            texture.wrapModeU = asset.texture.wrapModeU;
+            texture.wrapModeV = asset.texture.wrapModeV;
+            texture.wrapModeW = asset.texture.wrapModeW;
+
             Single newWidth = texture.width;
             Single newHeight = texture.height;
             Single ox = newWidth / originalWidth;
             Single oy = newHeight / originalHeight;
+            Single px = originalPivot.x / originalWidth;
+            Single py = originalPivot.y / originalHeight;
             Rect newRect = new Rect(originalRect.x * ox, originalRect.y * oy, originalRect.width * ox, originalRect.height * oy);
-            Vector2 newPivot = new Vector2(originalPivot.x * ox, originalPivot.y * oy);
 
-            return Sprite.Create(texture, newRect, newPivot, asset.pixelsPerUnit);
+            Vector2 newPivot = new Vector2(px, py);
+            Sprite newSpr = Sprite.Create(texture, newRect, newPivot, asset.pixelsPerUnit, 0, SpriteMeshType.Tight, asset.border);
+            newSpr.name = asset.name;
+            return newSpr;
         }
-        
+
         private static Object ImportBinaryAsset(String assetName, String fullPath)
         {
             // Il2CppStructArray<Byte> sourceBytes = Il2CppSystem.IO.File.ReadAllBytes(fullPath);
