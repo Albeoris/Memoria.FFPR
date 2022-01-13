@@ -2,10 +2,12 @@
 using BepInEx.Logging;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.Core;
+using Memoria.FFPR.Mods;
 using UnityEngine;
 using Exception = System.Exception;
 using IntPtr = System.IntPtr;
 using Logger = BepInEx.Logging.Logger;
+using Object = System.Object;
 
 namespace Memoria.FFPR.IL2CPP
 {
@@ -17,6 +19,8 @@ namespace Memoria.FFPR.IL2CPP
         [field: NonSerialized] public ModConfiguration Config { get; private set; }
         [field: NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
         [field: NonSerialized] public GameEncountersControl EncountersControl { get; private set; }
+        [field: NonSerialized] public ModFileResolver ModFiles { get; private set; }
+
 
         public ModComponent(IntPtr ptr) : base(ptr)
         {
@@ -35,6 +39,7 @@ namespace Memoria.FFPR.IL2CPP
                 Config = new ModConfiguration();
                 SpeedControl = new GameSpeedControl();
                 EncountersControl = new GameEncountersControl();
+                ModFiles = new ModFileResolver();
 
                 gameObject.AddComponent<ResourceExporter>();
 
@@ -47,7 +52,7 @@ namespace Memoria.FFPR.IL2CPP
                 throw;
             }
         }
-
+        
         public void OnDestroy()
         {
             Log.LogInfo($"[{nameof(ModComponent)}].{nameof(OnDestroy)}()");

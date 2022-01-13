@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using HarmonyLib;
-using Il2CppSystem.Collections.Generic;
 using Last.Management;
 using Last.Map;
 using Memoria.FFPR.Configuration;
@@ -12,7 +12,7 @@ using Boolean = System.Boolean;
 using Exception = System.Exception;
 using File = System.IO.File;
 using IntPtr = System.IntPtr;
-using Object = Il2CppSystem.Object;
+using Object = System.Object;
 using Path = System.IO.Path;
 
 namespace Memoria.FFPR.IL2CPP
@@ -20,7 +20,7 @@ namespace Memoria.FFPR.IL2CPP
     [HarmonyPatch(typeof(ContentCatalogData), nameof(ContentCatalogData.CreateLocator))]
     public sealed class ContentCatalogData_CreateLocator : Il2CppSystem.Object
     {
-        private static readonly Dictionary<Object, Object> KnownCatalogs = new();
+        private static readonly Dictionary<String, Dictionary<String,String>> KnownCatalogs = new();
         
         public ContentCatalogData_CreateLocator(IntPtr ptr) : base(ptr)
         {
@@ -30,17 +30,14 @@ namespace Memoria.FFPR.IL2CPP
         {
             return GetFileExtension("AddressablesMainContentCatalog", assetAddress);
         }
-        
+
         public static String GetFileExtension(String catalogName, String assetAddress)
         {
-            if (!KnownCatalogs.ContainsKey(catalogName))
-                return String.Empty;
-
-            Dictionary<Object, Object> catalog = KnownCatalogs[catalogName].Cast<Dictionary<Object, Object>>();
-            if (!catalog.ContainsKey(assetAddress))
-                return String.Empty;
-
-            return catalog[assetAddress].ToString();
+            return
+                KnownCatalogs.TryGetValue(catalogName, out var dictionary)
+                && dictionary.TryGetValue(assetAddress, out var extension)
+                    ? extension
+                    : String.Empty;
         }
 
         public static void Prefix(ContentCatalogData __instance)
@@ -49,7 +46,7 @@ namespace Memoria.FFPR.IL2CPP
             if (KnownCatalogs.ContainsKey(locatorId))
                 return;
 
-            Dictionary<Object, Object> extensions = new();
+            Dictionary<String, String> extensions = new();
             KnownCatalogs.Add(locatorId, extensions);
 
             try

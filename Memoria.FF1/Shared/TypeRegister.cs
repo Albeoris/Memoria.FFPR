@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using BepInEx.Logging;
+using Il2CppSystem.Collections.Generic;
 using UnhollowerRuntimeLib;
 
 namespace Memoria.FFPR
@@ -16,15 +17,13 @@ namespace Memoria.FFPR
 
         public void RegisterRequiredTypes()
         {
-
-
             try
             {
                 // Not supported :(
                 
                 // _log.LogInfo("Registering required types...");
                 //
-                // ClassInjector.RegisterTypeInIl2Cpp<Dictionary<String, IntPtr>>();
+                // ClassInjector.RegisterTypeInIl2Cpp<Dictionary<String, String>>();
                 //
                 // _log.LogInfo($"1 additional types required successfully.");
             }
@@ -40,12 +39,8 @@ namespace Memoria.FFPR
             {
                 _log.LogInfo("Registering assembly types...");
 
-                MethodInfo registrator = typeof(ClassInjector).GetMethod("RegisterTypeInIl2Cpp", new Type[0]);
-                if (registrator == null)
-                    throw new Exception("Cannot find method RegisterTypeInIl2Cpp.");
-                
                 Assembly assembly = Assembly.GetExecutingAssembly();
-                Int32 count = RegisterTypes(assembly, registrator);
+                Int32 count = RegisterTypes(assembly);
                 
                 _log.LogInfo($"{count} assembly types registered successfully.");
             }
@@ -55,19 +50,25 @@ namespace Memoria.FFPR
             }
         }
 
-        private Int32 RegisterTypes(Assembly assembly, MethodInfo registrator)
+        private Int32 RegisterTypes(Assembly assembly)
         {
             Int32 count = 0;
-            var parameters = new object[0];
 
             foreach (Type type in assembly.GetTypes())
             {
                 if (!IsImportableType(type))
                     continue;
 
-                MethodInfo genericMethod = registrator.MakeGenericMethod(type);
-                genericMethod.Invoke(null, parameters);
-                count++;
+                try
+                {
+                    ClassInjector.RegisterTypeInIl2Cpp(type);
+                    count++;
+                }
+                catch (Exception ex)
+                {
+                    _log.LogError($"Failed to register type {type.FullName}. Error: {ex}");
+                    throw;
+                }
             }
 
             return count;
@@ -75,6 +76,9 @@ namespace Memoria.FFPR
 
         private static Boolean IsImportableType(Type type)
         {
+            if (!type.IsClass)
+                return false;
+
             return type.Namespace?.EndsWith(".IL2CPP") ?? false;
         }
     }

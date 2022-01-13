@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using Il2CppSystem.Collections.Generic;
 using Last.Management;
+using Memoria.FFPR.BeepInEx;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.Core;
 using UnityEngine;
 using Exception = System.Exception;
 using IntPtr = System.IntPtr;
-using Object = System.Object;
 
 namespace Memoria.FFPR.IL2CPP
 {
@@ -18,6 +18,7 @@ namespace Memoria.FFPR.IL2CPP
         private String _exportDirectory;
         private Int32 _currentIndex;
         private Int32 _totalCount = 1;
+        private Boolean _enumeratorIsNull = true;
         private Dictionary<String, Dictionary<String, String>>.Enumerator _enumerator;
         private KeyValuePair<String, Dictionary<String, String>> _currentGroup;
         private DateTime _loadingStartTime;
@@ -41,18 +42,18 @@ namespace Memoria.FFPR.IL2CPP
                     Destroy(this);
                     return;
                 }
-                
+
                 Time.timeScale = 0.0f;
 
                 ModComponent.Log.LogInfo($"[Export] Game stopped. Export started. Directory: {_exportDirectory}");
                 ModComponent.Log.LogInfo($"[Export] Waiting for ResourceManager initialization.");
                 _extensionResolver = new AssetExtensionResolver();
-                
+
                 // OnGui
                 _blackTexture = new Texture2D(1, 1);
                 _blackTexture.SetPixel(0, 0, Color.black);
                 _blackTexture.Apply();
-                
+
                 _guiStyle = new GUIStyle();
                 _guiStyle.fontSize = 48;
                 _guiStyle.normal.textColor = Color.white;
@@ -80,7 +81,7 @@ namespace Memoria.FFPR.IL2CPP
                 }
 
                 // Waiting for AssetsPath loading
-                if (_enumerator is null)
+                if (_enumeratorIsNull)
                 {
                     if (!_resourceManager.CheckLoadAssetCompleted("AssetsPath"))
                         return;
@@ -88,15 +89,16 @@ namespace Memoria.FFPR.IL2CPP
                     Dictionary<String, Dictionary<String, String>> dic = GetAssetsPath();
                     _totalCount = dic.Count;
                     _enumerator = dic.GetEnumerator();
+                    _enumeratorIsNull = false;
 
                     ModComponent.Log.LogInfo($"[Export] Exporting assets {_totalCount} listed in AssetsPath...");
                 }
-                
+
                 // Must have to export not readable textures
                 if (Camera.main is null)
                     return;
 
-                if (_currentGroup != null)
+                if (_currentGroup.Key != null)
                 {
                     String assetGroup = _currentGroup.Key;
                     TimeSpan elapsedTime = DateTime.Now - _loadingLogTime;
@@ -111,12 +113,12 @@ namespace Memoria.FFPR.IL2CPP
 
                         return;
                     }
-                    
+
                     elapsedTime = DateTime.Now - _loadingStartTime;
                     Dictionary<String, String> assets = _currentGroup.Value;
                     ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] Loaded {assets.Count} assets from [{assetGroup}] in {elapsedTime.TotalSeconds} sec. Exporting...");
 
-                    Dictionary<String, Il2CppSystem.Object> loaded = _resourceManager.completeAssetDic;
+                    Il2CppSystem.Collections.Generic.Dictionary<String, Il2CppSystem.Object> loaded = _resourceManager.completeAssetDic;
                     foreach (var pair in assets)
                     {
                         String assetName = pair.Key;
@@ -131,21 +133,21 @@ namespace Memoria.FFPR.IL2CPP
 
                         String extension = _extensionResolver.GetFileExtension(assetPath);
                         String type = _extensionResolver.GetAssetType(asset);
-                            
+
                         String exportPath = assetPath + extension;
 
                         ExportAsset(asset, type, assetName, exportPath);
                     }
 
                     _resourceManager.DestroyGroupAsset(assetGroup);
-                    _currentGroup = null;
+                    _currentGroup = default;
                 }
 
                 if (_enumerator.MoveNext())
                 {
                     _loadingStartTime = DateTime.Now;
                     _loadingLogTime = _loadingStartTime;
-                    _currentGroup = _enumerator.current;
+                    _currentGroup = _enumerator.Current;
 
                     try
                     {
@@ -193,11 +195,11 @@ namespace Memoria.FFPR.IL2CPP
                 OnExportError(ex);
             }
         }
-        
+
         private void ExportAsset(Il2CppSystem.Object asset, String type, String assetName, String assetPath)
         {
             String fullPath = Path.Combine(_exportDirectory, assetPath);
-            
+
             Boolean overwrite = ModComponent.Instance.Config.Assets.ExportOverwrite;
             if (!overwrite && File.Exists(fullPath))
             {
@@ -304,7 +306,7 @@ namespace Memoria.FFPR.IL2CPP
         {
             ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tSkip {assetName}. Not supported type: {type}");
         }
-        
+
         private static void PrepareDirectory(String fullPath)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
@@ -322,7 +324,8 @@ namespace Memoria.FFPR.IL2CPP
             if (assetPathAsset is null)
                 throw new Exception("[Export] Cannot find text resource AssetsPath.");
 
-            return AssetPathUtilty.Parse(assetPathAsset.text);
+            var il2cppDic = AssetPathUtilty.Parse(assetPathAsset.text);
+            return il2cppDic.ToManaged();
         }
     }
 }

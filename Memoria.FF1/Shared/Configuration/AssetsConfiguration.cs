@@ -21,6 +21,9 @@ namespace Memoria.FFPR.Configuration
         private readonly ConfigEntry<Boolean> _importTextures;
         // private readonly ConfigEntry<Boolean> _importBinary; // Cannot import :/
 
+        private readonly ConfigEntry<Boolean> ModsEnabled;
+        private readonly ConfigEntry<String> _modsDirectory;
+        
         public AssetsConfiguration(ConfigFile file)
         {
             ExportEnabled = file.Bind(Section, nameof(ExportEnabled), false,
@@ -60,6 +63,13 @@ namespace Memoria.FFPR.Configuration
             
             // _importBinary = file.Bind(Section, nameof(ImportBinary), true,
             //     "Import binary resources: .bytes, etc.");
+            
+            ModsEnabled = file.Bind(Section, nameof(ModsEnabled), true,
+                $"Overwrite the supported resources from the {nameof(ModsDirectory)}.");
+
+            _modsDirectory = file.Bind(Section, nameof(ModsDirectory), "%StreamingAssets%/Mods",
+                $"Directory from which the supported resources will be updated.",
+                new AcceptableDirectoryPath(nameof(ModsDirectory)));
         }
 
         public String ExportDirectory => ExportEnabled.Value
@@ -81,6 +91,10 @@ namespace Memoria.FFPR.Configuration
         public Boolean ImportText => _importText.Value;
         public Boolean ImportTextures => _importTextures.Value;
         public Boolean ImportBinary => false; // _importBinary.Value;
+        
+        public String ModsDirectory => ModsEnabled.Value
+            ? AcceptableDirectoryPath.Preprocess(_modsDirectory.Value)
+            : String.Empty;
 
         public void DisableExport() => ExportEnabled.Value = false;
     }

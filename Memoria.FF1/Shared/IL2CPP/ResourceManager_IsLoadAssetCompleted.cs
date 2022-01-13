@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
-using Il2CppSystem.Collections.Generic;
 using Last.Management;
 using Last.Map;
 using Memoria.FFPR.Configuration;
@@ -26,41 +27,41 @@ namespace Memoria.FFPR.IL2CPP
         }
 
         // Don't use other Dictionaries. It must be present in IL2CPP
-        private static readonly Dictionary<Object, Object> KnownAssets = new();
+        private static readonly Dictionary<String, Object> KnownAssets = new();
         private static readonly AssetExtensionResolver ExtensionResolver = new();
 
         public static void Postfix(String addressName, ResourceManager __instance, Boolean __result)
         {
             if (!__result)
                 return;
-            
+
             // Skip scenes or the game will crash
             if (addressName.StartsWith("Assets/Scenes"))
                 return;
-            
+
             try
             {
                 AssetsConfiguration config = ModComponent.Instance.Config.Assets;
                 String importDirectory = config.ImportDirectory;
                 String exportDirectory = config.ExportDirectory;
+                String modsDirectory = config.ModsDirectory;
 
                 // Skip import if disabled
-                if (importDirectory == String.Empty)
+                if (importDirectory == String.Empty && modsDirectory == String.Empty)
                     return;
 
                 // Skip import if export is enabled to avoid race condition
                 if (exportDirectory != String.Empty)
                     return;
 
-                // Don't use TryGetValue to avoid MissingMethod exception
                 IntPtr knownAsset = IntPtr.Zero;
-                if (KnownAssets.ContainsKey(addressName))
-                    knownAsset = KnownAssets[addressName].Pointer;
+                if (KnownAssets.TryGetValue(addressName, out var ka))
+                    knownAsset = ka.Pointer;
 
-                Dictionary<String, Object> dic = ResourceManager.Instance.completeAssetDic;
+                Il2CppSystem.Collections.Generic.Dictionary<String, Object> dic = ResourceManager.Instance.completeAssetDic;
                 if (!dic.ContainsKey(addressName))
                     return;
-                
+
                 Object assetObject = dic[addressName];
                 if (assetObject is null)
                     return;
@@ -68,61 +69,31 @@ namespace Memoria.FFPR.IL2CPP
                 // Skip if asset was already processed
                 if (knownAsset == assetObject.Pointer)
                     return;
-                
-                KnownAssets[addressName] = assetObject;
 
                 String type = ExtensionResolver.GetAssetType(assetObject);
                 String extension = ExtensionResolver.GetFileExtension(addressName);
-                String fullPath = Path.Combine(importDirectory, addressName) + extension;
-                if (!File.Exists(fullPath))
-                    return;
+                String addressNameWithExtension = addressName + extension;
 
-                Object newAsset = null;
-                switch (type)
+                String fullPath = Path.Combine(importDirectory, addressNameWithExtension);
+                if (File.Exists(fullPath))
                 {
-                    case "UnityEngine.AnimationClip":
-                    case "UnityEngine.AnimatorOverrideController":
-                    case "UnityEngine.GameObject":
-                    case "UnityEngine.Material":
-                    case "UnityEngine.RenderTexture":
-                    case "UnityEngine.RuntimeAnimatorController":
-                    case "UnityEngine.Shader":
-                    case "UnityEngine.Sprite":
+                    if (TryImportAsset(type, config, assetObject, fullPath, out var newAsset))
                     {
-                        if (!config.ImportTextures)
-                            return;
-                        newAsset = ImportSprite(assetObject.Cast<Sprite>(), fullPath);
-                        break;
+                        assetObject = newAsset;
+                        String shortPath = ApplicationPathConverter.ReturnPlaceholders(fullPath);
+                        ModComponent.Log.LogInfo($"[Import] File imported: {shortPath}");
                     }
-                    case "UnityEngine.TextAsset":
-                    {
-                        if (!config.ImportText)
-                            return;
-                        newAsset = ImportTextAsset(fullPath);
-                        break;
-                    }
-                    case "System.Byte[]":
-                    {
-                        if (!config.ImportBinary)
-                            return;
-                        newAsset = ImportBinaryAsset(assetObject.Cast<TextAsset>().name, fullPath);
-                        break;
-                    }
-                    case "UnityEngine.Texture2D":
-                        if (!config.ImportTextures)
-                            return;
-                        newAsset = ImportTextures(fullPath);
-                        break;
-                    case "UnityEngine.U2D.SpriteAtlas":
-                        throw new NotSupportedException(type);
                 }
 
-                dic[addressName] = newAsset;
+                IReadOnlyList<String> modPath = ModComponent.Instance.ModFiles.FindAll(addressNameWithExtension);
+                if (modPath.Count > 0)
+                {
+                    if (TryModAsset(type, config, assetObject, modPath, out var newAsset))
+                        assetObject = newAsset;
+                }
 
-                KnownAssets[addressName] = newAsset;
-
-                String shortPath = ApplicationPathConverter.ReturnPlaceholders(fullPath);
-                ModComponent.Log.LogInfo($"[Import] File imported: {shortPath}");
+                dic[addressName] = assetObject;
+                KnownAssets[addressName] = assetObject;
             }
             catch (Exception ex)
             {
@@ -130,11 +101,57 @@ namespace Memoria.FFPR.IL2CPP
             }
         }
 
+        private static Boolean TryImportAsset(String type, AssetsConfiguration config, Object assetObject, String fullPath, out Object newAsset)
+        {
+            newAsset = null;
+            switch (type)
+            {
+                case "UnityEngine.AnimationClip":
+                case "UnityEngine.AnimatorOverrideController":
+                case "UnityEngine.GameObject":
+                case "UnityEngine.Material":
+                case "UnityEngine.RenderTexture":
+                case "UnityEngine.RuntimeAnimatorController":
+                case "UnityEngine.Shader":
+                    throw new NotSupportedException(type);
+                case "UnityEngine.Sprite":
+                {
+                    if (!config.ImportTextures)
+                        return false;
+                    newAsset = ImportSprite(assetObject.Cast<Sprite>(), fullPath);
+                    break;
+                }
+                case "UnityEngine.TextAsset":
+                {
+                    if (!config.ImportText)
+                        return false;
+                    newAsset = ImportTextAsset(fullPath);
+                    break;
+                }
+                case "System.Byte[]":
+                {
+                    if (!config.ImportBinary)
+                        return false;
+                    newAsset = ImportBinaryAsset(assetObject.Cast<TextAsset>().name, fullPath);
+                    break;
+                }
+                case "UnityEngine.Texture2D":
+                    if (!config.ImportTextures)
+                        return false;
+                    newAsset = ImportTextures(fullPath);
+                    break;
+                case "UnityEngine.U2D.SpriteAtlas":
+                    throw new NotSupportedException(type);
+            }
+
+            return true;
+        }
+
         private static Object ImportTextAsset(String fullPath)
         {
             return new TextAsset(File.ReadAllText(fullPath));
         }
-        
+
         private static Object ImportTextures(String fullPath)
         {
             return TextureHelper.ReadTextureFromFile(fullPath);
@@ -171,7 +188,7 @@ namespace Memoria.FFPR.IL2CPP
         private static Object ImportBinaryAsset(String assetName, String fullPath)
         {
             // Il2CppStructArray<Byte> sourceBytes = Il2CppSystem.IO.File.ReadAllBytes(fullPath);
-            
+
             // Not working
             // TextAsset result = new TextAsset(new String('a', sourceBytes.Length));
             // result.name = assetName + ".bytes";
@@ -189,6 +206,73 @@ namespace Memoria.FFPR.IL2CPP
             // return result;
 
             throw new NotSupportedException();
+        }
+
+        private static Boolean TryModAsset(String type, AssetsConfiguration config, Object assetObject, IReadOnlyList<String> modPath, out Object newAsset)
+        {
+            newAsset = null;
+            switch (type)
+            {
+                case "UnityEngine.AnimationClip":
+                case "UnityEngine.AnimatorOverrideController":
+                case "UnityEngine.GameObject":
+                case "UnityEngine.Material":
+                case "UnityEngine.RenderTexture":
+                case "UnityEngine.RuntimeAnimatorController":
+                case "UnityEngine.Shader":
+                {
+                    throw new NotSupportedException(type);
+                }
+                case "UnityEngine.Sprite":
+                {
+                    String fullPath = modPath.Last();
+                    newAsset = ImportSprite(assetObject.Cast<Sprite>(), fullPath);
+
+                    String shortPath = ApplicationPathConverter.ReturnPlaceholders(fullPath);
+                    ModComponent.Log.LogInfo($"[Mod] Sprite replaced: {shortPath}");
+
+                    break;
+                }
+                case "UnityEngine.TextAsset":
+                {
+                    String fullPath = modPath.Last();
+                    if (Path.GetExtension(fullPath) == ".csv")
+                    {
+                        TextAsset textAsset = assetObject.Cast<TextAsset>();
+                        
+                        CsvMerger merger = new(textAsset.text);
+                        merger.MergeFiles(modPath);
+                        
+                        newAsset = new TextAsset(merger.BuildContent());
+                    }
+                    else
+                    {
+                        newAsset = ImportTextAsset(fullPath);
+                        String shortPath = ApplicationPathConverter.ReturnPlaceholders(fullPath);
+                        ModComponent.Log.LogInfo($"[Mod] Text replaced: {shortPath}");
+                    }
+                    break;
+                }
+                case "System.Byte[]":
+                {
+                    return false;
+                }
+                case "UnityEngine.Texture2D":
+                {
+                    String fullPath = modPath.Last();
+                    newAsset = ImportTextures(fullPath);
+
+                    String shortPath = ApplicationPathConverter.ReturnPlaceholders(fullPath);
+                    ModComponent.Log.LogInfo($"[Mod] Texture replaced: {shortPath}");
+                    break;
+                }
+                case "UnityEngine.U2D.SpriteAtlas":
+                {
+                    throw new NotSupportedException(type);
+                }
+            }
+
+            return true;
         }
     }
 }
