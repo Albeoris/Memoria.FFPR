@@ -4,11 +4,11 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 ## Installation:
 - Unpack [BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534.zip) into the game folder.
 - Unpack one of the archives into the game folder:
-    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/FF1_v2022.01.05.zip)
-    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/FF2_v2022.01.05.zip)
-    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/FF3_v2022.01.05.zip)
-    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/FF4_v2022.01.05.zip)
-    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/FF5_v2022.01.05.zip)
+    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF1_v2022.01.14.zip)
+    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF2_v2022.01.14.zip)
+    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF3_v2022.01.14.zip)
+    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF4_v2022.01.14.zip)
+    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF5_v2022.01.14.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
