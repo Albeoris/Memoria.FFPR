@@ -21,6 +21,7 @@ If you are already using BepInEx to load other mods, use the most recent version
 - You can increase game speed (Default Key: F1).
 - You can disable encounters (Default Key: F2).
 - You can export, edit and import text resources (like characteristics of enemies) (Export disabled by default)
+- [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV resources
 
 ## Configuration:
 
