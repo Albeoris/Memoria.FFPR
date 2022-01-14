@@ -242,7 +242,7 @@ namespace Memoria.FFPR.IL2CPP
                         
                         CsvMerger merger = new(textAsset.text);
                         merger.MergeFiles(modPath);
-                        
+
                         newAsset = new TextAsset(merger.BuildContent());
                     }
                     else

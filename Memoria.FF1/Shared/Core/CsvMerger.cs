@@ -174,14 +174,19 @@ public sealed class CsvMerger
     {
         using (StringWriter sw = new StringWriter())
         {
+            Boolean newLine = true;
             foreach (String columnName in _columnNames)
             {
+                if (!newLine)
+                    sw.Write(Separator);
+                
                 sw.Write(columnName);
-                sw.Write(Separator);
+                newLine = false;
             }
 
             sw.WriteLine();
-
+            newLine = true;
+            
             for (int i = 0; i < _rows.Count; i++)
             {
                 if (_removedRows.Contains(i))
@@ -190,11 +195,14 @@ public sealed class CsvMerger
                 String[] row = _rows[i];
                 foreach (String data in row)
                 {
+                    if (!newLine)
+                        sw.Write(Separator);
                     sw.Write(data);
-                    sw.Write(Separator);
+                    newLine = false;
                 }
 
                 sw.WriteLine();
+                newLine = true;
             }
 
             sw.Flush();

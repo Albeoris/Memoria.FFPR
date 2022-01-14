@@ -9,10 +9,17 @@ namespace Memoria.FFPR.Configuration
     public sealed class AcceptableDirectoryPath : AcceptableValueBase
     {
         private readonly String _optionName;
+        private readonly Boolean _create;
 
         public AcceptableDirectoryPath(String optionName) : base(typeof(String))
         {
             _optionName = optionName;
+        }
+        
+        public AcceptableDirectoryPath(String optionName, Boolean create) : base(typeof(String))
+        {
+            _optionName = optionName;
+            _create = create;
         }
 
         public override Object Clamp(Object value)
@@ -51,6 +58,12 @@ namespace Memoria.FFPR.Configuration
 
                     String replaced = Preprocess(str);
                     Boolean isExists = Directory.Exists(replaced);
+                    if (!isExists)
+                    {
+                        Directory.CreateDirectory(replaced);
+                        isExists = Directory.Exists(replaced);
+                    }
+
                     error = isExists ? null : $"Directory [{replaced}] does not exist.";
                     return isExists;
                 }

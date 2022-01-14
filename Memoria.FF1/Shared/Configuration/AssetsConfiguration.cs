@@ -69,7 +69,7 @@ namespace Memoria.FFPR.Configuration
 
             _modsDirectory = file.Bind(Section, nameof(ModsDirectory), "%StreamingAssets%/Mods",
                 $"Directory from which the supported resources will be updated.",
-                new AcceptableDirectoryPath(nameof(ModsDirectory)));
+                new AcceptableDirectoryPath(nameof(ModsDirectory), create: true));
         }
 
         public String ExportDirectory => ExportEnabled.Value
