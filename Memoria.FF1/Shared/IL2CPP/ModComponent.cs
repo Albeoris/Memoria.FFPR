@@ -1,5 +1,6 @@
 ﻿using System;
 using BepInEx.Logging;
+using Memoria.FFPR.Configuration.Scopes;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.Core;
 using Memoria.FFPR.Mods;
@@ -9,100 +10,104 @@ using IntPtr = System.IntPtr;
 using Logger = BepInEx.Logging.Logger;
 using Object = System.Object;
 
-namespace Memoria.FFPR.IL2CPP
+namespace Memoria.FFPR.IL2CPP;
+
+public sealed class ModComponent : MonoBehaviour
 {
-    public sealed class ModComponent : MonoBehaviour
+    public static ModComponent Instance { get; private set; }
+    public static ManualLogSource Log { get; private set; }
+
+    [field: NonSerialized] public ModConfiguration Config { get; private set; }
+    [field: NonSerialized] public GameSaveLoadControl SaveLoadControl { get; private set; }
+    [field: NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
+    [field: NonSerialized] public GameEncountersControl EncountersControl { get; private set; }
+    [field: NonSerialized] public ModFileResolver ModFiles { get; private set; }
+
+
+    public ModComponent(IntPtr ptr) : base(ptr)
     {
-        public static ModComponent Instance { get; private set; }
-        public static ManualLogSource Log { get; private set; }
+    }
 
-        [field: NonSerialized] public ModConfiguration Config { get; private set; }
-        [field: NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
-        [field: NonSerialized] public GameEncountersControl EncountersControl { get; private set; }
-        [field: NonSerialized] public ModFileResolver ModFiles { get; private set; }
+    private Boolean _isDisabled;
 
-
-        public ModComponent(IntPtr ptr) : base(ptr)
+    public void Awake()
+    {
+        Log = Logger.CreateLogSource("Memoria IL2CPP");
+        Log.LogMessage($"[{nameof(ModComponent)}].{nameof(Awake)}(): Begin...");
+        try
         {
+            Instance = this;
+
+            Config = new ModConfiguration();
+            SaveLoadControl = new GameSaveLoadControl();
+            SpeedControl = new GameSpeedControl();
+            EncountersControl = new GameEncountersControl();
+            ModFiles = new ModFileResolver();
+
+            gameObject.AddComponent<ResourceExporter>();
+
+            Log.LogMessage($"[{nameof(ModComponent)}].{nameof(Awake)}(): Processed successfully.");
         }
-
-        private Boolean _isDisabled;
-
-        public void Awake()
+        catch (Exception ex)
         {
-            Log = Logger.CreateLogSource("Memoria IL2CPP");
-            Log.LogMessage($"[{nameof(ModComponent)}].{nameof(Awake)}(): Begin...");
-            try
-            {
-                Instance = this;
-
-                Config = new ModConfiguration();
-                SpeedControl = new GameSpeedControl();
-                EncountersControl = new GameEncountersControl();
-                ModFiles = new ModFileResolver();
-
-                gameObject.AddComponent<ResourceExporter>();
-
-                Log.LogMessage($"[{nameof(ModComponent)}].{nameof(Awake)}(): Processed successfully.");
-            }
-            catch (Exception ex)
-            {
-                _isDisabled = true;
-                Log.LogError($"[{nameof(ModComponent)}].{nameof(Awake)}(): {ex}");
-                throw;
-            }
+            _isDisabled = true;
+            Log.LogError($"[{nameof(ModComponent)}].{nameof(Awake)}(): {ex}");
+            throw;
         }
+    }
         
-        public void OnDestroy()
+    public void OnDestroy()
+    {
+        Log.LogInfo($"[{nameof(ModComponent)}].{nameof(OnDestroy)}()");
+    }
+
+    private void FixedUpdate()
+    {
+        try
         {
-            Log.LogInfo($"[{nameof(ModComponent)}].{nameof(OnDestroy)}()");
+            if (_isDisabled)
+                return;
         }
-
-        private void FixedUpdate()
+        catch (Exception ex)
         {
-            try
-            {
-                if (_isDisabled)
-                    return;
-            }
-            catch (Exception ex)
-            {
-                _isDisabled = true;
-                Log.LogError($"[{nameof(ModComponent)}].{nameof(FixedUpdate)}(): {ex}");
-            }
+            _isDisabled = true;
+            Log.LogError($"[{nameof(ModComponent)}].{nameof(FixedUpdate)}(): {ex}");
         }
+    }
 
-        private void Update()
+    private void Update()
+    {
+        try
         {
-            try
-            {
-                if (_isDisabled)
-                    return;
-                
-                EncountersControl.Update();
-            }
-            catch (Exception ex)
-            {
-                _isDisabled = true;
-                Log.LogError($"[{nameof(ModComponent)}].{nameof(Update)}(): {ex}");
-            }
+            if (_isDisabled)
+                return;
+
+            EncountersControl.Update();
         }
-
-        private void LateUpdate()
+        catch (Exception ex)
         {
-            try
-            {
-                if (_isDisabled)
-                    return;
+            _isDisabled = true;
+            Log.LogError($"[{nameof(ModComponent)}].{nameof(Update)}(): {ex}");
+        }
+    }
 
-                // Must be called from LateUpdate to work in combat. 
-                SpeedControl.Update();
-            }
-            catch (Exception ex)
-            {
-                _isDisabled = true;
-                Log.LogError($"[{nameof(ModComponent)}].{nameof(LateUpdate)}(): {ex}");
-            }
+    private void LateUpdate()
+    {
+        try
+        {
+            if (_isDisabled)
+                return;
+
+            // Must be called from LateUpdate to work with actual data.
+            SaveLoadControl.Update();
+
+            // Must be called from LateUpdate to work in combat. 
+            SpeedControl.Update();
+        }
+        catch (Exception ex)
+        {
+            _isDisabled = true;
+            Log.LogError($"[{nameof(ModComponent)}].{nameof(LateUpdate)}(): {ex}");
         }
     }
 }

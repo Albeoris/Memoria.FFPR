@@ -5,46 +5,45 @@ using BepInEx.IL2CPP;
 using HarmonyLib;
 using Memoria.FFPR.Core;
 
-namespace Memoria.FFPR
+namespace Memoria.FFPR;
+
+[BepInPlugin(ModConstants.Id, "Memoria FF PR", "1.0.0.0")]
+public class EntryPoint : BasePlugin
 {
-    [BepInPlugin(ModConstants.Id, "Memoria FF PR", "1.0.0.0")]
-    public class EntryPoint : BasePlugin
+    public override void Load()
     {
-        public override void Load()
+        try
         {
-            try
-            {
-                Log.LogMessage("Initializing...");
+            Log.LogMessage("Initializing...");
 
-                TypeRegister typeRegister = new(Log);
-                typeRegister.RegisterRequiredTypes();
-                typeRegister.RegisterAssemblyTypes();
+            TypeRegister typeRegister = new(Log);
+            typeRegister.RegisterRequiredTypes();
+            typeRegister.RegisterAssemblyTypes();
 
-                SingletonInitializer singletonInitializer = new(Log);
-                singletonInitializer.InitializeInGameSingleton();
+            SingletonInitializer singletonInitializer = new(Log);
+            singletonInitializer.InitializeInGameSingleton();
 
-                PatchMethods();
-                Log.LogMessage("The mod has been successfully initialized.");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"Failed to initialize the mod: {ex}");
-                throw;
-            }
+            PatchMethods();
+            Log.LogMessage("The mod has been successfully initialized.");
         }
-
-        private void PatchMethods()
+        catch (Exception ex)
         {
-            try
-            {
-                Log.LogInfo("Patching methods...");
-                Harmony harmony = new Harmony(ModConstants.Id);
-                harmony.PatchAll(Assembly.GetExecutingAssembly());
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to patch methods.", ex);
-            }
+            Log.LogError($"Failed to initialize the mod: {ex}");
+            throw;
+        }
+    }
+
+    private void PatchMethods()
+    {
+        try
+        {
+            Log.LogInfo("Patching methods...");
+            Harmony harmony = new Harmony(ModConstants.Id);
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Failed to patch methods.", ex);
         }
     }
 }

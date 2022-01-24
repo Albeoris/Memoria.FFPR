@@ -1,64 +1,64 @@
 ﻿using System;
+using Last.Map;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
-using UnityEngine;
+using UnityEngine.SceneManagement;
 
-namespace Memoria.FFPR.Core
+namespace Memoria.FFPR.Core;
+
+public sealed class GameEncountersControl
 {
-    public sealed class GameEncountersControl
+    public GameEncountersControl()
     {
-        public GameEncountersControl()
+    }
+
+    private Boolean _isDisabled;
+    private Boolean _isToggled;
+
+    public Boolean DisableEncounters { get; private set; }
+
+    public void Update()
+    {
+        try
         {
+            if (_isDisabled)
+                return;
+
+            ProcessEncounters();
         }
-
-        private Boolean _isDisabled;
-        private Boolean _isToggled;
-
-        public Boolean DisableEncounters { get; private set; }
-
-        public void Update()
+        catch (Exception ex)
         {
-            try
-            {
-                if (_isDisabled)
-                    return;
-
-                ProcessEncounters();
-            }
-            catch (Exception ex)
-            {
-                _isDisabled = true;
-                ModComponent.Log.LogError($"[{nameof(GameEncountersControl)}].{nameof(Update)}(): {ex}");
-            }
+            _isDisabled = true;
+            ModComponent.Log.LogError($"[{nameof(GameEncountersControl)}].{nameof(Update)}(): {ex}");
         }
+    }
 
-        private void ProcessEncounters()
+    private void ProcessEncounters()
+    {
+        var config = ModComponent.Instance.Config.Encounters;
+
+        var toggleKey = config.ToggleKey.Value;
+        var toggleAction = config.ToggleAction.Value;
+
+        var holdKey = config.HoldKey.Value;
+        var holdAction = config.HoldAction.Value;
+
+        Boolean isToggled = InputManager.GetKeyUp(toggleKey) || InputManager.GetKeyUp(toggleAction);
+        Boolean isHold = InputManager.GetKey(holdKey) || InputManager.GetKey(holdAction);
+
+        if (isToggled)
         {
-            var config = ModComponent.Instance.Config.Encounters;
-
-            var toggleKey = config.ToggleKey.Value;
-            var toggleAction = config.ToggleAction.Value;
-
-            var holdKey = config.HoldKey.Value;
-            var holdAction = config.HoldAction.Value;
-
-            Boolean isToggled = InputManager.GetKeyUp(toggleKey) || InputManager.GetKeyUp(toggleAction);
-            Boolean isHold = InputManager.GetKey(holdKey) || InputManager.GetKey(holdAction);
-
-            if (isToggled)
+            _isToggled = !_isToggled;
+            if (_isToggled)
             {
-                _isToggled = !_isToggled;
-                if (_isToggled)
-                {
-                    DisableEncounters = true;
-                    return;
-                }
-
-                DisableEncounters = false;
+                DisableEncounters = true;
+                return;
             }
 
-            if (!_isToggled)
-                DisableEncounters = isHold;
+            DisableEncounters = false;
         }
+
+        if (!_isToggled)
+            DisableEncounters = isHold;
     }
 }
