@@ -4,11 +4,11 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 ## Installation:
 - Unpack [BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534.zip) into the game folder.
 - Unpack one of the archives into the game folder:
-    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF1_v2022.01.14.zip)
-    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF2_v2022.01.14.zip)
-    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF3_v2022.01.14.zip)
-    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF4_v2022.01.14.zip)
-    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.14/FF5_v2022.01.14.zip)
+    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF1_v2022.01.24.zip)
+    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF2_v2022.01.24.zip)
+    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF3_v2022.01.24.zip)
+    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF4_v2022.01.24.zip)
+    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF5_v2022.01.24.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
@@ -20,7 +20,9 @@ If you are already using BepInEx to load other mods, use the most recent version
 
 - You can increase game speed (Default Key: F1).
 - You can disable encounters (Default Key: F2).
-- You can export, edit and import text resources (like characteristics of enemies) (Export disabled by default)
+- You can use quick save and load (Default Keys: F5 and F9).
+- [FF2: Color used words and items](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-FF2-Color-Secret-Words-and-Key-Items)
+- You can export, edit and import graphics and text resources (like characteristics of enemies) (Export disabled by default)
 - [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV resources
 
 ## Configuration:
@@ -28,7 +30,7 @@ If you are already using BepInEx to load other mods, use the most recent version
 1. Start the game first.
 2. Wait, the first launch will take some time.
 3. Features that are enabled by default (for example, increasing the speed of the game) will already work.
-4. Close the game and edit the configuration file `$GameFolder$\BepInEx\config\Memoria.ffpr.cfg`
+4. Close the game and edit the configuration file `$GameFolder$\BepInEx\config\Memoria.FFPR\$Section$.cfg`
 
 ## Troubleshooting:
 
