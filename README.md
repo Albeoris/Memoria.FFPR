@@ -1,5 +1,5 @@
 # Memoria FF PR
-This is a small modification that makes gameplay of [Final Fantasy I (PR)](https://store.steampowered.com/app/1173770/FINAL_FANTASY/), [Final Fantasy II (PR)](https://store.steampowered.com/app/1173780/FINAL_FANTASY_II/) and [Final Fantasy III (PR)](https://store.steampowered.com/app/1173790/FINAL_FANTASY_III/) more enjoyable. 
+This is a small modification that makes gameplay of [Final Fantasy I (PR)](https://store.steampowered.com/app/1173770/FINAL_FANTASY/), [Final Fantasy II (PR)](https://store.steampowered.com/app/1173780/FINAL_FANTASY_II/), [Final Fantasy III (PR)](https://store.steampowered.com/app/1173790/FINAL_FANTASY_III/), [Final Fantasy IV (PR)](https://store.steampowered.com/app/1173800/FINAL_FANTASY_IV/), [Final Fantasy V (PR)](https://store.steampowered.com/app/1173810/FINAL_FANTASY_V/) and [Final Fantasy VI (PR)](https://store.steampowered.com/app/1173820/FINAL_FANTASY_VI/) more enjoyable. 
 
 ## Installation:
 - Unpack [BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534.zip) into the game folder.
