@@ -17,10 +17,13 @@
     <Compile Include="Shared\BeepInEx\ExtensionMethods.cs" />
     <Compile Include="Shared\Configuration\AcceptableColor.cs" />
     <Compile Include="Shared\Configuration\AcceptableDirectoryPath.cs" />
+    <Compile Include="Shared\Configuration\AcceptableHotkey.cs" />
     <Compile Include="Shared\Configuration\ApplicationPathConverter.cs" />
     <Compile Include="Shared\Configuration\ColorTypeConverter.cs" />
     <Compile Include="Shared\Configuration\ConfigFileProvider.cs" />
     <Compile Include="Shared\Configuration\ExtensionsConfigFile.cs" />
+    <Compile Include="Shared\Configuration\Hotkey.cs" />
+    <Compile Include="Shared\Configuration\HotkeyTypeConverter.cs" />
     <Compile Include="Shared\Configuration\Scopes\AssetsConfiguration.cs" />
     <Compile Include="Shared\Configuration\Scopes\EncountersConfiguration.cs" />
     <Compile Include="Shared\Configuration\Scopes\ModConfiguration.cs" />

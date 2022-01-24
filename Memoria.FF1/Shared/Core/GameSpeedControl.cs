@@ -47,8 +47,8 @@ public sealed class GameSpeedControl
         var holdKey = config.Speed.HoldKey.Value;
         var holdAction = config.Speed.HoldAction.Value;
 
-        Boolean isToggled = InputManager.GetKeyUp(toggleKey) || InputManager.GetKeyUp(toggleAction);
-        Boolean isHold = InputManager.GetKey(holdKey) || InputManager.GetKey(holdAction);
+        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
+        Boolean isHold = InputManager.IsHold(holdKey) || InputManager.GetKey(holdAction);
         Single speedFactor = 0.0f;
 
         Boolean toggleOff = false;

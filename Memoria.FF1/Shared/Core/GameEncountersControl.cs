@@ -43,8 +43,8 @@ public sealed class GameEncountersControl
         var holdKey = config.HoldKey.Value;
         var holdAction = config.HoldAction.Value;
 
-        Boolean isToggled = InputManager.GetKeyUp(toggleKey) || InputManager.GetKeyUp(toggleAction);
-        Boolean isHold = InputManager.GetKey(holdKey) || InputManager.GetKey(holdAction);
+        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
+        Boolean isHold = InputManager.IsHold(holdKey) || InputManager.GetKey(holdAction);
 
         if (isToggled)
         {

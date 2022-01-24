@@ -11,6 +11,7 @@ using Last.Systems.Indicator;
 using Last.UI;
 using Last.UI.Common.Library;
 using Last.UI.KeyInput;
+using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
 using Memoria.FFPR.IL2CPP.HarmonyHooks;
 using UnhollowerBaseLib;
@@ -53,9 +54,9 @@ public sealed class GameSaveLoadControl
     {
         var config = ModComponent.Instance.Config.Saves;
 
-        KeyCode toggleKey = config.QuickSaveKey;
+        Hotkey toggleKey = config.QuickSaveKey;
         String toggleAction = config.QuickSaveAction;
-        Boolean isToggled = InputManager.GetKeyUp(toggleKey) || InputManager.GetKeyUp(toggleAction);
+        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
 
         if (!isToggled)
             return;
@@ -78,9 +79,9 @@ public sealed class GameSaveLoadControl
     {
         var config = ModComponent.Instance.Config.Saves;
 
-        KeyCode toggleKey = config.QuickLoadKey;
+        Hotkey toggleKey = config.QuickLoadKey;
         String toggleAction = config.QuickLoadAction;
-        Boolean isToggled = InputManager.GetKeyUp(toggleKey) || InputManager.GetKeyUp(toggleAction);
+        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
 
         if (!isToggled)
             return;

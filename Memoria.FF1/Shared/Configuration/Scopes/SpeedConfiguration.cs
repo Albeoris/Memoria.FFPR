@@ -2,6 +2,7 @@
 using BepInEx.Configuration;
 using Memoria.FFPR.Configuration;
 using KeyCode = UnityEngine.KeyCode;
+using Memoria.FFPR.BeepInEx;
 
 namespace Memoria.FFPR.Configuration.Scopes;
 
@@ -9,8 +10,8 @@ public sealed class SpeedConfiguration
 {
     private const String Section = "Speed";
 
-    public ConfigEntry<KeyCode> ToggleKey { get; }
-    public ConfigEntry<KeyCode> HoldKey { get; }
+    public ConfigEntry<Hotkey> ToggleKey { get; }
+    public ConfigEntry<Hotkey> HoldKey { get; }
     public ConfigEntry<String> ToggleAction { get; }
     public ConfigEntry<String> HoldAction { get; }
     public ConfigEntry<Single> ToggleFactor { get; }
@@ -23,11 +24,13 @@ public sealed class SpeedConfiguration
 
     public SpeedConfiguration(ConfigFile file)
     {
-        ToggleKey = file.Bind(Section, nameof(ToggleKey), KeyCode.F1,
-            $"Speed up toggle key.");
+        ToggleKey = file.Bind(Section, nameof(ToggleKey),  new Hotkey{Key = KeyCode.F1},
+            $"Speed up toggle key.",
+            new AcceptableHotkey(nameof(ToggleKey)));
 
-        HoldKey = file.Bind(Section, nameof(HoldKey), KeyCode.None,
-            $"Speed up hold key.");
+        HoldKey = file.Bind(Section, nameof(HoldKey), new Hotkey(),
+            $"Speed up hold key.",
+            new AcceptableHotkey(nameof(HoldKey)));
 
         ToggleAction = file.Bind(Section, nameof(ToggleAction), "None",
             $"Speed up toggle action.",

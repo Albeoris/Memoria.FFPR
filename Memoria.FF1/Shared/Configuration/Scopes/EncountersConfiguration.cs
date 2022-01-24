@@ -2,6 +2,7 @@
 using BepInEx.Configuration;
 using Memoria.FFPR.Configuration;
 using KeyCode = UnityEngine.KeyCode;
+using Memoria.FFPR.BeepInEx;
 
 namespace Memoria.FFPR.Configuration.Scopes;
 
@@ -9,8 +10,8 @@ public sealed class EncountersConfiguration
 {
     private const String Section = "Encounters";
 
-    public ConfigEntry<KeyCode> ToggleKey { get; }
-    public ConfigEntry<KeyCode> HoldKey { get; }
+    public ConfigEntry<Hotkey> ToggleKey { get; }
+    public ConfigEntry<Hotkey> HoldKey { get; }
     public ConfigEntry<String> ToggleAction { get; }
     public ConfigEntry<String> HoldAction { get; }
 
@@ -21,11 +22,13 @@ public sealed class EncountersConfiguration
         
     public EncountersConfiguration(ConfigFile file)
     {
-        ToggleKey = file.Bind(Section, nameof(ToggleKey), KeyCode.F2,
-            $"Disable/Enable encounters toggle key.");
+        ToggleKey = file.Bind(Section, nameof(ToggleKey), new Hotkey{Key = KeyCode.F2},
+            $"Disable/Enable encounters toggle key.",
+            new AcceptableHotkey(nameof(ToggleKey)));
 
-        HoldKey = file.Bind(Section, nameof(HoldKey), KeyCode.None,
-            $"Disable encounters hold key.");
+        HoldKey = file.Bind(Section, nameof(HoldKey), new Hotkey(),
+            $"Disable encounters hold key.",
+            new AcceptableHotkey(nameof(HoldKey)));
 
         ToggleAction = file.Bind(Section, nameof(ToggleAction), "None",
             $"Disable/Enable encounters action.",
