@@ -20,7 +20,7 @@ If you are already using BepInEx to load other mods, use the most recent version
 
 - You can increase game speed (Default Key: F1).
 - You can disable encounters (Default Key: F2).
-- You can use quick save and load (Default Keys: F5 and F9).
+- You can use quick save and load (Default Keys: (Release) F5 and F9, (Current) Alt+F5, Alt+F9).
 - [FF2: Color used words and items](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-FF2-Color-Secret-Words-and-Key-Items)
 - You can export, edit and import graphics and text resources (like characteristics of enemies) (Export disabled by default)
 - [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV resources
