@@ -75,7 +75,7 @@ public sealed class AssetsConfiguration
         _importText = file.Bind(Section, nameof(ImportText), true,
             "Import text resources: .txt, .csv, .json, etc.");
 
-        _importTextures = file.Bind(Section, nameof(ImportTextures), false,
+        _importTextures = file.Bind(Section, nameof(ImportTextures), true,
             "Import text resources: .png, .jpg, .tga");
 
         // _importBinary = file.Bind(Section, nameof(ImportBinary), true,
