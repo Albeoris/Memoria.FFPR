@@ -9,6 +9,7 @@ using Memoria.FFPR.Configuration.Scopes;
 using Memoria.FFPR.IL2CPP;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = System.Object;
 
 namespace Memoria.FF2.Internal.IL2CPP.HarmonyHooks;
 
@@ -21,6 +22,8 @@ namespace Memoria.FF2.Internal.IL2CPP.HarmonyHooks;
     })]
 public sealed class SecretWordControllerBase_ListUpdate_Words : Il2CppSystem.Object
 {
+    private static Color DefaultColor;
+
     public SecretWordControllerBase_ListUpdate_Words(IntPtr ptr) : base(ptr)
     {
     }
@@ -66,13 +69,16 @@ public sealed class SecretWordControllerBase_ListUpdate_Words : Il2CppSystem.Obj
             Color color = ConversationManager.WasUsedWord(word.UniqueId)
                 ? usedColor
                 : unusedColor;
-            
-            if (color == default)
-                return;
 
             Text text = obj.GetComponentInChildren<Text>();
             if (text is null)
                 continue;
+            
+            if (DefaultColor == default)
+                DefaultColor = text.color;
+
+            if (color == default)
+                color = DefaultColor;
 
             text.color = color;
         }
