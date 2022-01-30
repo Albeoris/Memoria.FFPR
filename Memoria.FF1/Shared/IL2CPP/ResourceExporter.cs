@@ -533,19 +533,19 @@ public sealed class ResourceExporter : MonoBehaviour
 
             foreach (Sprite sprite in sprites)
             {
-                Rect rect = sprite.GetTextureRect(); // don't use sprite.textureRect, can be empty!
+                RectInt rect = sprite.GetPixelTextureRect(); // don't use sprite.textureRect, can be empty!
                 sw.Write(FormattableString.Invariant($"{sprite.name};{rect.x};{rect.y};{rect.width};{rect.height}; "));
 
-                Vector2 pivot = sprite.pivot;
-                if (rect == Rect.zero)
+                Vector2 pivot = sprite.GetMeshPivot();
+                if (rect.width == 0 || rect.height == 0)
                     sw.Write(FormattableString.Invariant($"{0};{0}; "));
                 else
-                    sw.Write(FormattableString.Invariant($"{pivot.x / rect.width};{pivot.y / rect.height}; "));
+                    sw.Write(FormattableString.Invariant($"{pivot.x};{pivot.y}; "));
 
                 Vector4 border = sprite.border; // left, right, top, bottom
                 sw.Write(FormattableString.Invariant($"{border.x};{border.z};{border.w};{border.y}"));
 
-                Vector2[] vertices = sprite.vertices.ToManaged();
+                Vector2Int[] vertices = sprite.GetPixelVertices();
                 sw.Write($"; {vertices.Length}");
                 foreach (Vector2 v in vertices)
                     sw.Write(FormattableString.Invariant($";{v.x};{v.y}"));

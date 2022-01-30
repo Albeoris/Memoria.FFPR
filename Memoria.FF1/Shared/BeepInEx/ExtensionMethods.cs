@@ -68,6 +68,98 @@ public static class ExtensionMethods
                 z: rect.z * scale,
                 w: rect.w * scale);
     }
+    
+    public static RectInt GetPixelSpriteRect(this Sprite sprite)
+    {
+        if (sprite is null) throw new ArgumentNullException(nameof(sprite));
+        
+        Rect rect = sprite.rect;
+        RectInt result = new RectInt
+        {
+            x = (Int32)Math.Round(rect.x),
+            y = (Int32)Math.Round(rect.y),
+            width = (Int32)Math.Round(rect.width),
+            height = (Int32)Math.Round(rect.height)
+        };
+
+        return result;
+    }
+    
+    public static RectInt GetPixelTextureRect(this Sprite sprite)
+    {
+        if (sprite is null) throw new ArgumentNullException(nameof(sprite));
+        
+        Rect rect = sprite.GetTextureRect();
+        RectInt result = new RectInt
+        {
+            x = (Int32)Math.Round(rect.x),
+            y = (Int32)Math.Round(rect.y),
+            width = (Int32)Math.Round(rect.width),
+            height = (Int32)Math.Round(rect.height)
+        };
+
+        return result;
+    }
+
+    public static Vector2Int GetPixelPivot(this Sprite sprite)
+    {
+        if (sprite is null) throw new ArgumentNullException(nameof(sprite));
+        
+        Vector2 pivot = sprite.pivot;
+        return new Vector2Int((Int32)pivot.x, (Int32)pivot.y);
+    }
+    
+    public static Vector2 GetMeshPivot(this Sprite sprite)
+    {
+        if (sprite is null) throw new ArgumentNullException(nameof(sprite));
+
+        Rect textureRect = sprite.GetTextureRect();
+        if (textureRect.width == 0 || textureRect.height == 0)
+            return Vector2.zero;
+        
+        Rect spriteRect = sprite.rect;
+        if (spriteRect.width == 0 || spriteRect.height == 0)
+            return Vector2.zero;
+        
+        Vector2 pivot = sprite.pivot;
+        return new Vector2(pivot.x / textureRect.width, pivot.y / textureRect.height);
+    }
+
+    public static Vector2Int[] GetPixelVertices(this Sprite sprite)
+    {
+        if (sprite is null) throw new ArgumentNullException(nameof(sprite));
+
+        Rect spriteRect = sprite.rect;
+        Rect textureRect = sprite.GetTextureRect();
+        Single scaleX = textureRect.width / spriteRect.width;
+        Single scaleY = textureRect.height / spriteRect.height;
+        Vector2 pixelPivot = sprite.pivot;
+        Vector2[] meshVertices = sprite.GetMeshVertices();
+        Vector2Int[] pixelVertices = new Vector2Int[meshVertices.Length];
+
+        for (int i = 0; i < meshVertices.Length; i++)
+        {
+            Vector2 mesh = meshVertices[i];
+            Single floatX = (mesh.x + pixelPivot.x) * scaleX - 0.01f;
+            Single floatY = (mesh.y + pixelPivot.y) * scaleY - 0.01f;
+            Vector2Int pixel = new Vector2Int((Int32)Math.Round(floatX), (Int32)Math.Round(floatY));
+
+            if (pixel.x < 0 || pixel.y < 0 || pixel.x > textureRect.width || pixel.y > textureRect.height)
+                throw new NotSupportedException($"During transformation the coordinate of the {i} vertex of the sprite, the coordinate went beyond the boundaries of the sprite. Rect: {spriteRect}, TransformedVertex: ({floatX}, {floatY}), BeforeTransform: {mesh}");
+
+            pixelVertices[i] = pixel;
+        }
+
+        return pixelVertices;
+    }
+
+    public static Vector2[] GetMeshVertices(this Sprite sprite)
+    {
+        if (sprite is null) throw new ArgumentNullException(nameof(sprite));
+
+        return sprite.vertices.ToManaged();
+    }
+    
 
     public static T[] ToManaged<T>(this UnhollowerBaseLib.Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
     {
