@@ -227,7 +227,7 @@ public sealed class ResourceExporter : MonoBehaviour
                     _currentIndex++;
                     
                     // Debug
-                    // if (_currentGroup.Key != "mo_ff2_p001_c00")
+                    // if (!String.Equals(_currentGroup.Key, "MO_FF2_B024_C00", StringComparison.InvariantCultureIgnoreCase))
                     //     goto Debug;
                     
                     _resourceManager.RequestGroupLoadAssetBundle(_currentGroup.Key);
@@ -327,10 +327,7 @@ public sealed class ResourceExporter : MonoBehaviour
 
         if (HandleExistingFile(assetName, fullPath, overwrite))
             return;
-        
-        if (HandleExistingDirectory(assetName, fullPath, overwrite))
-            return;
-        
+
         switch (type)
         {
             case "UnityEngine.AnimationClip":
@@ -364,7 +361,7 @@ public sealed class ResourceExporter : MonoBehaviour
                 ExportTexture2D(assetName, asset.Cast<Texture2D>(), fullPath);
                 break;
             case "UnityEngine.U2D.SpriteAtlas":
-                ExportSpriteAtlas(assetName, asset.Cast<SpriteAtlas>(), fullPath);
+                ExportSpriteAtlas(assetName, asset.Cast<SpriteAtlas>(), fullPath, overwrite);
                 break;
             case "UnityEngine.Sprite":
                 ExportSprite(assetName, asset.Cast<Sprite>(), fullPath);
@@ -420,8 +417,6 @@ public sealed class ResourceExporter : MonoBehaviour
                 _skippedCount++;
                 return true;
             }
-
-            File.Delete(fullPath);
         }
         else
         {
@@ -431,7 +426,6 @@ public sealed class ResourceExporter : MonoBehaviour
                 ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tSkip exporting an existing file of asset [{assetName}]: {shortPath}");
             }
             _skippedCount++;
-
             return true;
         }
 
@@ -476,7 +470,7 @@ public sealed class ResourceExporter : MonoBehaviour
         }
     }
 
-    private void ExportSpriteAtlas(String assetName, SpriteAtlas atlas, String atlasDirectoryPath)
+    private void ExportSpriteAtlas(String assetName, SpriteAtlas atlas, String atlasDirectoryPath, Boolean overwrite)
     {
         String shortPath = ApplicationPathConverter.ReturnPlaceholders(atlasDirectoryPath);
         if (!ModComponent.Instance.Config.Assets.ExportTextures)
@@ -486,6 +480,9 @@ public sealed class ResourceExporter : MonoBehaviour
         }
 
         ModComponent.Log.LogInfo($"[Export ({_currentIndex} / {_totalCount})] \tExport [{assetName}] SpriteAtlas {shortPath}");
+        
+        if (HandleExistingDirectory(assetName, atlasDirectoryPath, overwrite))
+            return;
 
         Directory.CreateDirectory(atlasDirectoryPath);
         String textureFileName = Path.ChangeExtension(Path.GetFileName(atlasDirectoryPath), ".png");

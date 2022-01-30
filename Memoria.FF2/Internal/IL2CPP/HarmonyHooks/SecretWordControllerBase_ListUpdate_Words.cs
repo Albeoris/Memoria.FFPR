@@ -9,7 +9,6 @@ using Memoria.FFPR.Configuration.Scopes;
 using Memoria.FFPR.IL2CPP;
 using UnityEngine;
 using UnityEngine.UI;
-using Object = System.Object;
 
 namespace Memoria.FF2.Internal.IL2CPP.HarmonyHooks;
 
