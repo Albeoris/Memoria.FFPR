@@ -11,7 +11,6 @@ public static class ConversationManager
     private const String UsedItemsTag = "Memoria.FFPR.KeyItems.Used";
 
     private static Dictionary<String, HashSet<Int32>> _usedWords = new();
-    private static Dictionary<String, HashSet<Int32>> _usedItems = new();
     private static String _entity;
 
     public static void ChangeLastInteractionEntity(FieldEntityId fieldEntity)
@@ -29,18 +28,6 @@ public static class ConversationManager
     {
         return HasUsedWords(out HashSet<Int32> words)
                && words.Contains(uniqueId);
-    }
-
-    public static void RememberUsedItem(Int32 itemId)
-    {
-        HashSet<Int32> usedWords = GetUsedItems();
-        usedWords.Add(itemId);
-    }
-
-    public static Boolean WasUsedItem(Int32 itemId)
-    {
-        return HasUsedItems(out HashSet<Int32> items)
-               && items.Contains(itemId);
     }
 
     private static Boolean HasUsedWords(out HashSet<Int32> words)
@@ -63,26 +50,6 @@ public static class ConversationManager
         return words;
     }
 
-    private static Boolean HasUsedItems(out HashSet<Int32> items)
-    {
-        String currentEntity = EnsureEntityWasSet();
-
-        return _usedItems.TryGetValue(currentEntity, out items);
-    }
-
-    private static HashSet<Int32> GetUsedItems()
-    {
-        String currentEntity = EnsureEntityWasSet();
-
-        if (!_usedItems.TryGetValue(currentEntity, out var items))
-        {
-            items = new HashSet<Int32>();
-            _usedItems.Add(currentEntity, items);
-        }
-
-        return items;
-    }
-
     private static String EnsureEntityWasSet()
     {
         if (_entity is null)
@@ -94,7 +61,6 @@ public static class ConversationManager
     public static void SaveData(JObject root)
     {
         root.Add(UsedWordsTag, JObject.FromObject(_usedWords));
-        root.Add(UsedItemsTag, JObject.FromObject(_usedItems));
     }
 
     public static void LoadData(JObject root)
@@ -103,16 +69,10 @@ public static class ConversationManager
         _usedWords = words is null
             ? new Dictionary<String, HashSet<Int32>>()
             : words.ToObject<Dictionary<String, HashSet<Int32>>>();
-
-        JToken items = root[UsedItemsTag];
-        _usedItems = items is null
-            ? new Dictionary<String, HashSet<Int32>>()
-            : items.ToObject<Dictionary<String, HashSet<Int32>>>();
     }
 
     public static void ResetData()
     {
         _usedWords = new Dictionary<String, HashSet<Int32>>();
-        _usedItems = new Dictionary<String, HashSet<Int32>>();
     }
 }

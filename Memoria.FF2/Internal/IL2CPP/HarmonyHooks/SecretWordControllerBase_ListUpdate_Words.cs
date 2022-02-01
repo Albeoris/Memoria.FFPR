@@ -21,7 +21,7 @@ namespace Memoria.FF2.Internal.IL2CPP.HarmonyHooks;
     })]
 public sealed class SecretWordControllerBase_ListUpdate_Words : Il2CppSystem.Object
 {
-    private static Color DefaultColor;
+    private static Color _defaultColor;
 
     public SecretWordControllerBase_ListUpdate_Words(IntPtr ptr) : base(ptr)
     {
@@ -73,11 +73,11 @@ public sealed class SecretWordControllerBase_ListUpdate_Words : Il2CppSystem.Obj
             if (text is null)
                 continue;
             
-            if (DefaultColor == default)
-                DefaultColor = text.color;
+            if (_defaultColor == default)
+                _defaultColor = text.color;
 
             if (color == default)
-                color = DefaultColor;
+                color = _defaultColor;
 
             text.color = color;
         }

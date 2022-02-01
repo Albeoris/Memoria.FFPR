@@ -16,7 +16,6 @@
 	<Compile Include="Internal\Core\ConversationManager.cs" />
 	<Compile Include="Internal\Core\FieldEntityId.cs" />
 	<Compile Include="Internal\IL2CPP\HarmonyHooks\FieldNonPlayerController_OnTakeAction.cs" />
-	<Compile Include="Internal\IL2CPP\HarmonyHooks\SecretWordControllerBase_ListUpdate_Items.cs" />
 	<Compile Include="Internal\IL2CPP\HarmonyHooks\SecretWordControllerBase_ListUpdate_Words.cs" />
 	<Compile Include="Internal\IL2CPP\HarmonyHooks\SecretWordController__WordSelectingInit_b__24_0.cs" />
 	<Compile Include="Partial\Configuration\Scopes\ModConfiguration.cs" />
