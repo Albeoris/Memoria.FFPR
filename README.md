@@ -30,7 +30,7 @@ If you are already using BepInEx to load other mods, use the most recent version
 ## Configuration:
 
 1. Start the game first.
-2. Wait, the first launch will take some time.
+2. Wait, the first launch will take some time. (about 1 minute)
 3. Features that are enabled by default (for example, increasing the speed of the game) will already work.
 4. Close the game and edit the configuration file `$GameFolder$\BepInEx\config\Memoria.FFPR\$Section$.cfg`
 
