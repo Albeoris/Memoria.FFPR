@@ -85,7 +85,7 @@ public sealed class ModComponent : MonoBehaviour
             if (_isDisabled)
                 return;
 
-            EncountersControl.Update();
+            EncountersControl.TryUpdate();
             FieldControl.TryUpdate();
         }
         catch (Exception ex)

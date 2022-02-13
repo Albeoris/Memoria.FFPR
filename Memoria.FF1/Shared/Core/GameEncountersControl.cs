@@ -6,63 +6,26 @@ using UnityEngine.SceneManagement;
 
 namespace Memoria.FFPR.Core;
 
-public sealed class GameEncountersControl
+public sealed class GameEncountersControl : SafeComponent
 {
+    private readonly HotkeyControl _disableEncountersKey = new();
+    
     public GameEncountersControl()
     {
     }
 
-    private Boolean _isDisabled;
-    private Boolean _isToggled;
+    public Boolean DisableEncounters => _disableEncountersKey.XorHeldAndToggled;
 
-    public Boolean DisableEncounters { get; private set; }
-
-    public void Update()
+    protected override void Update()
     {
-        try
-        {
-            if (_isDisabled)
-                return;
-
-            ProcessEncounters();
-        }
-        catch (Exception ex)
-        {
-            _isDisabled = true;
-            ModComponent.Log.LogError($"[{nameof(GameEncountersControl)}].{nameof(Update)}(): {ex}");
-        }
+        ProcessEncounters();
     }
 
     private void ProcessEncounters()
     {
         var config = ModComponent.Instance.Config.Encounters;
-
-        var toggleKey = config.ToggleKey.Value;
-        var toggleAction = config.ToggleAction.Value;
-
-        var holdKey = config.HoldKey.Value;
-        var holdAction = config.HoldAction.Value;
-
-        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
-        Boolean isHold = InputManager.IsHold(holdKey) || InputManager.GetKey(holdAction);
-
-        if (isToggled)
-        {
-            _isToggled = !_isToggled;
-            if (_isToggled)
-            {
-                DisableEncounters = true;
-                UpdateIndicator();
-                return;
-            }
-
-            DisableEncounters = false;
-        }
-
-        if (!_isToggled)
-            DisableEncounters = isHold;
-
-        UpdateIndicator();
+        if (_disableEncountersKey.Update(config.Key.Value))
+            UpdateIndicator();
     }
 
     private void UpdateIndicator()

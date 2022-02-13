@@ -25,8 +25,7 @@ public sealed class GameEntitiesControl : SafeComponent
 
     private void UpdateInput()
     {
-        _showInteractionIconsKey.Update(ModComponent.Instance.Config.Field.HighlightingKey.Value);
-        if (_showInteractionIconsKey.Changed)
+        if (_showInteractionIconsKey.Update(ModComponent.Instance.Config.Field.HighlightingKey.Value))
             UpdateIndicator(WillShowHiddenIcons());
     }
     

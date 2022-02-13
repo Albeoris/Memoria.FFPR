@@ -79,7 +79,7 @@ public sealed class HotkeyControl
         : Time.unscaledTime - _holdOnTimeSeconds;
 
 
-    public void Update(HotkeyGroup hotkeyGroup)
+    public Boolean Update(HotkeyGroup hotkeyGroup)
     {
         Boolean? isHeld = null;
         Boolean? isPressed = null;
@@ -111,9 +111,10 @@ public sealed class HotkeyControl
         }
 
         UpdateStates(isHeld, isPressed);
+        return Changed;
     }
     
-    public void Update(Hotkey hotkey)
+    public Boolean Update(Hotkey hotkey)
     {
         Boolean? isHeld = null;
         Boolean? isPressed = null;
@@ -127,6 +128,7 @@ public sealed class HotkeyControl
         }
 
         UpdateStates(isHeld, isPressed);
+        return Changed;
     }
 
     private void UpdateStates(Boolean? isHeld, Boolean? isPressed)
