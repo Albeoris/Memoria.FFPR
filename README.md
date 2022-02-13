@@ -2,13 +2,13 @@
 This is a small modification that makes gameplay of [Final Fantasy I (PR)](https://store.steampowered.com/app/1173770/FINAL_FANTASY/), [Final Fantasy II (PR)](https://store.steampowered.com/app/1173780/FINAL_FANTASY_II/), [Final Fantasy III (PR)](https://store.steampowered.com/app/1173790/FINAL_FANTASY_III/), [Final Fantasy IV (PR)](https://store.steampowered.com/app/1173800/FINAL_FANTASY_IV/), [Final Fantasy V (PR)](https://store.steampowered.com/app/1173810/FINAL_FANTASY_V/) and [Final Fantasy VI (PR)](https://store.steampowered.com/app/1173820/FINAL_FANTASY_VI/) more enjoyable. 
 
 ## Installation:
-- Unpack [BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.05/BepInEx_UnityIL2CPP_x64_39f6bf8_6.0.0-be.534.zip) into the game folder.
+- Unpack [BepInEx_UnityIL2CPP_x64_1504d80_6.0.0-be.546](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/BepInEx_UnityIL2CPP_x64_1504d80_6.0.0-be.546.zip) into the game folder.
 - Unpack one of the archives into the game folder:
-    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF1_v2022.01.24.zip)
-    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF2_v2022.01.24.zip)
-    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF3_v2022.01.24.zip)
-    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF4_v2022.01.24.zip)
-    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.01.24/FF5_v2022.01.24.zip)
+    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF1_v2022.02.12.zip)
+    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF2_v2022.02.12.zip)
+    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF3_v2022.02.12.zip)
+    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF4_v2022.02.12.zip)
+    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF5_v2022.02.12.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
@@ -21,6 +21,8 @@ If you are already using BepInEx to load other mods, use the most recent version
 - You can increase game speed (Default Key: F1).
 - You can disable encounters (Default Key: F2).
 - You can use quick save and load (Default Keys: (Release) F5 and F9, (Current) Alt+F5, Alt+F9).
+- You can [highlight interactive objects and hidden passages](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Highlighting) (Default key: Caps Lock [Toggle or Hold])
+- You can [switch between ATB/Command battle systems](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Battle-System)
 - [FF2: Color used words and items](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-FF2-Color-Secret-Words-and-Key-Items)
 - You can export, edit and import graphics and text resources (like characteristics of enemies) (Export disabled by default)
 - [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV resources
@@ -28,7 +30,7 @@ If you are already using BepInEx to load other mods, use the most recent version
 ## Configuration:
 
 1. Start the game first.
-2. Wait, the first launch will take some time.
+2. Wait, the first launch will take some time. (about 1 minute)
 3. Features that are enabled by default (for example, increasing the speed of the game) will already work.
 4. Close the game and edit the configuration file `$GameFolder$\BepInEx\config\Memoria.FFPR\$Section$.cfg`
 
