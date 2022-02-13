@@ -22,11 +22,11 @@ public sealed class EncountersConfiguration
         
     public EncountersConfiguration(ConfigFile file)
     {
-        ToggleKey = file.Bind(Section, nameof(ToggleKey), new Hotkey{Key = KeyCode.F2},
+        ToggleKey = file.Bind(Section, nameof(ToggleKey), new Hotkey(KeyCode.F2),
             $"Disable/Enable encounters toggle key.",
             new AcceptableHotkey(nameof(ToggleKey)));
 
-        HoldKey = file.Bind(Section, nameof(HoldKey), new Hotkey(),
+        HoldKey = file.Bind(Section, nameof(HoldKey), Hotkey.None,
             $"Disable encounters hold key.",
             new AcceptableHotkey(nameof(HoldKey)));
 

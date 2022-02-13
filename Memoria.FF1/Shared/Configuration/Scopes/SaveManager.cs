@@ -21,7 +21,10 @@ public sealed partial class SaveManager
             SaveData(root);
             
             String result = root.ToString();
-            ModComponent.Log.LogInfo($"Permanent data successfully saved.");
+            
+            // Spam
+            // ModComponent.Log.LogInfo($"Permanent data successfully saved.");
+            
             return result;
         }
         catch (Exception ex)

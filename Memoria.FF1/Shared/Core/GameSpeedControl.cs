@@ -1,34 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
 using UnityEngine;
 
 namespace Memoria.FFPR.Core;
 
-public sealed class GameSpeedControl
+public sealed class GameSpeedControl : SafeComponent
 {
     public GameSpeedControl()
     {
     }
 
-    private Boolean _isDisabled;
-    private Boolean _isToggled;
-    private HeldState _heldState;
-    private Single _speedFactor = Time.timeScale;
+    private readonly HotkeyControl _speedUpKey = new();
+    private Single _nativeFactor;
+    private Single _knownFactor;
 
-    public void Update()
+    protected override void Update()
     {
-        try
-        {
-            if (_isDisabled)
-                return;
-
-            ProcessSpeedUp();
-        }
-        catch (Exception ex)
-        {
-            _isDisabled = true;
-            ModComponent.Log.LogError($"[{nameof(GameSpeedControl)}].{nameof(Update)}(): {ex}");
-        }
+        ProcessSpeedUp();
     }
 
     private void ProcessSpeedUp()
@@ -37,71 +27,40 @@ public sealed class GameSpeedControl
         if (currentFactor == 0.0f) // Do not unpause the game 
             return;
 
-        var config = ModComponent.Instance.Config;
+        var config = ModComponent.Instance.Config.Speed;
+        _speedUpKey.Update(config.Key.Value);
 
-        var toggleFactor = config.Speed.ToggleFactor.Value;
-        var toggleKey = config.Speed.ToggleKey.Value;
-        var toggleAction = config.Speed.ToggleAction.Value;
+        if (currentFactor != _knownFactor)
+            _nativeFactor = currentFactor;
 
-        var holdFactor = config.Speed.HoldFactor.Value;
-        var holdKey = config.Speed.HoldKey.Value;
-        var holdAction = config.Speed.HoldAction.Value;
-
-        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
-        Boolean isHold = InputManager.IsHold(holdKey) || InputManager.GetKey(holdAction);
-        Single speedFactor = 0.0f;
-
-        Boolean toggleOff = false;
-        if (isToggled)
+        if (_speedUpKey.IsHeld)
         {
-            if (_isToggled)
-                toggleOff = true;
-            else
-                speedFactor = Math.Max(speedFactor, toggleFactor);
-
-            _isToggled = !_isToggled;
+            _knownFactor = _nativeFactor * config.HoldFactor.Value;
+            UpdateIndicator(flag: true);
+        }
+        else if (_speedUpKey.IsToggled)
+        {
+            _knownFactor = _nativeFactor * config.ToggleFactor.Value;
+            UpdateIndicator(flag: true);
+        }
+        else
+        {
+            _knownFactor = _nativeFactor;
+            UpdateIndicator(flag: false);
         }
 
-        if (isHold)
-        {
-            speedFactor = Math.Max(speedFactor, holdFactor);
-            _heldState = HeldState.KeyIsHeld;
-        }
-        else if (_heldState != HeldState.KeyNotHeld)
-        {
-            _heldState = HeldState.KeyReleased;
-        }
-
-        if (speedFactor == 0.0f)
-        {
-            speedFactor = _isToggled ? _speedFactor : 1.0f;
-        }
-
-        // ReSharper disable once CompareOfFloatsByEqualityOperator
-        if (currentFactor != speedFactor)
-        {
-            if (toggleOff)
-            {
-                Time.timeScale = speedFactor; //set it to 1 so our multiplicative approach returns to normal
-            }
-            else if (_heldState == HeldState.KeyReleased)
-            {
-                Time.timeScale = speedFactor;
-                _heldState = HeldState.KeyNotHeld; //holding logic should be ignored until key is held again
-            }
-            else
-            {
-                Time.timeScale = currentFactor * speedFactor;
-            }
-
-            _speedFactor = speedFactor;
-        }
+        Time.timeScale = _knownFactor;
     }
 
-    private enum HeldState
+    private static void UpdateIndicator(Boolean flag)
     {
-        KeyNotHeld = 0,
-        KeyIsHeld = 1,
-        KeyReleased = 2
+        if (flag)
+        {
+            ModComponent.Instance.Drawer.Add("s");
+        }
+        else
+        {
+            ModComponent.Instance.Drawer.Remove("s");
+        }
     }
 }

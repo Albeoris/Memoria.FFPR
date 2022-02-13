@@ -52,6 +52,7 @@ public sealed class GameEncountersControl
             if (_isToggled)
             {
                 DisableEncounters = true;
+                UpdateIndicator();
                 return;
             }
 
@@ -60,5 +61,19 @@ public sealed class GameEncountersControl
 
         if (!_isToggled)
             DisableEncounters = isHold;
+
+        UpdateIndicator();
+    }
+
+    private void UpdateIndicator()
+    {
+        if (DisableEncounters)
+        {
+            ModComponent.Instance.Drawer.Add("e");
+        }
+        else
+        {
+            ModComponent.Instance.Drawer.Remove("e");
+        }
     }
 }

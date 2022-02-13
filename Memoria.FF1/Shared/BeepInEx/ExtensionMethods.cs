@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
 using UnhollowerBaseLib;
 using UnityEngine;
@@ -10,6 +11,25 @@ namespace Memoria.FFPR.BeepInEx;
 
 public static class ExtensionMethods
 {
+    public static IReadOnlyList<T> DistinctBy<T, TKey>(this IEnumerable<T> self, Func<T, TKey> selector)
+    {
+        List<T> result;
+        if (self is IReadOnlyCollection<T> collection)
+            result = new List<T>(collection.Count);
+        else
+            result = new();
+
+        HashSet<TKey> set = new();
+        foreach (var item in self)
+        {
+            TKey key = selector(item);
+            if (set.Add(key))
+                result.Add(item);
+        }
+
+        return result;
+    }
+
     public static void LogException(this ManualLogSource logSource, Exception ex)
     {
         logSource.LogError(ex.ToString());
@@ -26,7 +46,7 @@ public static class ExtensionMethods
         return file.Bind(section, key, defaultValue,
             new ConfigDescription(description, acceptable, tags));
     }
-    
+
     public static void Deconstruct<TKey, TValue>(this Il2CppSystem.Collections.Generic.KeyValuePair<TKey, TValue> il2cpp, out TKey key, out TValue value)
     {
         key = il2cpp.Key;

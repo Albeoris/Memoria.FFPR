@@ -50,7 +50,7 @@ public static class InputManager
                 return false;
         }
 
-        return hotkey.Modifiers.All(Input.GetKey);
+        return hotkey.ModifierKeys.All(Input.GetKey);
     }
 
     public static Boolean GetKey(String action) => Check(action, Input.GetKey);

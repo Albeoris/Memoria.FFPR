@@ -13,7 +13,10 @@ public sealed partial class ModConfiguration
     public SavesConfiguration Saves { get; }
     public SpeedConfiguration Speed { get; }
     public EncountersConfiguration Encounters { get; }
+    public BattleSystemConfiguration BattleSystem { get; }
+    public FieldConfiguration Field { get; }
     public AssetsConfiguration Assets { get; }
+    public GuiIndicatorsConfiguration GuiIndicators { get; }
 
     public ModConfiguration()
     {
@@ -27,7 +30,10 @@ public sealed partial class ModConfiguration
                 Saves = new SavesConfiguration(provider);
                 Speed = new SpeedConfiguration(provider);
                 Encounters = new EncountersConfiguration(provider);
+                BattleSystem = new BattleSystemConfiguration(provider);
+                Field = new FieldConfiguration(provider);
                 Assets = new AssetsConfiguration(provider);
+                GuiIndicators = new GuiIndicatorsConfiguration(provider);
                 InitializeGameSpecificOptions(provider);
 
                 UpgradeLegacyConfig(log);

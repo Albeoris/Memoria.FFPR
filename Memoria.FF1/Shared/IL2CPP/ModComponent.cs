@@ -21,8 +21,9 @@ public sealed class ModComponent : MonoBehaviour
     [field: NonSerialized] public GameSaveLoadControl SaveLoadControl { get; private set; }
     [field: NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
     [field: NonSerialized] public GameEncountersControl EncountersControl { get; private set; }
+    [field: NonSerialized] public GameEntitiesControl FieldControl { get; private set; }
     [field: NonSerialized] public ModFileResolver ModFiles { get; private set; }
-
+    [field: NonSerialized] public ScreenDrawer Drawer { get; private set; }
 
     public ModComponent(IntPtr ptr) : base(ptr)
     {
@@ -42,8 +43,10 @@ public sealed class ModComponent : MonoBehaviour
             SaveLoadControl = new GameSaveLoadControl();
             SpeedControl = new GameSpeedControl();
             EncountersControl = new GameEncountersControl();
+            FieldControl = new GameEntitiesControl();
             ModFiles = new ModFileResolver();
 
+            Drawer = gameObject.AddComponent<ScreenDrawer>();
             gameObject.AddComponent<ResourceExporter>();
 
             Log.LogMessage($"[{nameof(ModComponent)}].{nameof(Awake)}(): Processed successfully.");
@@ -55,7 +58,7 @@ public sealed class ModComponent : MonoBehaviour
             throw;
         }
     }
-        
+    
     public void OnDestroy()
     {
         Log.LogInfo($"[{nameof(ModComponent)}].{nameof(OnDestroy)}()");
@@ -83,6 +86,7 @@ public sealed class ModComponent : MonoBehaviour
                 return;
 
             EncountersControl.Update();
+            FieldControl.TryUpdate();
         }
         catch (Exception ex)
         {
@@ -102,7 +106,7 @@ public sealed class ModComponent : MonoBehaviour
             SaveLoadControl.Update();
 
             // Must be called from LateUpdate to work in combat. 
-            SpeedControl.Update();
+            SpeedControl.TryUpdate();
         }
         catch (Exception ex)
         {

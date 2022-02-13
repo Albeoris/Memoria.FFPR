@@ -35,11 +35,11 @@ public sealed class SavesConfiguration
             $"{Environment.NewLine}Enabling this option will increase the size of save files (including cloud ones)." +
             $"{Environment.NewLine}Disabling this option will result in the loss of all accumulated data the next time you save the game.");
 
-        _quickSaveKey = file.Bind(Section, nameof(QuickSaveKey), new Hotkey { Alt = true, Key = KeyCode.F5 },
+        _quickSaveKey = file.Bind(Section, nameof(QuickSaveKey), new Hotkey(KeyCode.F5) { Alt = true },
             $"Disable/Enable quick-save key.",
             new AcceptableHotkey(nameof(QuickSaveKey)));
 
-        _quickLoadKey = file.Bind(Section, nameof(QuickLoadKey), new Hotkey { Alt = true, Key = KeyCode.F9 },
+        _quickLoadKey = file.Bind(Section, nameof(QuickLoadKey), new Hotkey(KeyCode.F9) { Alt = true },
             $"Disable/Enable quick-load key.",
             new AcceptableHotkey(nameof(QuickLoadKey)));
 
