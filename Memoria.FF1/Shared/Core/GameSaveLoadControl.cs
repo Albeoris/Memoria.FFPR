@@ -25,40 +25,26 @@ using String = System.String;
 
 namespace Memoria.FFPR.Core;
 
-public sealed class GameSaveLoadControl
+public sealed class GameSaveLoadControl : SafeComponent
 {
+    private readonly HotkeyControl _quickSaveKey = new();
+    private readonly HotkeyControl _quickLoadKey = new();
+    
     public GameSaveLoadControl()
     {
     }
 
-    private Boolean _isDisabled;
-
-    public void Update()
+    protected override void Update()
     {
-        try
-        {
-            if (_isDisabled)
-                return;
-
-            ProcessSave();
-            ProcessLoad();
-        }
-        catch (Exception ex)
-        {
-            _isDisabled = true;
-            ModComponent.Log.LogError($"[{nameof(GameSaveLoadControl)}].{nameof(Update)}(): {ex}");
-        }
+        ProcessSave();
+        ProcessLoad();
     }
 
     private void ProcessSave()
     {
         var config = ModComponent.Instance.Config.Saves;
-
-        Hotkey toggleKey = config.QuickSaveKey;
-        String toggleAction = config.QuickSaveAction;
-        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
-
-        if (!isToggled)
+        _quickSaveKey.Update(config.QuickSaveKey);
+        if (!_quickSaveKey.IsPressed)
             return;
 
         if (!IsOperable(out SaveSlotData slot))
@@ -78,12 +64,8 @@ public sealed class GameSaveLoadControl
     private void ProcessLoad()
     {
         var config = ModComponent.Instance.Config.Saves;
-
-        Hotkey toggleKey = config.QuickLoadKey;
-        String toggleAction = config.QuickLoadAction;
-        Boolean isToggled = InputManager.IsToggled(toggleKey) || InputManager.GetKeyUp(toggleAction);
-
-        if (!isToggled)
+        _quickLoadKey.Update(config.QuickLoadKey);
+        if (!_quickLoadKey.IsPressed)
             return;
 
         if (!IsOperable(out SaveSlotData slot))

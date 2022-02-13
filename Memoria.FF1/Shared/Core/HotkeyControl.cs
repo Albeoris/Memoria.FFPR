@@ -17,6 +17,7 @@ public sealed class HotkeyControl
     public Boolean ToggleChanged { get; private set; }
     public Boolean HoldChanged { get; private set; }
     public Boolean Changed => ToggleChanged || HoldChanged;
+    public Boolean IsPressed => ToggleChanged && Toggle == HotkeyToggleState.ToggleOn || Toggle == HotkeyToggleState.ToggleOff;
 
     public Boolean IsToggled => Toggle switch
     {

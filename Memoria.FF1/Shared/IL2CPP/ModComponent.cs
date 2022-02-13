@@ -103,7 +103,7 @@ public sealed class ModComponent : MonoBehaviour
                 return;
 
             // Must be called from LateUpdate to work with actual data.
-            SaveLoadControl.Update();
+            SaveLoadControl.TryUpdate();
 
             // Must be called from LateUpdate to work in combat. 
             SpeedControl.TryUpdate();
