@@ -1,7 +1,11 @@
-﻿using System;
+﻿using System.Reflection;
 using HarmonyLib;
+using Last.Data.User;
+using Last.Management;
 using Memoria.FFPR.Core;
 using UnityEngine.U2D;
+using Boolean = System.Boolean;
+using Int32 = System.Int32;
 
 namespace Memoria.FFPR.IL2CPP.HarmonyHooks;
 

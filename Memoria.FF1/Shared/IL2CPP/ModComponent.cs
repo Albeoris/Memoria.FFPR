@@ -21,6 +21,7 @@ public sealed class ModComponent : MonoBehaviour
     [field: NonSerialized] public GameSaveLoadControl SaveLoadControl { get; private set; }
     [field: NonSerialized] public GameSpeedControl SpeedControl { get; private set; }
     [field: NonSerialized] public GameEncountersControl EncountersControl { get; private set; }
+    [field: NonSerialized] public GameBattleAtbControl BattleAtbControl { get; private set; }
     [field: NonSerialized] public GameEntitiesControl FieldControl { get; private set; }
     [field: NonSerialized] public ModFileResolver ModFiles { get; private set; }
     [field: NonSerialized] public ScreenDrawer Drawer { get; private set; }
@@ -43,6 +44,7 @@ public sealed class ModComponent : MonoBehaviour
             SaveLoadControl = new GameSaveLoadControl();
             SpeedControl = new GameSpeedControl();
             EncountersControl = new GameEncountersControl();
+            BattleAtbControl = new GameBattleAtbControl();
             FieldControl = new GameEntitiesControl();
             ModFiles = new ModFileResolver();
 
@@ -87,6 +89,7 @@ public sealed class ModComponent : MonoBehaviour
 
             EncountersControl.TryUpdate();
             FieldControl.TryUpdate();
+            BattleAtbControl.TryUpdate();
         }
         catch (Exception ex)
         {

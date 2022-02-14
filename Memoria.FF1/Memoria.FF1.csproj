@@ -30,6 +30,7 @@
     <Compile Include="Shared\Configuration\CustomOptions\Hotkey\HotkeyTypeConverter.cs" />
     <Compile Include="Shared\Configuration\ExtensionsConfigFile.cs" />
     <Compile Include="Shared\Configuration\Scopes\AssetsConfiguration.cs" />
+    <Compile Include="Shared\Configuration\Scopes\BattleAtbConfiguration.cs" />
     <Compile Include="Shared\Configuration\Scopes\BattleSystemConfiguration.cs" />
     <Compile Include="Shared\Configuration\Scopes\EncountersConfiguration.cs" />
     <Compile Include="Shared\Configuration\Scopes\FieldInteractionConfiguration.cs" />
@@ -39,6 +40,7 @@
     <Compile Include="Shared\Configuration\Scopes\SavesConfiguration.cs" />
     <Compile Include="Shared\Configuration\Scopes\SpeedConfiguration.cs" />
     <Compile Include="Shared\Core\AssetExtensionResolver.cs" />
+    <Compile Include="Shared\Core\GameBattleAtbControl.cs" />
     <Compile Include="Shared\Core\GameEncountersControl.cs" />
     <Compile Include="Shared\Core\GameEntitiesControl.cs" />
     <Compile Include="Shared\Core\GameSaveLoadControl.cs" />
@@ -58,8 +60,12 @@
     <Compile Include="Shared\Core\Sprites\SpriteSheetInfo.cs" />
     <Compile Include="Shared\Core\Sprites\TextureHelper.cs" />
     <Compile Include="Shared\Core\SystemIndicatorAccessor.cs" />
+    <Compile Include="Shared\Core\TurnBasedBattleState.cs" />
     <Compile Include="Shared\EntryPoint.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\Animator_SetSpeed.cs" />
+    <Compile Include="Shared\IL2CPP\HarmonyHooks\BattleInfomationController_Initalize.cs" />
+    <Compile Include="Shared\IL2CPP\HarmonyHooks\BattleInfomationController_IsWaiting.cs" />
+    <Compile Include="Shared\IL2CPP\HarmonyHooks\BattleProgressATB_Update.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\ContentCatalogData_CreateLocator.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\EncounterLot_CheckEncount.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\ResourceManager_IsLoadAssetCompleted.cs" />

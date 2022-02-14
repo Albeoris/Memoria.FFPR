@@ -29,7 +29,7 @@ public sealed class SpeedConfiguration
                 new Hotkey(KeyCode.F1) { MustHeld = true }
             }),
             description: $"Speed up key.",
-            new AcceptableHotkeyGroup(nameof(Key)));
+            new AcceptableHotkeyGroup(nameof(Key), canHold: true));
 
         UpdateOldConfig(file);
 

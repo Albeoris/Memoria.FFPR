@@ -34,11 +34,11 @@ public sealed class SavesConfiguration
         _quickSaveKey = file.Bind(Section, nameof(QuickSaveKey),
             defaultValue: HotkeyGroup.Create(new Hotkey(KeyCode.F5) { Alt = true }),
             description: $"Quick-save key.",
-            new AcceptableHotkeyGroup(nameof(QuickSaveKey)));
+            new AcceptableHotkeyGroup(nameof(QuickSaveKey), canHold: false));
 
         _quickLoadKey = file.Bind(Section, nameof(QuickLoadKey),
             defaultValue: HotkeyGroup.Create(new Hotkey(KeyCode.F9) { Alt = true }),
             description: $"Quick-load key.",
-            new AcceptableHotkeyGroup(nameof(QuickLoadKey)));
+            new AcceptableHotkeyGroup(nameof(QuickLoadKey), canHold: false));
     }
 }

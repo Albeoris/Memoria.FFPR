@@ -29,7 +29,7 @@ public sealed class FieldConfiguration
                 new Hotkey(KeyCode.CapsLock) { MustHeld = true }
             }),
             description: $"Enables or disables highlighting of interactive objects.",
-            new AcceptableHotkeyGroup(nameof(HighlightingKey)));
+            new AcceptableHotkeyGroup(nameof(HighlightingKey), canHold: true));
 
         HighlightingIcons = file.Bind(Section, nameof(HighlightingIcons),
             defaultValue: (IReadOnlyList<FieldInteractiveIcon.InteractiveIconType>)new[]

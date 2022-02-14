@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Il2CppSystem.Input;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
+using Memoria.FFPR.IL2CPP.HarmonyHooks;
 using UnityEngine;
 
 namespace Memoria.FFPR.Core;

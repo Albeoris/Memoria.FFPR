@@ -26,7 +26,7 @@ public sealed class EncountersConfiguration
                 new Hotkey(KeyCode.F2),
             }),
             description: $"Disable encounters key.",
-            new AcceptableHotkeyGroup(nameof(Key)));
+            new AcceptableHotkeyGroup(nameof(Key), canHold: true));
 
         UpdateOldConfig(file);
     }
