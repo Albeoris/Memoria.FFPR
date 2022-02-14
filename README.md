@@ -26,7 +26,6 @@ If you are already using BepInEx to load other mods, use the most recent version
 - You can use quick save and load (Default Keys: (Release) F5 and F9, (Current) Alt+F5, Alt+F9).
 - You can [highlight interactive objects and hidden passages](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Highlighting) (Default key: Caps Lock [Toggle or Hold])
 - You can [switch to Turn-based ATB Combat](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Turn-based-ATB-Combat)
-- You can [switch between ATB/Command battle systems](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Battle-System)
 - [FF2: Color used words and items](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-FF2-Color-Secret-Words-and-Key-Items)
 - You can export, edit and import graphics and text resources (like characteristics of enemies) (Export disabled by default)
 - [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV resources
