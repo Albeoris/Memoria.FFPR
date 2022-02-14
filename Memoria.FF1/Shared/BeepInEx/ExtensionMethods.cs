@@ -151,6 +151,7 @@ public static class ExtensionMethods
 
         Rect spriteRect = sprite.rect;
         Rect textureRect = sprite.GetTextureRect();
+        RectInt pixelTextureRect = sprite.GetPixelTextureRect();
         Single scaleX = textureRect.width / spriteRect.width;
         Single scaleY = textureRect.height / spriteRect.height;
         Vector2 pixelPivot = sprite.pivot;
@@ -164,8 +165,8 @@ public static class ExtensionMethods
             Single floatY = (mesh.y + pixelPivot.y) * scaleY - 0.01f;
             Vector2Int pixel = new Vector2Int((Int32)Math.Round(floatX), (Int32)Math.Round(floatY));
 
-            if (pixel.x < 0 || pixel.y < 0 || pixel.x > textureRect.width || pixel.y > textureRect.height)
-                throw new NotSupportedException($"During transformation the coordinate of the {i} vertex of the sprite, the coordinate went beyond the boundaries of the sprite. Rect: {spriteRect}, TransformedVertex: ({floatX}, {floatY}), BeforeTransform: {mesh}");
+            if (pixel.x < 0 || pixel.y < 0 || pixel.x > pixelTextureRect.width || pixel.y > pixelTextureRect.height)
+                throw new NotSupportedException($"During transformation the coordinate of the {i} vertex of the sprite, the coordinate went beyond the boundaries of the sprite. SpriteRect: {spriteRect}, TextureRect: {textureRect}, Pivot: {pixelPivot} TransformedVertex: ({floatX}, {floatY}), BeforeTransform: {mesh}");
 
             pixelVertices[i] = pixel;
         }
