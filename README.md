@@ -1,14 +1,17 @@
 # Memoria FF PR
 This is a small modification that makes gameplay of [Final Fantasy I (PR)](https://store.steampowered.com/app/1173770/FINAL_FANTASY/), [Final Fantasy II (PR)](https://store.steampowered.com/app/1173780/FINAL_FANTASY_II/), [Final Fantasy III (PR)](https://store.steampowered.com/app/1173790/FINAL_FANTASY_III/), [Final Fantasy IV (PR)](https://store.steampowered.com/app/1173800/FINAL_FANTASY_IV/), [Final Fantasy V (PR)](https://store.steampowered.com/app/1173810/FINAL_FANTASY_V/) and [Final Fantasy VI (PR)](https://store.steampowered.com/app/1173820/FINAL_FANTASY_VI/) more enjoyable. 
 
+## Support
+[Patreon](https://www.patreon.com/Albeoris?fan_landing=true)
+
 ## Installation:
 - Unpack [BepInEx_UnityIL2CPP_x64_1504d80_6.0.0-be.546](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/BepInEx_UnityIL2CPP_x64_1504d80_6.0.0-be.546.zip) into the game folder.
 - Unpack one of the archives into the game folder:
-    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF1_v2022.02.12.zip)
-    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF2_v2022.02.12.zip)
-    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF3_v2022.02.12.zip)
-    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF4_v2022.02.12.zip)
-    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/FF5_v2022.02.12.zip)
+    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.14/FF1_v2022.02.14.zip)
+    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.14/FF2_v2022.02.14.zip)
+    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.14/FF3_v2022.02.14.zip)
+    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.14/FF4_v2022.02.14.zip)
+    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.14/FF5_v2022.02.14.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
@@ -22,7 +25,7 @@ If you are already using BepInEx to load other mods, use the most recent version
 - You can disable encounters (Default Key: F2).
 - You can use quick save and load (Default Keys: (Release) F5 and F9, (Current) Alt+F5, Alt+F9).
 - You can [highlight interactive objects and hidden passages](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Highlighting) (Default key: Caps Lock [Toggle or Hold])
-- You can [switch between ATB/Command battle systems](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Battle-System)
+- You can [switch to Turn-based ATB Combat](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Turn-based-ATB-Combat)
 - [FF2: Color used words and items](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-FF2-Color-Secret-Words-and-Key-Items)
 - You can export, edit and import graphics and text resources (like characteristics of enemies) (Export disabled by default)
 - [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV resources
