@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
+using UnhollowerBaseLib;
 using UnityEngine;
 using UnityEngine.U2D;
 using Object = System.Object;
@@ -48,12 +49,14 @@ public sealed class SpriteAtlasCache
             return item;
         
         SpriteSheetInfo spriteSheet = SpriteSheetInfo.ReadFromFile(tpsheetPath);
-        Texture2D texture = TextureHelper.ReadTextureFromFile(spriteSheet.TexturePath);
+
+        FilterMode filterMode = GetFilterMode(asset);
+        Texture2D texture = TextureHelper.ReadTextureFromFile(filterMode, spriteSheet.TexturePath);
 
         item.Modify(spriteSheet, texture);
         return item;
     }
-
+    
     public static void Modify(SpriteAtlas spriteAtlas, IReadOnlyList<String> filePaths)
     {
         if (spriteAtlas is null) throw new ArgumentNullException(nameof(spriteAtlas));
@@ -80,5 +83,18 @@ public sealed class SpriteAtlasCache
         SpriteAtlas atlas = UnityEngine.Object.Instantiate(asset);
         List<Sprite> sprites = SpriteAtlasItem.GetSprites(atlas);
         return new SpriteAtlasItem(sprites);
+    }
+    
+    private static FilterMode GetFilterMode(SpriteAtlas asset)
+    {
+        FilterMode filterMode = FilterMode.Point;
+        if (asset.spriteCount < 1)
+            return filterMode;
+        
+        Il2CppReferenceArray<Sprite> spriteArray = new(asset.spriteCount);
+        asset.GetSprites(spriteArray);
+        filterMode = spriteArray[0].texture.filterMode;
+
+        return filterMode;
     }
 }

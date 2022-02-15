@@ -82,11 +82,11 @@ public static class TextureHelper
         File.WriteAllBytes(outputPath, data);
     }
 
-    public static Texture2D ReadTextureFromFile(String fullPath)
+    public static Texture2D ReadTextureFromFile(FilterMode filterMode, String fullPath)
     {
         Byte[] bytes = File.ReadAllBytes(fullPath);
         Texture2D texture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
-        texture.filterMode = FilterMode.Point;
+        texture.filterMode = filterMode;
         if (!ImageConversion.LoadImage(texture, bytes))
             throw new NotSupportedException($"Failed to load texture from file [{fullPath}]");
         return texture;

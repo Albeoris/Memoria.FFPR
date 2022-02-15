@@ -257,7 +257,7 @@ public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object
             {
                 if (!config.ImportTextures)
                     return false;
-                newAsset = ImportTextures(fullPath);
+                newAsset = ImportTextures(assetObject.Cast<Texture2D>().filterMode, fullPath);
                 break;
             }
             case "UnityEngine.Sprite":
@@ -284,9 +284,9 @@ public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object
         return new TextAsset(File.ReadAllText(fullPath));
     }
 
-    private static Object ImportTextures(String fullPath)
+    private static Object ImportTextures(FilterMode filterMode, String fullPath)
     {
-        return TextureHelper.ReadTextureFromFile(fullPath);
+        return TextureHelper.ReadTextureFromFile(filterMode, fullPath);
     }
 
     private static Object ImportSpriteAtlas(SpriteAtlas asset, String fullPath)
@@ -302,7 +302,7 @@ public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object
         Single originalWidth = asset.texture.width;
         Single originalHeight = asset.texture.height;
 
-        Texture2D texture = TextureHelper.ReadTextureFromFile(fullPath);
+        Texture2D texture = TextureHelper.ReadTextureFromFile(asset.texture.filterMode, fullPath);
 
         texture.wrapMode = asset.texture.wrapMode;
         texture.wrapModeU = asset.texture.wrapModeU;
@@ -398,7 +398,8 @@ public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object
             case "UnityEngine.Texture2D":
             {
                 String fullPath = modPath.Last();
-                newAsset = ImportTextures(fullPath);
+                Texture2D texture = assetObject.Cast<Texture2D>();
+                newAsset = ImportTextures(texture.filterMode, fullPath);
 
                 String shortPath = ApplicationPathConverter.ReturnPlaceholders(fullPath);
                 ModComponent.Log.LogInfo($"[Mod] Texture replaced: {shortPath}");
