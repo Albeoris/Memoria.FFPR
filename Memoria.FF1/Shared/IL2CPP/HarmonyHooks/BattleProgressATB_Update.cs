@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using Last.Battle;
+using Memoria.FFPR.BeepInEx;
 using Memoria.FFPR.Core;
 
 namespace Memoria.FFPR.IL2CPP.HarmonyHooks;
@@ -21,12 +22,13 @@ public static class BattleProgressATB_Update
         BattlePlugManager manager = BattlePlugManager.Instance();
 
         var units = manager.BattleStatusControl.BattleStatusControlInfo.BattleUnitDataList;
-        var atbDic = __instance.gaugeStatusDictionary;
+        var atbDic = __instance.gaugeStatusDictionary.ToManaged();
 
+        CurrentReadyUnits.Clear();
+        
         foreach (BattleUnitData unit in units)
         {
-            Single atbValue = atbDic[unit];
-            if (atbValue >= 100.0f)
+            if (atbDic.TryGetValue(unit, out Single atbValue) && atbValue >= 100.0f)
                 CurrentReadyUnits.Add(unit.Pointer);
         }
 
