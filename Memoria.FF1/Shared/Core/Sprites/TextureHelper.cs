@@ -63,9 +63,10 @@ public static class TextureHelper
     public static void WriteTextureToFile(Texture2D texture, String outputPath)
     {
         Byte[] data;
-        String extension = Path.GetExtension(outputPath);
+        String extension = Path.GetExtension(outputPath) ?? String.Empty;
         switch (extension)
         {
+            case "": // FF6 - Texture2D %StreamingAssets%\Assets/GameAssets/Serial/Res/UI/Common/Library/Thumbnail/MT_FF6_147_C00/Thumbnail
             case ".png":
                 data = ImageConversion.EncodeToPNG(texture);
                 break;
