@@ -67,7 +67,7 @@
     <Compile Include="Shared\IL2CPP\HarmonyHooks\BattleInfomationController_IsWaiting.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\BattleProgressATB_Update.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\ContentCatalogData_CreateLocator.cs" />
-    <Compile Include="Shared\IL2CPP\HarmonyHooks\EncounterLot_CheckEncount.cs" />
+    <Compile Include="Shared\IL2CPP\HarmonyHooks\EncountTable_GetEncountData.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\ResourceManager_IsLoadAssetCompleted.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\SpriteAtlas_GetSprite.cs" />
     <Compile Include="Shared\IL2CPP\HarmonyHooks\SpriteAtlas_GetSprites.cs" />
