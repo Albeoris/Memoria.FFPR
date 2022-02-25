@@ -51,7 +51,7 @@ Just providing these in case you want to use them. I posted this on a FF Modding
 1. Download BepInEx Loader + Mod from: https://github.com/Albeoris/Memoria.FFPR
 2. Extract to the root of your game install.
 3. Run your game + close it.
-4. Navigate to InstallDir\BepInEx\config and open Memoria.ffpr.cfg
+4. Navigate to InstallDir\BepInEx\config\Memoria.FFPR\ and open Assets.cfg
 5. Set ExportEnabled = true
 6. Run your game again, wait a bit for extraction to complete then close it.
 7. Navigate to: InstallDir\FINAL FANTASY_Data\StreamingAssets\Assets\GameAssets\Serial\Data to explore the files within and make any modifications you would like to try.
