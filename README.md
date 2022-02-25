@@ -12,7 +12,7 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
     - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF3_v2022.02.23.zip)
     - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF4_v2022.02.23.zip)
     - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF5_v2022.02.23.zip)
-    - [FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF6_v2022.02.23.zip)
+    - [FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.25/FF6_v2022.02.25.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
