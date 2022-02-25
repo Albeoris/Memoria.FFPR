@@ -117,6 +117,12 @@ public sealed class AssetsConfiguration
 
     public void DisableExport() => ExportEnabled.Value = false;
 
+    public void DisableImportTextures()
+    {
+        if (ImportTextures)
+            _importTextures.Value = false;
+    }
+
     public void CopyFrom(AssetsConfiguration other)
     {
         ExportEnabled.Value = other.ExportEnabled.Value;
