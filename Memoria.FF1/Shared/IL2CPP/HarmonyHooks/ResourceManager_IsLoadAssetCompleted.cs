@@ -374,11 +374,21 @@ public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object
             case "UnityEngine.TextAsset":
             {
                 String fullPath = modPath.Last();
-                if (Path.GetExtension(fullPath) == ".csv")
+                String fileExtension = Path.GetExtension(fullPath);
+                if (fileExtension == ".csv")
                 {
                     TextAsset textAsset = assetObject.Cast<TextAsset>();
                         
                     CsvMerger merger = new(textAsset.text);
+                    merger.MergeFiles(modPath);
+
+                    newAsset = new TextAsset(merger.BuildContent());
+                }
+                else if (fileExtension == ".txt" && fullPath.Contains("Assets/GameAssets/Serial/Data/Message/"))
+                {
+                    TextAsset textAsset = assetObject.Cast<TextAsset>();
+                        
+                    MessageMerger merger = new(textAsset.text);
                     merger.MergeFiles(modPath);
 
                     newAsset = new TextAsset(merger.BuildContent());

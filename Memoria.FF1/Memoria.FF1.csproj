@@ -40,6 +40,7 @@
     <Compile Include="Shared\Configuration\Scopes\SavesConfiguration.cs" />
     <Compile Include="Shared\Configuration\Scopes\SpeedConfiguration.cs" />
     <Compile Include="Shared\Core\AssetExtensionResolver.cs" />
+    <Compile Include="Shared\Core\CSV\MessageMerger.cs" />
     <Compile Include="Shared\Core\GameBattleAtbControl.cs" />
     <Compile Include="Shared\Core\GameEncountersControl.cs" />
     <Compile Include="Shared\Core\GameEntitiesControl.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Shared\Core\InputManager.cs" />
     <Compile Include="Shared\Core\ModConstants.cs" />
     <Compile Include="Shared\Core\CSV\CsvMerger.cs" />
+    <Compile Include="Shared\Core\OrderedDictionary.cs" />
     <Compile Include="Shared\Core\OrderedSet.cs" />
     <Compile Include="Shared\Core\PathUtility.cs" />
     <Compile Include="Shared\Core\SafeComponent.cs" />
