@@ -120,7 +120,7 @@ public static class ColorTypeConverter
         if (str == String.Empty)
             throw new FormatException($"The empty string cannot be recognized as a color. The string must match on of the UnityEngine.Color names or represent the HTML sequence #RRGGBBAA.");
 
-        if (ColorUtility.TryParseHtmlString(str, out var color))
+        if (!ColorUtility.TryParseHtmlString(str, out var color))
             throw new FormatException($"The string [{str}] cannot be recognized as a color. The string must match on of the UnityEngine.Color names or represent the HTML sequence #RRGGBBAA.");
 
         return color;
