@@ -16,6 +16,8 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
+If you playing on Steam Deck check [this page](https://github.com/Albeoris/Memoria.FFPR/wiki/Steam-Deck).
+
 ## Deinstalation:
 - To remove the mod - delete $GameFolder$\BepInEx\plugins\Memoria.FF*.dll
 - To remove the mod launcer - delete $GameFolder$\winhttp.dll
