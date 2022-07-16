@@ -5,14 +5,14 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 [Patreon](https://www.patreon.com/Albeoris?fan_landing=true)
 
 ## Installation:
-- Unpack [BepInEx_UnityIL2CPP_x64_1504d80_6.0.0-be.546](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.12/BepInEx_UnityIL2CPP_x64_1504d80_6.0.0-be.546.zip) into the game folder.
+- Unpack [BepInEx_UnityIL2CPP_x64_3a54f7e_6.0.0-be.571](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/BepInEx_UnityIL2CPP_x64_3a54f7e_6.0.0-be.571.zip) into the game folder.
 - Unpack one of the archives into the game folder:
-    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF1_v2022.02.23.zip)
-    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF2_v2022.02.23.zip)
-    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF3_v2022.02.23.zip)
-    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF4_v2022.02.23.zip)
-    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.23/FF5_v2022.02.23.zip)
-    - [FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.02.25/FF6_v2022.02.25.zip)
+    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/FF1_v2022.07.16.zip)
+    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/FF2_v2022.07.16.zip)
+    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/FF3_v2022.07.16.zip)
+    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/FF4_v2022.07.16.zip)
+    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/FF5_v2022.07.16.zip)
+    - [FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/FF6_v2022.07.16.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
@@ -30,8 +30,9 @@ If you playing on Steam Deck check [this page](https://github.com/Albeoris/Memor
 - You can [highlight interactive objects and hidden passages](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Highlighting) (Default key: Caps Lock [Toggle or Hold])
 - You can [switch to Turn-based ATB Combat](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Turn-based-ATB-Combat)
 - [FF2: Color used words and items](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-FF2-Color-Secret-Words-and-Key-Items)
+- [FF6: Modable Magicite.json](https://github.com/Albeoris/Memoria.FFPR/issues/27#issuecomment-1186271402)
 - You can export, edit and import graphics and text resources (like characteristics of enemies) (Export disabled by default)
-- [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV resources
+- [Partial modification](https://github.com/Albeoris/Memoria.FFPR/wiki/Features-Mods) of CSV and TXT resources
 
 ## Configuration:
 
