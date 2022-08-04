@@ -41,12 +41,6 @@ public static class ExtensionMethods
         logSource.LogError(ex.ToString());
     }
     
-    public static ConfigEntry<T> Bind<T>(this ConfigFile file, String section, String key, T defaultValue, String description, AcceptableValueBase acceptable, params String[] tags)
-    {
-        return file.Bind(section, key, defaultValue,
-            new ConfigDescription(description, acceptable, tags));
-    }
-
     public static void Deconstruct<TKey, TValue>(this Il2CppSystem.Collections.Generic.KeyValuePair<TKey, TValue> il2cpp, out TKey key, out TValue value)
     {
         key = il2cpp.Key;
@@ -242,6 +236,16 @@ public static class ExtensionMethods
         return result;
     }
     
+    public static List<T> ToManaged<T>(this Il2CppSystem.Collections.Generic.List<T> il2cpp)
+    {
+        if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
+
+        List<T> result = new List<T>(il2cpp.Count);
+        foreach (var item in il2cpp)
+            result.Add(item);
+        return result;
+    }
+
     public static Dictionary<TKey1, Dictionary<TKey2, TValue>> ToManaged<TKey1, TKey2, TValue>(
         this Il2CppSystem.Collections.Generic.Dictionary<TKey1, Il2CppSystem.Collections.Generic.Dictionary<TKey2, TValue>> il2cpp)
     {

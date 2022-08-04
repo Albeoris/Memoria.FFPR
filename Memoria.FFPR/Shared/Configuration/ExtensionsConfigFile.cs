@@ -23,7 +23,7 @@ public static class ExtensionsConfigFile
             new ConfigDescription(description, acceptable, tags));
     }
 
-    public static ConfigEntry<T> Bind<T>(this ConfigFile file, String section, String key, T defaultValue, String description, IAcceptableValue<T> acceptable, params String[] tags) where T : IEquatable<T>
+    public static ConfigEntry<T> Bind<T>(this ConfigFile file, String section, String key, T defaultValue, String description, IAcceptableValue<T> acceptable, params String[] tags)// where T : IEquatable<T>
     {
         return file.Bind(section, key, defaultValue,
             new ConfigDescription(description, (AcceptableValueBase)acceptable, tags));
