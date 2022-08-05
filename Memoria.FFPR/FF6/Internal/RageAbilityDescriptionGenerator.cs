@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Last.Data.Master;
 using Last.Defaine.Master;
+using Last.Management;
 using Last.Systems;
 using Memoria.FFPR.BeepInEx;
 using Memoria.FFPR.IL2CPP;
@@ -39,6 +40,11 @@ public sealed class RageAbilityDescriptionGenerator
 
     private void Initialize()
     {
+        // String textWeakness = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_WEAK_POINT);
+        // String textResistance = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_RESISTANCE);
+        // String textAbsorbs = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_ABSORPTION);
+        // String textImmune = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_INVALID);
+        
         MasterManager masterManager = MasterManager.Instance;
 
         Ability[] allAbilities = GetAllRageAbilities(masterManager);
@@ -58,7 +64,7 @@ public sealed class RageAbilityDescriptionGenerator
 
             if (!randomGroups.TryGetValue(monster.RageAbilityRandomGroupId, out AbilityRandomGroup[] randomGroup))
                 continue;
-
+            
             sb.Clear();
 
             foreach (AbilityRandomGroup randomAbility in randomGroup)
