@@ -68,6 +68,9 @@ public sealed class RageAbilityColorization
         List<OwnedAbility> abilities = controller.AbilityList.ToManaged();
         for (var index = 0; index < contentList.Count; index++)
         {
+            if (index >= abilities.Count)
+                break;
+            
             BattleAbilityInfomationContentController content = contentList[index];
             OwnedAbility ability = abilities[index];
             if (_changedAbilityIds.Contains(ability.Ability.Id))
