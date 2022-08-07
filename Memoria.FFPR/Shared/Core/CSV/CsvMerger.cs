@@ -10,12 +10,7 @@ namespace Memoria.FFPR.Core;
 
 public sealed class CsvMerger
 {
-    private const Char Separator = ',';
-    
-    private readonly String[] _columnNames;
-    private readonly Dictionary<String, Int32> _columnNameIndices;
-    private readonly List<String[]> _rows;
-    private readonly Dictionary<Int32, Int32> _rowIndices;
+    private readonly CsvParser _parser;
     private readonly HashSet<Int32> _removedRows = new HashSet<Int32>();
 
     public CsvMerger(String csvContent)
@@ -23,33 +18,7 @@ public sealed class CsvMerger
         if (csvContent is null) throw new ArgumentNullException(nameof(csvContent));
         if (csvContent == String.Empty) throw new ArgumentException(nameof(csvContent));
 
-        using (var sr = new StringReader(csvContent))
-        {
-            if (!TryReadContent(sr, out String[] parts))
-                parts = Array.Empty<String>();
-            else if (parts[0] != "id")
-                throw new NotSupportedException($"Not supported CSV-format. Unexpected first column: [{parts[0]}]. Expected: [id]");
-
-            HashSet<String> processedColumns = new();
-            _columnNames = parts;
-            _columnNameIndices = new(_columnNames.Length);
-            for (Int32 i = 0; i < _columnNames.Length; i++)
-            {
-                String columnName = _columnNames[i];
-                if (!processedColumns.Add(columnName))
-                    throw new FormatException($"The header contains several columns with the same name: [{columnName}]");
-                
-                _columnNameIndices.Add(columnName, i);
-            }
-
-            _rows = new List<String[]>();
-            _rowIndices = new Dictionary<Int32, Int32>();
-            while (TryReadContent(sr, out parts))
-            {
-                Int32 id = Int32.Parse(parts[0], CultureInfo.InvariantCulture);
-                AddNewRow(id, parts);
-            }
-        }
+        _parser = new CsvParser(csvContent);
     }
 
     public void MergeFiles(IReadOnlyList<String> filePaths)
@@ -72,16 +41,10 @@ public sealed class CsvMerger
             }
         }
     }
-    
-    private void AddNewRow(Int32 id, String[] row)
-    {
-        _rowIndices.Add(id, _rows.Count);
-        _rows.Add(row);
-    }
 
     private void MergeFile(StreamReader sr)
     {
-        if (!TryReadContent(sr, out String[] parts))
+        if (!CsvParser.TryReadContent(sr, out String[] parts))
             return;
         
         if (parts[0] != "id")
@@ -98,13 +61,13 @@ public sealed class CsvMerger
             if (!processedColumns.Add(columnName))
                 throw new FormatException($"The header contains several columns with the same name: [{columnName}]"); 
             
-            if (!_columnNameIndices.TryGetValue(columnName, out Int32 columnIndex))
+            if (!_parser.ColumnNameIndices.TryGetValue(columnName, out Int32 columnIndex))
                 throw new FormatException($"Cannot find index of [{columnName}] column in the full CSV-file.");
 
             columnIndices[i] = columnIndex;
         }
 
-        while (TryReadContent(sr, out parts))
+        while (CsvParser.TryReadContent(sr, out parts))
         {
             Boolean toRemove = false;
             Int32 id = Int32.Parse(parts[0], CultureInfo.InvariantCulture);
@@ -114,7 +77,7 @@ public sealed class CsvMerger
                 id *= -1;
             }
             
-            if (!_rowIndices.TryGetValue(id, out var rowIndex))
+            if (!_parser.RowIndices.TryGetValue(id, out var rowIndex))
             {
                 if (toRemove)
                 {
@@ -122,17 +85,17 @@ public sealed class CsvMerger
                     continue;
                 }
                 
-                if (parts.Length != _columnNames.Length)
-                    throw new FormatException($"Cannot add row with id [{id}]. Expected {_columnNames.Length} columns, but there is {parts.Length}.");
+                if (parts.Length != _parser.ColumnNames.Length)
+                    throw new FormatException($"Cannot add row with id [{id}]. Expected {_parser.ColumnNames.Length} columns, but there is {parts.Length}.");
                 
-                String[] row = new String[_columnNames.Length];
+                String[] row = new String[_parser.ColumnNames.Length];
                 for (Int32 i = 0; i < row.Length; i++)
                 {
                     Int32 columnIndex = columnIndices[i];
                     row[columnIndex] = parts[i];
                 }
 
-                AddNewRow(id, row);
+                _parser.AddNewRow(id, row);
                 ModComponent.Log.LogInfo($"[Mod] Added new row: {String.Join(",", row)}.");
                 continue;
             }
@@ -141,7 +104,7 @@ public sealed class CsvMerger
             {
                 if (_removedRows.Add(rowIndex))
                 {
-                    String[] row = _rows[rowIndex];
+                    String[] row = _parser.Rows[rowIndex];
                     ModComponent.Log.LogInfo($"[Mod] Removed existing row [{id}]. {String.Join(",", row)}.");
                 }
 
@@ -152,7 +115,7 @@ public sealed class CsvMerger
             {
                 Int32 columnIndex = columnIndices[i];
                 String columnName = columnNames[i];
-                String[] row = _rows[rowIndex];
+                String[] row = _parser.Rows[rowIndex];
                 String oldValue = row[columnIndex];
                 String newValue = parts[i];
                 if (oldValue != newValue)
@@ -175,10 +138,10 @@ public sealed class CsvMerger
         using (StringWriter sw = new StringWriter())
         {
             Boolean newLine = true;
-            foreach (String columnName in _columnNames)
+            foreach (String columnName in _parser.ColumnNames)
             {
                 if (!newLine)
-                    sw.Write(Separator);
+                    sw.Write(CsvParser.Separator);
                 
                 sw.Write(columnName);
                 newLine = false;
@@ -187,16 +150,16 @@ public sealed class CsvMerger
             sw.WriteLine();
             newLine = true;
             
-            for (int i = 0; i < _rows.Count; i++)
+            for (int i = 0; i < _parser.Rows.Count; i++)
             {
                 if (_removedRows.Contains(i))
                     continue;
 
-                String[] row = _rows[i];
+                String[] row = _parser.Rows[i];
                 foreach (String data in row)
                 {
                     if (!newLine)
-                        sw.Write(Separator);
+                        sw.Write(CsvParser.Separator);
                     sw.Write(data);
                     newLine = false;
                 }
@@ -207,25 +170,6 @@ public sealed class CsvMerger
 
             sw.Flush();
             return sw.ToString();
-        }
-    }
-
-    private Boolean TryReadContent(TextReader reader, out String[] parts)
-    {
-        while (true)
-        {
-            String line = reader.ReadLine();
-            if (line is null)
-            {
-                parts = null;
-                return false;
-            }
-
-            if (!String.IsNullOrWhiteSpace(line))
-            {
-                parts = line.Split(Separator);
-                return true;
-            }
         }
     }
 }

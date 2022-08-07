@@ -8,7 +8,6 @@ using Last.Interpreter.Instructions.SystemCall;
 using Last.UI.KeyInput;
 using Memoria.FFPR.Configuration.Scopes;
 using Memoria.FFPR.IL2CPP;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace Memoria.FFPR.FF6.Internal;

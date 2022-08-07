@@ -23,7 +23,7 @@ public sealed class RageAbilityDescriptionGenerator
     {
         if (!ModComponent.Instance.Config.BattleGau.GenerateRageAbilityDescription)
             return;
-        
+
         Initialize();
     }
 
@@ -34,21 +34,20 @@ public sealed class RageAbilityDescriptionGenerator
             description = null;
             return false;
         }
-        
+
         return _abilityDescriptions.TryGetValue(abilityId, out description);
     }
 
     private void Initialize()
     {
-        // String textWeakness = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_WEAK_POINT);
-        // String textResistance = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_RESISTANCE);
-        // String textAbsorbs = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_ABSORPTION);
-        // String textImmune = MessageManager.Instance.GetMessageByMessageConclusion(UiMessageConstants.MONSTER_BOOK_INVALID);
-        
         MasterManager masterManager = MasterManager.Instance;
 
+        RageAbilityFormatter rageAbilityFormatter = new(masterManager);
+        RageSpeciesFormatter rageSpeciesFormatter = new(MessageManager.Instance);
+        RageResistanceFormatter rageResistanceFormatter = new(masterManager);
+
         Ability[] allAbilities = GetAllRageAbilities(masterManager);
-        Dictionary<Int32, AbilityRandomGroup[]> randomGroups = GetAllRandomGroups(masterManager);
+        // Dictionary<Int32, AbilityRandomGroup[]> randomGroups = GetAllRandomGroups(masterManager);
 
         StringBuilder sb = new StringBuilder();
 
@@ -62,33 +61,32 @@ public sealed class RageAbilityDescriptionGenerator
             if (monster is null)
                 continue;
 
-            if (!randomGroups.TryGetValue(monster.RageAbilityRandomGroupId, out AbilityRandomGroup[] randomGroup))
-                continue;
-            
             sb.Clear();
+            
+            String abilities = rageAbilityFormatter.FormatAbilities(monster);
+            String race = rageSpeciesFormatter.FormatSpecies(monster);
+            String initial = rageResistanceFormatter.FormatInitialCondition(monster);
+            String resistance = rageResistanceFormatter.FormatResistance(monster);
 
-            foreach (AbilityRandomGroup randomAbility in randomGroup)
+            if (sb.Length > 0) sb.AppendLine();
+            sb.Append(abilities);
+
+            sb.Append(' ', 8);
+            sb.Append(race);
+            sb.Append(' ');
+
+            if (!String.IsNullOrEmpty(initial))
             {
-                if (sb.Length > 0)
-                    sb.Append(", ");
-
-                String abilityName = ContentUtitlity.GetAbilityName(randomAbility.AbilityId);
-                abilityName = _textTagRegex.Replace(abilityName, String.Empty);
-                sb.Append($"{abilityName} ({randomAbility.InvocationRate}{(randomAbility.ConditionGroupId < 1 ? '%' : '?')})");
+                sb.Append('[');
+                sb.Append(initial);
+                sb.Append(']');
             }
 
+            if (sb.Length > 0) sb.AppendLine();
+            sb.Append(resistance);
+           
             _abilityDescriptions.Add(ability.Id, sb.ToString());
         }
-    }
-
-    private static Dictionary<Int32, AbilityRandomGroup[]> GetAllRandomGroups(MasterManager masterManager)
-    {
-        return masterManager
-            .GetList<AbilityRandomGroup>()
-            .ToManaged()
-            .Select(g => g.Value)
-            .GroupBy(g => g.GroupId)
-            .ToDictionary(g => g.Key, g => g.ToArray());
     }
 
     private static Ability[] GetAllRageAbilities(MasterManager masterManager)
