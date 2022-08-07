@@ -658,6 +658,11 @@ public sealed class ResourceExporter : MonoBehaviour
         if (assetPathAsset is null)
             throw new Exception("[Export] Cannot find text resource AssetsPath.");
 
+        String exportPath = "Assets/GameAssets/AssetsPath.json";
+        String fullPath = Path.Combine(_exportDirectory, exportPath);
+        if (!HandleExistingFile("AssetsPath", fullPath, ModComponent.Instance.Config.Assets.ExportOverwrite))
+            ExportText(assetPathAsset, fullPath); 
+
         var il2cppDic = AssetPathUtilty.Parse(assetPathAsset.text);
         return il2cppDic.ToManaged();
     }
