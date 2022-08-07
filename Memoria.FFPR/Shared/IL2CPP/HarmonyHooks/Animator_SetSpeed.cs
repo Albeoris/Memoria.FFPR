@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace Memoria.FFPR.IL2CPP.HarmonyHooks;
 
-// ReSharper disable once InconsistentNaming
+// ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(Animator), nameof(Animator.speed), MethodType.Setter)]
-public sealed class Animator_SetSpeed : Il2CppSystem.Object
+public static class Animator_SetSpeed
 {
     /// <summary>
     /// Allows you to suppress an error when changing the animation speed of an icon during a fast loading game.
@@ -26,10 +26,6 @@ public sealed class Animator_SetSpeed : Il2CppSystem.Object
     }
 
     private static Int32 _suppressErrorRequestNumber;
-
-    public Animator_SetSpeed(IntPtr ptr) : base(ptr)
-    {
-    }
 
     static Exception Finalizer(Exception __exception)
     {

@@ -8,12 +8,8 @@ namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(ContentUtitlity), nameof(ContentUtitlity.GetAbilityDescription), typeof(Ability))]
-public sealed class ContentUtitlity_GetAbilityDescription : Il2CppSystem.Object
+public static class ContentUtitlity_GetAbilityDescription
 {
-    public ContentUtitlity_GetAbilityDescription(IntPtr ptr) : base(ptr)
-    {
-    }
-
     public static void Postfix(Ability ability, ref String __result)
     {
         // Don't change existing description

@@ -11,12 +11,8 @@ namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(AbilityContentListController), nameof(AbilityContentListController.ShowUseList))]
-public sealed class AbilityContentListController_ShowUseList : Il2CppSystem.Object
+public static class AbilityContentListController_ShowUseList
 {
-    public AbilityContentListController_ShowUseList(IntPtr ptr) : base(ptr)
-    {
-    }
-    
     public static void Prefix(AbilityContentListController __instance, Command command, OwnedCharacterData data)
     {
         try

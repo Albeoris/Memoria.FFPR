@@ -19,14 +19,11 @@ using String = System.String;
 
 namespace Memoria.FFPR.IL2CPP.HarmonyHooks;
 
+// ReSharper disable InconsistentNaming
 // TODO: Import before loading native resources. 
 [HarmonyPatch(typeof(ResourceManager), nameof(ResourceManager.IsLoadAssetCompleted))]
-public sealed class ResourceManager_IsLoadAssetCompleted : Il2CppSystem.Object
+public static class ResourceManager_IsLoadAssetCompleted
 {
-    public ResourceManager_IsLoadAssetCompleted(IntPtr ptr) : base(ptr)
-    {
-    }
-
     // Don't use other Dictionaries. It must be present in IL2CPP
     private static readonly Dictionary<String, Object> KnownAssets = new();
     private static readonly AssetExtensionResolver ExtensionResolver = new();

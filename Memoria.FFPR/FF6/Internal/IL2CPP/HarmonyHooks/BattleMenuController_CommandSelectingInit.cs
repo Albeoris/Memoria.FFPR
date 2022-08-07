@@ -9,12 +9,8 @@ namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(BattleMenuController), nameof(BattleMenuController.CommandSelectingInit))]
-public sealed class BattleMenuController_CommandSelectingInit : Il2CppSystem.Object
+public static class BattleMenuController_CommandSelectingInit
 {
-    public BattleMenuController_CommandSelectingInit(IntPtr ptr) : base(ptr)
-    {
-    }
-
     public static void Postfix(BattleMenuController __instance)
     {
         try

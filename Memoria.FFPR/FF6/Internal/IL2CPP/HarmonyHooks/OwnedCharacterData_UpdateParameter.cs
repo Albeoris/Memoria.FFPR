@@ -14,12 +14,8 @@ namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(OwnedCharacterData), nameof(OwnedCharacterData.characterStatusId), MethodType.Getter)]
-public sealed class OwnedCharacterData_UpdateParameter : Il2CppSystem.Object
+public static class OwnedCharacterData_UpdateParameter
 {
-    public OwnedCharacterData_UpdateParameter(IntPtr ptr) : base(ptr)
-    {
-    }
-    
     public static void Postfix(OwnedCharacterData __instance, Int32 __result)
     {
         try

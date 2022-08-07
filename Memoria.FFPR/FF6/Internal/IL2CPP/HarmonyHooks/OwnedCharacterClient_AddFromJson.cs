@@ -10,12 +10,8 @@ namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(OwnedCharacterClient), nameof(OwnedCharacterClient.AddFromJson))]
-public sealed class OwnedCharacterClient_AddFromJson : Il2CppSystem.Object
+public static class OwnedCharacterClient_AddFromJson
 {
-    public OwnedCharacterClient_AddFromJson(IntPtr ptr) : base(ptr)
-    {
-    }
-
     public static Int64 IsInvoked;
     
     public static void Prefix(OwnedCharacterClient __instance)

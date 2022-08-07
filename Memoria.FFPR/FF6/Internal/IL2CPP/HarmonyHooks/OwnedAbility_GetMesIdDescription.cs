@@ -9,12 +9,8 @@ namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(OwnedAbility), nameof(OwnedAbility.MesIdDescription), MethodType.Getter)]
-public sealed class OwnedAbility_GetMesIdDescription : Il2CppSystem.Object
+public static class OwnedAbility_GetMesIdDescription
 {
-    public OwnedAbility_GetMesIdDescription(IntPtr ptr) : base(ptr)
-    {
-    }
-
     public static void Postfix(OwnedAbility __instance, ref String __result)
     {
         try

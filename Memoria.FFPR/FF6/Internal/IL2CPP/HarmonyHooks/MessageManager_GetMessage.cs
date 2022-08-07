@@ -5,19 +5,14 @@ using Last.Management;
 
 namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
-// ReSharper disable once InconsistentNaming
+// ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(MessageManager), nameof(MessageManager.GetMessage))]
-public sealed class MessageManager_GetMessage : Il2CppSystem.Object
+public static class MessageManager_GetMessage
 {
     public const String SkipPrefix = "Skip.MessageManager_GetMessage.";
     
     private static readonly Regex NumberRegex = new("[0-9]+", RegexOptions.Compiled);
     
-    public MessageManager_GetMessage(IntPtr ptr) : base(ptr)
-    {
-    }
-    
-    // ReSharper disable once InconsistentNaming
     public static Boolean Prefix(ref String key, ref String __result, ref String __state)
     {
         if (key is null)
@@ -46,7 +41,6 @@ public sealed class MessageManager_GetMessage : Il2CppSystem.Object
         return false;
     }
 
-    // ReSharper disable once InconsistentNaming
     public static void Postfix(String key, ref String __result, ref String __state)
     {
         if (__state is null)

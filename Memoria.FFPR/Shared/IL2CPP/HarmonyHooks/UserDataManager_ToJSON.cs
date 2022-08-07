@@ -5,13 +5,10 @@ using Memoria.FFPR.BeepInEx;
 
 namespace Memoria.FFPR.IL2CPP.HarmonyHooks;
 
+// ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(UserDataManager), nameof(UserDataManager.ToJSON))]
-public sealed class UserDataManager_ToJSON : Il2CppSystem.Object
+public static class UserDataManager_ToJSON
 {
-    public UserDataManager_ToJSON(IntPtr ptr) : base(ptr)
-    {
-    }
-
     public static void Postfix(ref string __result)
     {
         try

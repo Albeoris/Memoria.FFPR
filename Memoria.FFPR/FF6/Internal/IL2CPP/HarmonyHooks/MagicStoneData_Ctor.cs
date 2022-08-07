@@ -18,17 +18,13 @@ using Newtonsoft.Json;
 
 namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
-// ReSharper disable once InconsistentNaming
+// ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(MagicStoneData), nameof(MagicStoneData.GetAllIds))]
-public sealed class MagicStoneData_Ctor : Il2CppSystem.Object
+public static class MagicStoneData_Ctor
 {
     private static Boolean _patched = false;
     
-    public MagicStoneData_Ctor(IntPtr ptr) : base(ptr)
-    {
-    }
-    
-    // ReSharper disable once InconsistentNaming
+    // ReSharper disable InconsistentNaming
     public static void Prefix(MagicStoneData __instance)
     {
         try

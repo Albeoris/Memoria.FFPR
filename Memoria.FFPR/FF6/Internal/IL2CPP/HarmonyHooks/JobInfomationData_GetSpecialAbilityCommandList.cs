@@ -7,15 +7,10 @@ using Serial.FF6.Management;
 
 namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
-// ReSharper disable once InconsistentNaming
+// ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(JobInfomationData), nameof(JobInfomationData.GetSpecialAbilityCommandList))]
-public sealed class JobInfomationData_GetSpecialAbilityCommandList : Il2CppSystem.Object
+public static class JobInfomationData_GetSpecialAbilityCommandList
 {
-    public JobInfomationData_GetSpecialAbilityCommandList(IntPtr ptr) : base(ptr)
-    {
-    }
-    
-    // ReSharper disable once InconsistentNaming
     public static void Postfix(ref Il2CppSystem.Collections.Generic.List<SpecialAbilityCommandId> __result)
     {
         try

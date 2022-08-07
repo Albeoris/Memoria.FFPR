@@ -12,22 +12,17 @@ using UnityEngine.UI;
 
 namespace Memoria.FF2.Internal.IL2CPP.HarmonyHooks;
 
-// ReSharper disable once InconsistentNaming
+// ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(SecretWordControllerBase), nameof(SecretWordControllerBase.ListUpdate),
     argumentTypes: new[]
     {
         typeof(InfiniteScrollView),
         typeof(Il2CppSystem.Collections.Generic.IEnumerable<SelectFieldContentManager.SelectFieldContentData>)
     })]
-public sealed class SecretWordControllerBase_ListUpdate_Words : Il2CppSystem.Object
+public static class SecretWordControllerBase_ListUpdate_Words
 {
     private static Color _defaultColor;
 
-    public SecretWordControllerBase_ListUpdate_Words(IntPtr ptr) : base(ptr)
-    {
-    }
-
-    // ReSharper disable once InconsistentNaming
     // ReSharper disable once IdentifierTypo
     public static void Postfix(SecretWordControllerBase __instance, InfiniteScrollView scrollview, IEnumerable<SelectFieldContentManager.SelectFieldContentData> contents)
     {

@@ -10,6 +10,24 @@ using IntPtr = System.IntPtr;
 
 namespace Memoria.FFPR.IL2CPP.HarmonyHooks;
 
+// [HarmonyPatch(typeof(EncounterLot), nameof(EncounterLot.StandingInExclusionArea))]
+// public static class EncounterLot_StandingInExclusionArea
+// {
+//     public static Boolean Prefix(ref MonsterParty __result)
+//     {
+//         if (ModComponent.Instance.EncountersControl.DisableEncounters)
+//         {
+//             __result = null;
+//
+//             // Skip native method
+//             return false;
+//         }
+//
+//         // Call native method
+//         return true;
+//     }
+// }
+
 [HarmonyPatch(typeof(EncountTable), nameof(EncountTable.GetEncountData))]
 public static class EncountTable_GetEncountData
 {

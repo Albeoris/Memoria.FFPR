@@ -9,12 +9,8 @@ namespace Memoria.FF6.Internal.IL2CPP.HarmonyHooks;
 
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(AbilityContentListController), nameof(AbilityContentListController.UpdateView))]
-public sealed class AbilityContentListController_UpdateView : Il2CppSystem.Object
+public static class AbilityContentListController_UpdateView
 {
-    public AbilityContentListController_UpdateView(IntPtr ptr) : base(ptr)
-    {
-    }
-    
     public static void Postfix(AbilityContentListController __instance)
     {
         try

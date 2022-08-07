@@ -8,15 +8,10 @@ using Memoria.FFPR.IL2CPP;
 
 namespace Memoria.FF2.Internal.IL2CPP.HarmonyHooks;
 
-// ReSharper disable once InconsistentNaming
+// ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(FieldNonPlayerController), nameof(FieldNonPlayerController.OnTakeAciton))]
-public sealed class FieldNonPlayerController_OnTakeAction : Il2CppSystem.Object
+public static class FieldNonPlayerController_OnTakeAction
 {
-    public FieldNonPlayerController_OnTakeAction(IntPtr ptr) : base(ptr)
-    {
-    }
-
-    // ReSharper disable once InconsistentNaming
     public static void Prefix(FieldNonPlayerController __instance)
     {
         try
