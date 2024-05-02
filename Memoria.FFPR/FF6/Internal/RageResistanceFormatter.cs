@@ -64,8 +64,15 @@ public sealed class RageResistanceFormatter
 
     public String FormatResistance(Monster monster)
     {
-        Dictionary<ResistanceAttributeType, List<Int32>> attributes = Group<ResistanceAttributeType>(GroupMasterUtility.GetResistanceAttributeDic(monster.ResistanceAttribute));
-        Dictionary<ResistanceConditionType, List<Int32>> conditions = Group<ResistanceConditionType>(GroupMasterUtility.GetResistanceConditionDic(monster.ResistanceCondition));
+        // Dirty hack for FF6 where GroupMasterUtility returns IReadOnlyDictionary instead of Dictionary
+        var attributeDic = GroupMasterUtility.GetResistanceAttributeDic(monster.ResistanceAttribute)
+            .Cast<Il2CppSystem.Collections.Generic.Dictionary<Int32, Int32>>();
+        var conditionDic = GroupMasterUtility.GetResistanceConditionDic(monster.ResistanceCondition)
+            .Cast<Il2CppSystem.Collections.Generic.Dictionary<Int32, Int32>>();
+        
+        Dictionary<ResistanceAttributeType, List<Int32>> attributes = Group<ResistanceAttributeType>(attributeDic);
+        Dictionary<ResistanceConditionType, List<Int32>> conditions = Group<ResistanceConditionType>(conditionDic);
+
         List<(String ResistanceType, List<String> Values)> translated = Translate(attributes, conditions);
 
         if (translated.Count == 0)
@@ -204,7 +211,11 @@ public sealed class RageResistanceFormatter
         return result;
     }
 
+// #if FF6
+//     private static Dictionary<T, List<Int32>> Group<T>(Il2CppSystem.Collections.Generic.IReadOnlyDictionary<Int32, Int32> attributes) where T : Enum
+// #else
     private static Dictionary<T, List<Int32>> Group<T>(Il2CppSystem.Collections.Generic.Dictionary<Int32, Int32> attributes) where T : Enum
+//#endif
     {
         Dictionary<T, List<Int32>> result = new();
 
