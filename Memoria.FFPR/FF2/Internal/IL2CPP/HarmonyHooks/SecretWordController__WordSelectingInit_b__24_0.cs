@@ -9,6 +9,7 @@ using Memoria.FFPR.IL2CPP;
 
 namespace Memoria.FF2.Internal.IL2CPP.HarmonyHooks;
 
+#if !FF2
 // ReSharper disable InconsistentNaming
 [HarmonyPatch(typeof(SecretWordController), nameof(SecretWordController._WordSelectingInit_b__24_0))]
 public static class SecretWordController__WordSelectingInit_b__24_0
@@ -34,3 +35,4 @@ public static class SecretWordController__WordSelectingInit_b__24_0
         ConversationManager.RememberUsedWord(word.UniqueId);
     }
 }
+#endif

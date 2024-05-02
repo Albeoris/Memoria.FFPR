@@ -23,6 +23,7 @@
 	<GameRegistryPath Condition=" '$(Configuration)' == 'FF4' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173800</GameRegistryPath>
 	<GameRegistryPath Condition=" '$(Configuration)' == 'FF5' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173810</GameRegistryPath>
 	<GameRegistryPath Condition=" '$(Configuration)' == 'FF6' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173820</GameRegistryPath>
+    <DefineConstants>$(Configuration)</DefineConstants>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(GameRegistryPath)' != ''">
@@ -146,6 +147,10 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>$(GamePath)\BepInEx\unhollowed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask">
+        <HintPath>$(GamePath)\BepInEx\unhollowed\UniTask.dll</HintPath>
+        <Private>False</Private>
     </Reference>
   </ItemGroup>
   
