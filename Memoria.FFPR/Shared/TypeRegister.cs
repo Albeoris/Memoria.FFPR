@@ -2,7 +2,7 @@
 using System.Reflection;
 using BepInEx.Logging;
 using Il2CppSystem.Collections.Generic;
-using UnhollowerRuntimeLib;
+using Il2CppInterop.Runtime.Injection;
 
 namespace Memoria.FFPR;
 

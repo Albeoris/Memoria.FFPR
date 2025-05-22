@@ -14,7 +14,6 @@ using Last.UI.KeyInput;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
 using Memoria.FFPR.IL2CPP.HarmonyHooks;
-using UnhollowerBaseLib;
 using UnityEngine;
 using Action = System.Action;
 using Boolean = System.Boolean;

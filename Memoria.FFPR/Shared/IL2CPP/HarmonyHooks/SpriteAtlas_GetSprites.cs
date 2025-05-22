@@ -4,7 +4,7 @@ using System.IO;
 using HarmonyLib;
 using Memoria.FFPR.BeepInEx;
 using Memoria.FFPR.Core;
-using UnhollowerBaseLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using UnityEngine.U2D;
 

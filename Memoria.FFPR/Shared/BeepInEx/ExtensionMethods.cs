@@ -4,7 +4,8 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
-using UnhollowerBaseLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
+using Il2CppInterop.Runtime.InteropTypes;
 using UnityEngine;
 
 namespace Memoria.FFPR.BeepInEx;
@@ -174,29 +175,29 @@ public static class ExtensionMethods
 
         return sprite.vertices.ToManaged();
     }
-    
 
-    public static T[] ToManaged<T>(this UnhollowerBaseLib.Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
+
+    public static T[] ToManaged<T>(this Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
-        
+
         T[] result = new T[il2cpp.Count];
         for (int i = 0; i < il2cpp.Length; i++)
             result[i] = il2cpp[i];
         return result;
     }
-    
-    public static T[] ToManaged<T>(this UnhollowerBaseLib.Il2CppStructArray<T> il2cpp) where T : unmanaged
+
+    public static T[] ToManaged<T>(this Il2CppStructArray<T> il2cpp) where T : unmanaged
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
-        
+
         T[] result = new T[il2cpp.Count];
         for (int i = 0; i < il2cpp.Length; i++)
             result[i] = il2cpp[i];
         return result;
     }
-    
-    public static List<T> ToManagedList<T>(this UnhollowerBaseLib.Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
+
+    public static List<T> ToManagedList<T>(this Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
 
@@ -204,8 +205,8 @@ public static class ExtensionMethods
         result.AddRange(il2cpp);
         return result;
     }
-    
-    public static List<T> ToManagedList<T>(this UnhollowerBaseLib.Il2CppStructArray<T> il2cpp) where T : unmanaged
+
+    public static List<T> ToManagedList<T>(this Il2CppStructArray<T> il2cpp) where T : unmanaged
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
 
@@ -213,7 +214,7 @@ public static class ExtensionMethods
         result.AddRange(il2cpp);
         return result;
     }
-    
+
     public static Il2CppReferenceArray<T> ToReferenceArray<T>(this IReadOnlyCollection<T> list) where T : Il2CppObjectBase
     {
         if (list is null) throw new ArgumentNullException(nameof(list));
@@ -235,7 +236,7 @@ public static class ExtensionMethods
             result[index++] = item;
         return result;
     }
-    
+
     public static List<T> ToManaged<T>(this Il2CppSystem.Collections.Generic.List<T> il2cpp)
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));

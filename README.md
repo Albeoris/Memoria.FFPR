@@ -5,14 +5,14 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 [Patreon](https://www.patreon.com/Albeoris?fan_landing=true)
 
 ## Installation:
-- Unpack [BepInEx_UnityIL2CPP_x64_3a54f7e_6.0.0-be.571](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/BepInEx_UnityIL2CPP_x64_3a54f7e_6.0.0-be.571.zip) into the game folder.
+- Unpack [BepInEx-Unity.IL2CPP-win-x64-6.0.0-pre.2](https://github.com/BepInEx/BepInEx/releases/download/v6.0.0-pre.2/BepInEx-Unity.IL2CPP-win-x64-6.0.0-pre.2.zip) into the game folder.
 - Unpack one of the archives into the game folder:
-    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF1_v2024.05.02.zip)
-    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF2_v2024.05.02.zip)
-    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF3_v2024.05.02.zip)
-    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF4_v2024.05.02.zip)
-    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF5_v2024.05.02.zip)
-    - [FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF6_v2024.05.02.zip)
+    - ~~[FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF1_v2024.05.02.zip)~~
+    - ~~[FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF2_v2024.05.02.zip)~~
+    - ~~[FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF3_v2024.05.02.zip)~~
+    - ~~[FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF4_v2024.05.02.zip)~~
+    - ~~[FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF5_v2024.05.02.zip)~~
+    - ~~[FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF6_v2024.05.02.zip)~~
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
@@ -20,7 +20,7 @@ If you playing on Steam Deck check [this page](https://github.com/Albeoris/Memor
 
 ## Deinstalation:
 - To remove the mod - delete $GameFolder$\BepInEx\plugins\Memoria.FF*.dll
-- To remove the mod launcer - delete $GameFolder$\winhttp.dll
+- To remove the mod launcher - delete $GameFolder$\winhttp.dll
 
 ## Features:
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using HarmonyLib;
 using Memoria.FFPR.Core;
-using UnhollowerBaseLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using UnityEngine.U2D;
 

@@ -9,10 +9,10 @@ using Memoria.FFPR.Configuration;
 using Memoria.FFPR.Configuration.Scopes;
 using Memoria.FFPR.Core;
 using Microsoft.DotNet.Tools.Common;
-using UnhollowerBaseLib;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.U2D;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Exception = System.Exception;
 using IntPtr = System.IntPtr;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Memoria.FFPR.BeepInEx;
 using Memoria.FFPR.IL2CPP;
-using UnhollowerBaseLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using UnityEngine.U2D;
 

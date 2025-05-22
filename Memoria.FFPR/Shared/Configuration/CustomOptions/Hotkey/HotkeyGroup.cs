@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Memoria.FFPR.BeepInEx;
 using UnityEngine;
 using Object = System.Object;
 
 namespace Memoria.FFPR.Configuration;
+
+using Memoria.FFPR.BeepInEx;
 
 public sealed class HotkeyGroup
 {
