@@ -23,7 +23,7 @@ public sealed class EncountersConfiguration
         Key = file.Bind(Section, nameof(Key),
             defaultValue: HotkeyGroup.Create(new[]
             {
-                new Hotkey(KeyCode.F2),
+                new Hotkey(KeyCode.None),
             }),
             description: $"Disable encounters key.",
             new AcceptableHotkeyGroup(nameof(Key), canHold: true));
@@ -65,7 +65,7 @@ public sealed class EncountersConfiguration
         {
             ConfigEntry<String> toggleAction = file.Bind(Section, "ToggleAction", "None",
                 $"Disable/Enable encounters action.",
-                new AcceptableValueList<String>("None", "Enter", "Cancel", "Shortcut", "Menu", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "PageUp", "PageDown", "Start"));
+                new AcceptableValueList<String>("None", "Action", "Cancel", "Menu", "Shortcut", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "Start", "Select", "PageUp", "PageDown", "Scroll", "StickL", "StickR"));
 
             String action = toggleAction.Value;
             if (action != "None")
@@ -77,7 +77,7 @@ public sealed class EncountersConfiguration
         {
             ConfigEntry<String> holdAction = file.Bind(Section, "HoldAction", "None",
                 $"Disable encounters hold action.",
-                new AcceptableValueList<String>("None", "Enter", "Cancel", "Shortcut", "Menu", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "PageUp", "PageDown", "Start"));
+                new AcceptableValueList<String>("None", "Action", "Cancel", "Menu", "Shortcut", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "Start", "Select", "PageUp", "PageDown", "Scroll", "StickL", "StickR"));
 
             String action = holdAction.Value;
             if (action != "None")

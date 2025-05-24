@@ -8,9 +8,11 @@
   </PropertyGroup>
   
   <PropertyGroup>
-  <ProjectGuid>{7CF67936-43E7-44A6-AF1F-819B5475C216}</ProjectGuid>
-  <RootNamespace>Memoria.FFPR</RootNamespace>
-  <TargetFramework>net6.0</TargetFramework>
+    <ProjectGuid>{7CF67936-43E7-44A6-AF1F-819B5475C216}</ProjectGuid>
+    <RootNamespace>Memoria.FFPR</RootNamespace>
+    <!-- net6.0+ works but you can no longer get game path from registry -->
+    <!--<TargetFramework>net6.0</TargetFramework>-->
+    <TargetFramework>net472</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <ImplicitUsings>false</ImplicitUsings>
     <Nullable>disable</Nullable>
@@ -27,15 +29,26 @@
     <GameRegistryPath Condition=" '$(Configuration)' == 'FF6' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173820</GameRegistryPath>
     <DefineConstants>$(Configuration)</DefineConstants>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(GameRegistryPath)' != ''">
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry32))</GamePath>
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry64))</GamePath>
-    <!-- Looks like the .NET SDK version of MSBuild does not support GetRegistryValueFromView, so I have settled for hardcoding the path. -->
-    <GamePath Condition="'$(GamePath)' == ''">D:\Games\SteamLibrary\steamapps\common\FINAL FANTASY VI PR</GamePath>
+    <GamePath Condition="'$(GamePath)' == ''">bin\$(Configuration)</GamePath>
     <OutputPath>$(GamePath)\BepInEx\plugins\</OutputPath>
   </PropertyGroup>
-  
+
+  <!--<PropertyGroup Condition="'$(GamePath)' == ''">
+    --><!-- Looks like the .NET SDK version of MSBuild does not support GetRegistryValueFromView, so I have settled for hardcoding the path. --><!--
+    <SteamLibraryPath>D:\Games\SteamLibrary\steamapps\common</SteamLibraryPath>
+    <GamePath Condition=" '$(Configuration)' == 'FF1' ">$(SteamLibraryPath)\FINAL FANTASY PR</GamePath>
+    <GamePath Condition=" '$(Configuration)' == 'FF2' ">$(SteamLibraryPath)\FINAL FANTASY II PR</GamePath>
+    <GamePath Condition=" '$(Configuration)' == 'FF3' ">$(SteamLibraryPath)\FINAL FANTASY III PR</GamePath>
+    <GamePath Condition=" '$(Configuration)' == 'FF4' ">$(SteamLibraryPath)\FINAL FANTASY IV PR</GamePath>
+    <GamePath Condition=" '$(Configuration)' == 'FF5' ">$(SteamLibraryPath)\FINAL FANTASY V PR</GamePath>
+    <GamePath Condition=" '$(Configuration)' == 'FF6' ">$(SteamLibraryPath)\FINAL FANTASY VI PR</GamePath>
+    <OutputPath>$(GamePath)\BepInEx\plugins\</OutputPath>
+  </PropertyGroup>-->
+
   <ItemGroup>
     <Compile Remove="FF1\**\*.cs" />
     <Compile Remove="FF2\**\*.cs" />
@@ -157,7 +170,7 @@
     </Reference>
   </ItemGroup>
   
-  <Target Name="CompileAll" AfterTargets="Build">
+  <!--<Target Name="CompileAll" AfterTargets="Build">
     <MSBuild Condition=" '$(Configuration)' != 'FF1' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF1" RunEachTargetSeparately="true" BuildInParallel="true" />
     <MSBuild Condition=" '$(Configuration)' != 'FF2' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF2" RunEachTargetSeparately="true" BuildInParallel="true" />
     <MSBuild Condition=" '$(Configuration)' != 'FF3' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF3" RunEachTargetSeparately="true" BuildInParallel="true" />
@@ -185,6 +198,6 @@
       <MSBuild Condition=" '$(Configuration)' != 'FF5' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF5" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
       <MSBuild Condition=" '$(Configuration)' != 'FF6' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF6" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
 	  <Pack PublishDirectory="..\Publish" Configuration="$(Configuration)" />
-  </Target>
+  </Target>-->
 
 </Project>

@@ -39,7 +39,7 @@ public sealed class AcceptableHotkeyGroup : AcceptableValueBase, IAcceptableValu
     {
         return $"# Acceptable keys: Ctrl+Alt+Shift+Key{(_canHold ? "(Hold)" : String.Empty)}: https://docs.unity3d.com/ScriptReference/KeyCode.html" +
                $"{Environment.NewLine}" +
-               $"# Acceptable actions: Ctrl+Alt+[Action]+[Action]: [None], [Enter], [Cancel], [Shortcut], [Menu], [Up], [Down], [Left], [Right], [SwitchLeft], [SwitchRight], [PageUp], [PageDown], [Start]";
+               $"# Acceptable actions: Ctrl+Alt+[Action]+[Action]: [None], [Action], [Cancel], [Menu], [Shortcut], [Up], [Down], [Left], [Right], [SwitchLeft], [SwitchRight], [Start], [Select], [PageUp], [PageDown], [Scroll], [StickL], [StickR]";
     }
 
     public HotkeyGroup FromConfig(HotkeyGroup value) => value;

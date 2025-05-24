@@ -53,7 +53,11 @@ public static class HotkeyTypeConverter
         }
 
         if (!String.Equals(hotkey.Action, "None", StringComparison.InvariantCultureIgnoreCase))
+        {
+            sb.Append('[');
             sb.Append(hotkey.Action);
+            sb.Append(']');
+        }
         else
             sb.Append(hotkey.Key);
 

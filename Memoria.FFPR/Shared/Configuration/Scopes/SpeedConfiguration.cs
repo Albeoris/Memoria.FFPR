@@ -76,7 +76,7 @@ public sealed class SpeedConfiguration
         {
             ConfigEntry<String> toggleAction = file.Bind(Section, "ToggleAction", "None",
                 $"Speed up toggle action.",
-                new AcceptableValueList<String>("None", "Enter", "Cancel", "Shortcut", "Menu", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "PageUp", "PageDown", "Start"));
+                new AcceptableValueList<String>("None", "Action", "Cancel", "Menu", "Shortcut", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "Start", "Select", "PageUp", "PageDown", "Scroll", "StickL", "StickR"));
 
             String action = toggleAction.Value;
             if (action != "None")
@@ -88,7 +88,7 @@ public sealed class SpeedConfiguration
         {
             ConfigEntry<String> holdAction = file.Bind(Section, "HoldAction", "None",
                 $"Speed up hold action.",
-                new AcceptableValueList<String>("None", "Enter", "Cancel", "Shortcut", "Menu", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "PageUp", "PageDown", "Start"));
+                new AcceptableValueList<String>("None", "Action", "Cancel", "Menu", "Shortcut", "Up", "Down", "Left", "Right", "SwitchLeft", "SwitchRight", "Start", "Select", "PageUp", "PageDown", "Scroll", "StickL", "StickR"));
 
             String action = holdAction.Value;
             if (action != "None")

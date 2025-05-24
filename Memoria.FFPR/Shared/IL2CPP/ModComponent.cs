@@ -110,6 +110,7 @@ public sealed class ModComponent : MonoBehaviour
 
             // Must be called from LateUpdate to work in combat. 
             SpeedControl.TryUpdate();
+            
         }
         catch (Exception ex)
         {
