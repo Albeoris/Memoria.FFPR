@@ -5,19 +5,28 @@ using Last.Map;
 using Last.UI;
 using IS = UnityEngine.InputSystem;
 using static FieldMap;
+using Memoria.FFPR.IL2CPP;
 
 namespace Memoria.FFPR.Shared.IL2CPP.HarmonyHooks
 {
     [HarmonyPatch(typeof(FieldMap), nameof(FieldMap.LateUpdate))]
     public static class FieldMap_LateUpdate
     {
+
         //This might be overkill... But it works.
         public static void Prefix(FieldMap __instance)
         {
-            //TODO: add configuratin option.
-            if (__instance.keyAutoDash != null)
+            //TODO: allow remap?
+            if (__instance.keyAutoDash != null &&
+                ModComponent.Instance.Config.Unmap.UnmapAutoDash.Value)
             {
                 __instance.keyAutoDash = null;
+            }
+
+            if (__instance.keyEncountChange != null &&
+                ModComponent.Instance.Config.Unmap.UnmapEncountersToggle.Value)
+            {
+                __instance.keyEncountChange = null;
             }
         }
     }

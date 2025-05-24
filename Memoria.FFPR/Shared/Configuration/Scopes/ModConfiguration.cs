@@ -18,6 +18,7 @@ public sealed partial class ModConfiguration
     public FieldConfiguration Field { get; }
     public AssetsConfiguration Assets { get; }
     public GuiIndicatorsConfiguration GuiIndicators { get; }
+    public UnmapConfiguration Unmap { get; }
 
     public ModConfiguration()
     {
@@ -36,6 +37,7 @@ public sealed partial class ModConfiguration
                 Field = new FieldConfiguration(provider);
                 Assets = AssetsConfiguration.Create(provider);
                 GuiIndicators = new GuiIndicatorsConfiguration(provider);
+                Unmap = new UnmapConfiguration(provider);
                 InitializeGameSpecificOptions(provider);
 
                 UpgradeLegacyConfig(log);
