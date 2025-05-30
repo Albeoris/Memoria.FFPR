@@ -2,9 +2,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Configurations>FF1;FF2;FF3;FF4;FF5;FF6</Configurations>
+    <Configurations>FF1;FF2;FF3;FF4;FF5;FF6;All</Configurations>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <Platform Condition=" '$(Configuration)' == '' ">FF1</Platform>
+    <Game>$(Configuration)</Game>
+    <Game Condition="'$(Configuration)' == 'All' ">FF1</Game>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -20,32 +22,33 @@
   </PropertyGroup>
   
   <PropertyGroup>
-    <AssemblyName>Memoria.$(Configuration)</AssemblyName>
-    <GameRegistryPath Condition=" '$(Configuration)' == 'FF1' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173770</GameRegistryPath>
-    <GameRegistryPath Condition=" '$(Configuration)' == 'FF2' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173780</GameRegistryPath>
-    <GameRegistryPath Condition=" '$(Configuration)' == 'FF3' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173790</GameRegistryPath>
-    <GameRegistryPath Condition=" '$(Configuration)' == 'FF4' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173800</GameRegistryPath>
-    <GameRegistryPath Condition=" '$(Configuration)' == 'FF5' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173810</GameRegistryPath>
-    <GameRegistryPath Condition=" '$(Configuration)' == 'FF6' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173820</GameRegistryPath>
-    <DefineConstants>$(Configuration)</DefineConstants>
+    <AssemblyName>Memoria.$(Game)</AssemblyName>
+    <GameRegistryPath Condition=" '$(Game)' == 'FF1' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173770</GameRegistryPath>
+    <GameRegistryPath Condition=" '$(Game)' == 'FF2' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173780</GameRegistryPath>
+    <GameRegistryPath Condition=" '$(Game)' == 'FF3' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173790</GameRegistryPath>
+    <GameRegistryPath Condition=" '$(Game)' == 'FF4' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173800</GameRegistryPath>
+    <GameRegistryPath Condition=" '$(Game)' == 'FF5' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173810</GameRegistryPath>
+    <GameRegistryPath Condition=" '$(Game)' == 'FF6' ">HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1173820</GameRegistryPath>
+    <DefineConstants>$(Game)</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GameRegistryPath)' != ''">
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry32))</GamePath>
     <GamePath Condition="'$(GamePath)' == ''">$([MSBuild]::GetRegistryValueFromView('$(GameRegistryPath)', 'InstallLocation', null, RegistryView.Registry64))</GamePath>
-    <GamePath Condition="'$(GamePath)' == ''">bin\$(Configuration)</GamePath>
+    <GamePath Condition="'$(GamePath)' == ''">bin\$(Game)</GamePath>
     <OutputPath>$(GamePath)\BepInEx\plugins\</OutputPath>
   </PropertyGroup>
 
   <!--<PropertyGroup Condition="'$(GamePath)' == ''">
-    --><!-- Looks like the .NET SDK version of MSBuild does not support GetRegistryValueFromView, so I have settled for hardcoding the path. --><!--
+    --><!-- Looks like the .NET SDK version of MSBuild does not support GetRegistryValueFromView, so I have settled for hardcoding the path. -->
+      <!--
     <SteamLibraryPath>D:\Games\SteamLibrary\steamapps\common</SteamLibraryPath>
-    <GamePath Condition=" '$(Configuration)' == 'FF1' ">$(SteamLibraryPath)\FINAL FANTASY PR</GamePath>
-    <GamePath Condition=" '$(Configuration)' == 'FF2' ">$(SteamLibraryPath)\FINAL FANTASY II PR</GamePath>
-    <GamePath Condition=" '$(Configuration)' == 'FF3' ">$(SteamLibraryPath)\FINAL FANTASY III PR</GamePath>
-    <GamePath Condition=" '$(Configuration)' == 'FF4' ">$(SteamLibraryPath)\FINAL FANTASY IV PR</GamePath>
-    <GamePath Condition=" '$(Configuration)' == 'FF5' ">$(SteamLibraryPath)\FINAL FANTASY V PR</GamePath>
-    <GamePath Condition=" '$(Configuration)' == 'FF6' ">$(SteamLibraryPath)\FINAL FANTASY VI PR</GamePath>
+    <GamePath Condition=" '$(Game)' == 'FF1' ">$(SteamLibraryPath)\FINAL FANTASY PR</GamePath>
+    <GamePath Condition=" '$(Game)' == 'FF2' ">$(SteamLibraryPath)\FINAL FANTASY II PR</GamePath>
+    <GamePath Condition=" '$(Game)' == 'FF3' ">$(SteamLibraryPath)\FINAL FANTASY III PR</GamePath>
+    <GamePath Condition=" '$(Game)' == 'FF4' ">$(SteamLibraryPath)\FINAL FANTASY IV PR</GamePath>
+    <GamePath Condition=" '$(Game)' == 'FF5' ">$(SteamLibraryPath)\FINAL FANTASY V PR</GamePath>
+    <GamePath Condition=" '$(Game)' == 'FF6' ">$(SteamLibraryPath)\FINAL FANTASY VI PR</GamePath>
     <OutputPath>$(GamePath)\BepInEx\plugins\</OutputPath>
   </PropertyGroup>-->
 
@@ -64,7 +67,7 @@
     <None Include="FF5\**\*.cs" />
     <None Include="FF6\**\*.cs" />
   
-    <Compile Include="$(Configuration)\**\*.cs" />
+    <Compile Include="$(Game)\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -170,34 +173,28 @@
     </Reference>
   </ItemGroup>
   
-  <!--<Target Name="CompileAll" AfterTargets="Build">
-    <MSBuild Condition=" '$(Configuration)' != 'FF1' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF1" RunEachTargetSeparately="true" BuildInParallel="true" />
-    <MSBuild Condition=" '$(Configuration)' != 'FF2' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF2" RunEachTargetSeparately="true" BuildInParallel="true" />
-    <MSBuild Condition=" '$(Configuration)' != 'FF3' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF3" RunEachTargetSeparately="true" BuildInParallel="true" />
-    <MSBuild Condition=" '$(Configuration)' != 'FF4' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF4" RunEachTargetSeparately="true" BuildInParallel="true" />
-    <MSBuild Condition=" '$(Configuration)' != 'FF5' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF5" RunEachTargetSeparately="true" BuildInParallel="true" />
-    <MSBuild Condition=" '$(Configuration)' != 'FF6' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF6" RunEachTargetSeparately="true" BuildInParallel="true" />
+  <Target Name="CompileAll" AfterTargets="Build" Condition="'$(Configuration)' == 'All' ">
+    <MSBuild Condition=" '$(Game)' != 'FF1' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF1" RunEachTargetSeparately="true" BuildInParallel="true" />
+    <MSBuild Condition=" '$(Game)' != 'FF2' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF2" RunEachTargetSeparately="true" BuildInParallel="true" />
+    <MSBuild Condition=" '$(Game)' != 'FF3' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF3" RunEachTargetSeparately="true" BuildInParallel="true" />
+    <MSBuild Condition=" '$(Game)' != 'FF4' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF4" RunEachTargetSeparately="true" BuildInParallel="true" />
+    <MSBuild Condition=" '$(Game)' != 'FF5' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF5" RunEachTargetSeparately="true" BuildInParallel="true" />
+    <MSBuild Condition=" '$(Game)' != 'FF6' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF6" RunEachTargetSeparately="true" BuildInParallel="true" />
   </Target>
 
-  <Target Name="PublishAll" AfterTargets="Publish">
-      <MSBuild Condition=" '$(Configuration)' != 'FF1' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF1" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF2' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF2" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF3' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF3" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF4' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF4" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF5' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF5" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF6' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF6" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
+  <Target Name="PublishAll" AfterTargets="Publish" Condition="'$(Configuration)' == 'All' ">
+      <MSBuild Condition=" '$(Game)' != 'FF1' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF1" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
+      <MSBuild Condition=" '$(Game)' != 'FF2' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF2" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
+      <MSBuild Condition=" '$(Game)' != 'FF3' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF3" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
+      <MSBuild Condition=" '$(Game)' != 'FF4' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF4" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
+      <MSBuild Condition=" '$(Game)' != 'FF5' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF5" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
+      <MSBuild Condition=" '$(Game)' != 'FF6' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF6" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
   </Target>
 
   <UsingTask TaskName="Memoria.MSBuild.Pack" AssemblyFile="..\MSBuild\Memoria.MSBuild.dll" />
-
-  <Target Name="PublishAll" AfterTargets="Publish">
-      <MSBuild Condition=" '$(Configuration)' != 'FF1' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF1" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF2' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF2" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF3' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF3" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF4' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF4" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF5' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF5" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-      <MSBuild Condition=" '$(Configuration)' != 'FF6' " Projects="$(MSBuildProjectFile)" Properties="Configuration=FF6" Targets="Publish" RunEachTargetSeparately="true" BuildInParallel="true" />
-	  <Pack PublishDirectory="..\Publish" Configuration="$(Configuration)" />
-  </Target>-->
-
+  
+  <Target Name="PackTask" AfterTargets="Publish">
+    <Pack PublishDirectory="$(PublishDir)" Configuration="$(Game)" />
+  </Target>
+  
 </Project>
