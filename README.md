@@ -6,13 +6,7 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 
 ## Installation:
 - Unpack [BepInEx-Unity.IL2CPP-win-x64-6.0.0-pre.2](https://github.com/BepInEx/BepInEx/releases/download/v6.0.0-pre.2/BepInEx-Unity.IL2CPP-win-x64-6.0.0-pre.2.zip) into the game folder.
-- Unpack one of the archives into the game folder:
-    - ~~[FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF1_v2024.05.02.zip)~~
-    - ~~[FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF2_v2024.05.02.zip)~~
-    - ~~[FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF3_v2024.05.02.zip)~~
-    - ~~[FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF4_v2024.05.02.zip)~~
-    - ~~[FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF5_v2024.05.02.zip)~~
-    - ~~[FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF6_v2024.05.02.zip)~~
+- Head to the [Releases](/../../releases/latest) page and download and unpack the archive for your game into the game folder:
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
