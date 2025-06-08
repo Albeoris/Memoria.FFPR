@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
-using UnhollowerBaseLib;
 using UnityEngine;
 using UnityEngine.U2D;
 using Object = System.Object;

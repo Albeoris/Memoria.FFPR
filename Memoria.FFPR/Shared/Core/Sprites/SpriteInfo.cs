@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppSystem.Input;
 using Memoria.FFPR.BeepInEx;
-using UnhollowerBaseLib;
 using UnityEngine;
 
 namespace Memoria.FFPR.Core;

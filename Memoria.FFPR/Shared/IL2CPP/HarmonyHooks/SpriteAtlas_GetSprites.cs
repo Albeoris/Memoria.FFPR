@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using HarmonyLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Memoria.FFPR.BeepInEx;
 using Memoria.FFPR.Core;
-using UnhollowerBaseLib;
 using UnityEngine;
 using UnityEngine.U2D;
 

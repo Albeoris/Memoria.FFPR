@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
-using UnhollowerBaseLib;
 using UnityEngine;
 using Object = Il2CppSystem.Object;
 

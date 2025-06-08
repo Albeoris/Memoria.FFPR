@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using BepInEx.Configuration;
 using BepInEx.Logging;
+using Il2CppInterop.Runtime.InteropTypes;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Memoria.FFPR.Configuration;
 using Memoria.FFPR.IL2CPP;
-using UnhollowerBaseLib;
 using UnityEngine;
 
 namespace Memoria.FFPR.BeepInEx;
@@ -176,7 +177,7 @@ public static class ExtensionMethods
     }
     
 
-    public static T[] ToManaged<T>(this UnhollowerBaseLib.Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
+    public static T[] ToManaged<T>(this Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
         
@@ -186,7 +187,7 @@ public static class ExtensionMethods
         return result;
     }
     
-    public static T[] ToManaged<T>(this UnhollowerBaseLib.Il2CppStructArray<T> il2cpp) where T : unmanaged
+    public static T[] ToManaged<T>(this Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppStructArray<T> il2cpp) where T : unmanaged
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
         
@@ -196,7 +197,7 @@ public static class ExtensionMethods
         return result;
     }
     
-    public static List<T> ToManagedList<T>(this UnhollowerBaseLib.Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
+    public static List<T> ToManagedList<T>(this Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppReferenceArray<T> il2cpp) where T : Il2CppObjectBase
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
 
@@ -205,7 +206,7 @@ public static class ExtensionMethods
         return result;
     }
     
-    public static List<T> ToManagedList<T>(this UnhollowerBaseLib.Il2CppStructArray<T> il2cpp) where T : unmanaged
+    public static List<T> ToManagedList<T>(this Il2CppInterop.Runtime.InteropTypes.Arrays.Il2CppStructArray<T> il2cpp) where T : unmanaged
     {
         if (il2cpp is null) throw new ArgumentNullException(nameof(il2cpp));
 
