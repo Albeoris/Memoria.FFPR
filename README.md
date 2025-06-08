@@ -5,7 +5,7 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 [Patreon](https://www.patreon.com/Albeoris?fan_landing=true)
 
 ## Installation:
-- Unpack [BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.735+5fef357.zip](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.735+5fef357.zip) into the game folder.
+- Unpack [BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.735+5fef357.zip](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.735+5fef357.zip) into the game folder.
 - Unpack one of the archives into the game folder:
     - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF1_v2025.06.08.zip)
     - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF2_v2025.06.08.zip)
