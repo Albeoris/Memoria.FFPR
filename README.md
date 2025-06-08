@@ -5,14 +5,14 @@ This is a small modification that makes gameplay of [Final Fantasy I (PR)](https
 [Patreon](https://www.patreon.com/Albeoris?fan_landing=true)
 
 ## Installation:
-- Unpack [BepInEx_UnityIL2CPP_x64_3a54f7e_6.0.0-be.571](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/BepInEx_UnityIL2CPP_x64_3a54f7e_6.0.0-be.571.zip) into the game folder.
+- Unpack [BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.735+5fef357.zip](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2022.07.16/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.735+5fef357.zip) into the game folder.
 - Unpack one of the archives into the game folder:
-    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF1_v2024.05.02.zip)
-    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF2_v2024.05.02.zip)
-    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF3_v2024.05.02.zip)
-    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF4_v2024.05.02.zip)
-    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF5_v2024.05.02.zip)
-    - [FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2024.05.02/FF6_v2024.05.02.zip)
+    - [FF1](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF1_v2025.06.08.zip)
+    - [FF2](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF2_v2025.06.08.zip)
+    - [FF3](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF3_v2025.06.08.zip)
+    - [FF4](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF4_v2025.06.08.zip)
+    - [FF5](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF5_v2025.06.08.zip)
+    - [FF6](https://github.com/Albeoris/Memoria.FFPR/releases/download/v2025.06.08/FF6_v2025.06.08.zip)
 
 If you are already using BepInEx to load other mods, use the most recent version of the loader.
 
