@@ -97,7 +97,7 @@ public sealed class LeapAbilityColorization
             return Array.Empty<Int32>();
 
         Il2CppSystem.Collections.Generic.Dictionary<Int32, Int32> abilityByMonster = Current.rampageAbilityList;
-        HashSet<Int32> set = new HashSet<Int32>(capacity: learnableMonstersCount);
+        HashSet<Int32> set = new HashSet<Int32>();
         List<Int32> abilities = new List<Int32>(capacity: learnableMonstersCount);
         foreach (Int32 monsterId in learnableMonsters)
         {
@@ -118,7 +118,7 @@ public sealed class LeapAbilityColorization
     private static HashSet<Int32> GetOwnedAbilities(OwnedCharacterData character)
     {
         Il2CppSystem.Collections.Generic.List<OwnedAbility> abilities = character.OwnedAbilityList;
-        HashSet<Int32> abilityIds = new(capacity: abilities.Count);
+        HashSet<Int32> abilityIds = new();
         
         foreach (OwnedAbility ability in character.OwnedAbilityList)
         {

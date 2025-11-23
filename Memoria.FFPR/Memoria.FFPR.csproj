@@ -9,7 +9,7 @@
   <PropertyGroup>
 	<ProjectGuid>{7CF67936-43E7-44A6-AF1F-819B5475C216}</ProjectGuid>
 	<RootNamespace>Memoria.FFPR</RootNamespace>
-	<TargetFramework>net472</TargetFramework>
+	<TargetFramework>netstandard2.0</TargetFramework>
     <ImplicitUsings>false</ImplicitUsings>
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
@@ -53,10 +53,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Memoria.CodeGenerator\Memoria.CodeGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   
   <ItemGroup>
@@ -152,6 +148,10 @@
         <HintPath>$(GamePath)\BepInEx\interop\UniTask.dll</HintPath>
         <Private>False</Private>
     </Reference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
   
   <Target Name="CompileAll" AfterTargets="Build">
